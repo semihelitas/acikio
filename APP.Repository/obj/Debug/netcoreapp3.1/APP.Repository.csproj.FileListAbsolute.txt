@@ -1,0 +1,13 @@
+W:\KodlayacagizProje\APP.UI\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.deps.json
+W:\KodlayacagizProje\APP.UI\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.dll
+W:\KodlayacagizProje\APP.UI\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.csprojAssemblyReference.cache
+W:\KodlayacagizProje\APP.UI\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.AssemblyInfoInputs.cache
+W:\KodlayacagizProje\APP.UI\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.AssemblyInfo.cs
+W:\KodlayacagizProje\APP.UI\APP.Repository\bin\Debug\netcoreapp3.1\APP.Domain.dll
+W:\KodlayacagizProje\APP.UI\APP.Repository\bin\Debug\netcoreapp3.1\APP.Domain.pdb
+W:\KodlayacagizProje\APP.UI\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.csproj.CopyComplete
+W:\KodlayacagizProje\APP.UI\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.runtimeconfig.json
+W:\KodlayacagizProje\APP.UI\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.runtimeconfig.dev.json
+W:\KodlayacagizProje\APP.UI\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.pdb
+W:\KodlayacagizProje\APP.UI\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.dll
+W:\KodlayacagizProje\APP.UI\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.pdb

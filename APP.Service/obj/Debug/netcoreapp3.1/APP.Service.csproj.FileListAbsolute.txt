@@ -1,0 +1,8 @@
+W:\KodlayacagizProje\APP.UI\APP.Service\bin\Debug\netcoreapp3.1\APP.Service.deps.json
+W:\KodlayacagizProje\APP.UI\APP.Service\bin\Debug\netcoreapp3.1\APP.Service.dll
+W:\KodlayacagizProje\APP.UI\APP.Service\bin\Debug\netcoreapp3.1\APP.Service.pdb
+W:\KodlayacagizProje\APP.UI\APP.Service\obj\Debug\netcoreapp3.1\APP.Service.csprojAssemblyReference.cache
+W:\KodlayacagizProje\APP.UI\APP.Service\obj\Debug\netcoreapp3.1\APP.Service.AssemblyInfoInputs.cache
+W:\KodlayacagizProje\APP.UI\APP.Service\obj\Debug\netcoreapp3.1\APP.Service.AssemblyInfo.cs
+W:\KodlayacagizProje\APP.UI\APP.Service\obj\Debug\netcoreapp3.1\APP.Service.dll
+W:\KodlayacagizProje\APP.UI\APP.Service\obj\Debug\netcoreapp3.1\APP.Service.pdb

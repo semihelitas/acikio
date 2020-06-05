@@ -1,0 +1,8 @@
+W:\KodlayacagizProje\APP.UI\APP.Domain\bin\Debug\netcoreapp3.1\APP.Domain.deps.json
+W:\KodlayacagizProje\APP.UI\APP.Domain\bin\Debug\netcoreapp3.1\APP.Domain.dll
+W:\KodlayacagizProje\APP.UI\APP.Domain\bin\Debug\netcoreapp3.1\APP.Domain.pdb
+W:\KodlayacagizProje\APP.UI\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.csprojAssemblyReference.cache
+W:\KodlayacagizProje\APP.UI\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.AssemblyInfoInputs.cache
+W:\KodlayacagizProje\APP.UI\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.AssemblyInfo.cs
+W:\KodlayacagizProje\APP.UI\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.dll
+W:\KodlayacagizProje\APP.UI\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.pdb
