@@ -3,83 +3,102 @@
 
 @{
     ViewData["Title"] = "Log in";
+    Layout = null;
 }
 
-<h1>@ViewData["Title"]</h1>
-<div class="row">
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+<!Doctype html>
+<html lang="en">
+<head>
+    <!-- Basic Page Needs
+    ================================================== -->
+    <title>Hireo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- CSS
+    ================================================== -->
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="stylesheet" href="../../../../css/colors/blue.css">
+</head>
+<body style="background-image: url(../../../../images/backgrounds/loginbg.jpg)">
+
+    <!-- Titlebar
+    ================================================== -->
+    <div id="titlebar" class="gradient">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 style="color:white">Acikio</h2>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                </div>
-            </form>
-        </section>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to log in.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
+
+    <!-- Page Content
+    ================================================== -->
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 offset-xl-12">
+                <div class="login-register-page" style="background-color: #fff; padding: 35px 35px 35px 35px; border-radius: 10px 10px 10px 10px;">
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h3>Giriş yap, yemekler soğuyacak!</h3>
+                        <span>Hesabınız yok mu?  <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Kaydol!</a>
+                        </span>
                     </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
+
+                    <!-- Form -->
+                    <form id="account" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="input-with-icon-left">
+                            <i class="icon-material-baseline-mail-outline"></i>
+                            <input type="text" asp-for="Input.Email" class="input-text with-border" placeholder="E-Posta Adresi" required />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
                         </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
-</div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+                        <div class="input-with-icon-left">
+                            <i class="icon-material-outline-lock"></i>
+                            <input type="password" asp-for="Input.Password" class="input-text with-border" placeholder="Parola" required />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="checkbox">
+                            <input asp-for="Input.RememberMe" type="checkbox" id="chekcbox2">
+                            <label for="chekcbox2"><span class="checkbox-icon"></span> Beni hatırla</label>
+                        </div>
+
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+
+                        <button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit">Giriş Yap <i class="icon-material-outline-arrow-right-alt"></i></button>
+                    </form>
+
+                    <!-- Social Login -->
+                    <div class="social-login-separator"><span>or</span></div>
+                    <div class="social-login-buttons">
+                        <button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Facebook ile Giriş Yap</button>
+                        <button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Google+ ile Giriş Yap</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts
+    ================================================== -->
+    <script src="../../../../js/jquery-3.3.1.min.js"></script>
+    <script src="../../../../js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="../../../../js/mmenu.min.js"></script>
+    <script src="../../../../js/tippy.all.min.js"></script>
+    <script src="../../../../js/simplebar.min.js"></script>
+    <script src="../../../../js/bootstrap-slider.min.js"></script>
+    <script src="../../../../js/bootstrap-select.min.js"></script>
+    <script src="../../../../js/snackbar.js"></script>
+    <script src="../../../../js/clipboard.min.js"></script>
+    <script src="../../../../js/counterup.min.js"></script>
+    <script src="../../../../js/magnific-popup.min.js"></script>
+    <script src="../../../../js/slick.min.js"></script>
+    <script src="../../../../js/custom.js"></script>
+
+</body>
+</html>

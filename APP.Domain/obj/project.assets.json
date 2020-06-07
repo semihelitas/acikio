@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "W:\\KodlayacagizProje\\APP.UI\\APP.Domain\\APP.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Domain.csproj",
       "projectName": "APP.Domain",
-      "projectPath": "W:\\KodlayacagizProje\\APP.UI\\APP.Domain\\APP.Domain.csproj",
+      "projectPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Domain.csproj",
       "packagesPath": "C:\\Users\\semih\\.nuget\\packages\\",
-      "outputPath": "W:\\KodlayacagizProje\\APP.UI\\APP.Domain\\obj\\",
+      "outputPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\semih\\AppData\\Roaming\\NuGet\\NuGet.Config",

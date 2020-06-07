@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "W:\\KodlayacagizProje\\APP.UI\\APP.Service\\APP.Service.csproj": {}
+    "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Service\\APP.Service.csproj": {}
   },
   "projects": {
-    "W:\\KodlayacagizProje\\APP.UI\\APP.Service\\APP.Service.csproj": {
+    "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Service\\APP.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "W:\\KodlayacagizProje\\APP.UI\\APP.Service\\APP.Service.csproj",
+        "projectUniqueName": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Service\\APP.Service.csproj",
         "projectName": "APP.Service",
-        "projectPath": "W:\\KodlayacagizProje\\APP.UI\\APP.Service\\APP.Service.csproj",
+        "projectPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Service\\APP.Service.csproj",
         "packagesPath": "C:\\Users\\semih\\.nuget\\packages\\",
-        "outputPath": "W:\\KodlayacagizProje\\APP.UI\\APP.Service\\obj\\",
+        "outputPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\semih\\AppData\\Roaming\\NuGet\\NuGet.Config",

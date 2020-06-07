@@ -5398,11 +5398,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "W:\\KodlayacagizProje\\APP.UI\\APP.Repository\\APP.Repository.csproj",
+      "projectUniqueName": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Repository\\APP.Repository.csproj",
       "projectName": "APP.Repository",
-      "projectPath": "W:\\KodlayacagizProje\\APP.UI\\APP.Repository\\APP.Repository.csproj",
+      "projectPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Repository\\APP.Repository.csproj",
       "packagesPath": "C:\\Users\\semih\\.nuget\\packages\\",
-      "outputPath": "W:\\KodlayacagizProje\\APP.UI\\APP.Repository\\obj\\",
+      "outputPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Repository\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\semih\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5418,8 +5418,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "W:\\KodlayacagizProje\\APP.UI\\APP.Domain\\APP.Domain.csproj": {
-              "projectPath": "W:\\KodlayacagizProje\\APP.UI\\APP.Domain\\APP.Domain.csproj"
+            "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Domain.csproj": {
+              "projectPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Domain.csproj"
             }
           }
         }

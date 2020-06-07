@@ -57,14 +57,16 @@ namespace APP.UI
 
             app.UseEndpoints(endpoints =>
             {
+                //default
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+                //home
                 endpoints.MapControllerRoute(
-                     name: "homepage",
-                     pattern: "home",
-                     defaults: new { controller = "Home", action = "Index" });
+                         name: "homepage",
+                         pattern: "home",
+                         defaults: new { controller = "Home", action = "Index" });
 
                 endpoints.MapRazorPages();
             });

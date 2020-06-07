@@ -11,3 +11,16 @@ W:\KodlayacagizProje\APP.UI\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repositor
 W:\KodlayacagizProje\APP.UI\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.pdb
 W:\KodlayacagizProje\APP.UI\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.dll
 W:\KodlayacagizProje\APP.UI\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.pdb
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.deps.json
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.runtimeconfig.json
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.runtimeconfig.dev.json
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.dll
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\bin\Debug\netcoreapp3.1\APP.Repository.pdb
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\bin\Debug\netcoreapp3.1\APP.Domain.dll
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\bin\Debug\netcoreapp3.1\APP.Domain.pdb
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.csprojAssemblyReference.cache
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.AssemblyInfoInputs.cache
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.AssemblyInfo.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.csproj.CopyComplete
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.dll
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.pdb
