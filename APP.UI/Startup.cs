@@ -6,6 +6,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using APP.Repository;
+using APP.Core.Models;
+using APP.Repository.Repository;
+using APP.Service.UnitOfWork;
+using APP.Service.Abstract;
+using APP.Service.Concrete;
+using APP.Repository.FoodAds;
 
 namespace APP.UI
 {
@@ -21,13 +27,21 @@ namespace APP.UI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // DbContext
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DatabaseConnection")));
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            // Identity
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            // Services
+            services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IFoodAdsService, FoodAdsService>();
+            services.AddScoped<IFoodAdsRepository, FoodAdsRepository>();
+
+            // Settings
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -62,11 +76,17 @@ namespace APP.UI
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                //home
+                // .com/anasayfa
                 endpoints.MapControllerRoute(
                          name: "homepage",
-                         pattern: "home",
+                         pattern: "anasayfa",
                          defaults: new { controller = "Home", action = "Index" });
+
+                // .com/yemek-yapanlar
+                endpoints.MapControllerRoute(
+                         name: "foodAdsIndex",
+                         pattern: "yemek-yapanlar",
+                         defaults: new { controller = "FoodAds", action = "Index" });
 
                 endpoints.MapRazorPages();
             });

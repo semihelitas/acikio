@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace APP.Domain.Models
+namespace APP.Core.Models
 {
     public interface IBaseEntity
     {
-        public Guid Id  { get; set; }
-        public DateTime CreatedAt  { get; set; }
+        public Guid Id { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

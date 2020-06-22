@@ -1,0 +1,40 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using APP.Core.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <nav id="navigation">
+        <ul id="responsive">
+            <li>
+                <a href="#" class="current"><i class="icon-material-outline-home"></i> Anasayfa</a>
+            </li>
+            <li>
+                <a href="/yemek-yapanlar"><i class="icon-material-outline-search"></i> Ev Hanımı Bul</a>
+            </li>
+            <li>
+                <a href="#"><i class="icon-material-outline-forum"></i> İlan Ver</a>
+            </li>
+            <li>
+                <a href="#"><i class="icon-feather-airplay"></i> Kontrol Paneli</a>
+            </li>
+        </ul>
+    </nav>
+}
+else
+{
+    <nav id="navigation">
+        <ul id="responsive">
+            <li>
+                <a href="#" class="current"><i class="icon-material-outline-home"></i> Anasayfa</a>
+            </li>
+            <li>
+                <a href="/yemek-yapanlar"><i class="icon-material-outline-search"></i> Ev Hanımı Bul</a>
+            </li>
+            <li>
+                <a href="#"><i class="icon-material-outline-forum"></i> İlan Ver</a>
+            </li>
+        </ul>
+    </nav>
+}

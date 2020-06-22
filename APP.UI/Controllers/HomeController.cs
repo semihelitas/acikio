@@ -6,21 +6,29 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using APP.UI.Models;
+using APP.Repository;
+using Microsoft.EntityFrameworkCore;
+using APP.Service.Abstract;
+using APP.Repository.Repository;
+using APP.Core.Models;
+using APP.Repository.FoodAds;
 
 namespace APP.UI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IFoodAdsService _foodAdsService;
+        public HomeController(ILogger<HomeController> logger, IFoodAdsService foodAdsService)
         {
             _logger = logger;
+            _foodAdsService = foodAdsService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var foodlist = await _foodAdsService.GetFoodAds();
+            return View(foodlist);
         }
 
         public IActionResult Privacy()

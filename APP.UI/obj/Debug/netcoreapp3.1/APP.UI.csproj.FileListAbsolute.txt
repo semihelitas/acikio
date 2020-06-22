@@ -822,10 +822,8 @@ C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Runtime.Caching.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Domain.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Repository.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Repository.pdb
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Domain.pdb
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\APP.UI.csprojAssemblyReference.cache
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\staticwebassets\APP.UI.StaticWebAssets.Manifest.cache
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\staticwebassets\APP.UI.StaticWebAssets.xml
@@ -858,4 +856,11 @@ C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\APP.UI.csproj.CopyComplete
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\APP.UI.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\APP.UI.pdb
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Log\Index.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_NavbarPartial.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\APP.UI.csproj.CoreCompileInputs.cache
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\APP.UI.genruntimeconfig.cache
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Core.dll
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Core.pdb
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Service.dll
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Service.pdb
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\FoodAds\Index.cshtml.g.cs

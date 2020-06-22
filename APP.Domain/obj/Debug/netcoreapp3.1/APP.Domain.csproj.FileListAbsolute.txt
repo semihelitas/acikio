@@ -9,8 +9,8 @@ W:\KodlayacagizProje\APP.UI\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.pdb
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Domain\bin\Debug\netcoreapp3.1\APP.Domain.deps.json
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Domain\bin\Debug\netcoreapp3.1\APP.Domain.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Domain\bin\Debug\netcoreapp3.1\APP.Domain.pdb
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.csprojAssemblyReference.cache
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.AssemblyInfoInputs.cache
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.AssemblyInfo.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.pdb
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Domain\obj\Debug\netcoreapp3.1\APP.Domain.csproj.CoreCompileInputs.cache

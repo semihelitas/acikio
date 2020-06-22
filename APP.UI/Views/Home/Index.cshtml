@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<APP.Core.Models.FoodAdvertisement>
+@{
+    ViewData["Title"] = "Acikio";
     Layout = "_Layout";
 }
 
@@ -44,8 +45,8 @@
                     <!-- Button -->
                     <div class="intro-search-button">
                         @*onclick="window.location.href='jobs-list-layout-full-page-map.html'">*@
-                                        <a class="button ripple-effect" asp-controller="Log" asp-action="Index"><i class="icon-line-awesome-cutlery"></i> Acıktım</a>
-                                    </div>
+                        <a class="button ripple-effect" asp-controller="Log" asp-action="Index"><i class="icon-line-awesome-cutlery"></i> Acıktım</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -74,7 +75,7 @@
     </div>
 </div>
 
-<!-- Features Jobs -->
+<!-- Posted Advertisements -->
 <div class="section gray padding-top-65 padding-bottom-75">
     <div class="container">
         <div class="row">
@@ -86,171 +87,58 @@
                     <a href="jobs-list-layout-full-page-map.html" class="headline-link">Bütün ilanları gör</a>
                 </div>
 
-                <!-- Jobs Container -->
-                <div class="listings-container compact-list-layout margin-top-35">
+                @foreach (var ads in Model)
+                {
+                    <!-- Advertisement Container -->
+                    <div class="listings-container compact-list-layout margin-top-35">
+                        <div class="freelancers-container freelancers-list-layout compact-list margin-top-35">
 
-                    <!-- Job Listing -->
-                    <a href="single-job-page.html" class="job-listing with-apply-button">
+                            <div class="freelancer">
+                                <!-- Overview -->
+                                <div class="freelancer-overview">
+                                    <div class="freelancer-overview-inner">
 
-                        <!-- Job Listing Details -->
-                        <div class="job-listing-details">
+                                        <!-- Bookmark Icon -->
+                                        <span class="bookmark-icon"></span>
 
-                            <!-- Logo -->
-                            <div class="job-listing-company-logo">
-                                <img src="~/images/avatar/woman-1.jpg" alt="">
-                            </div>
+                                        <!-- Avatar -->
+                                        <div class="freelancer-avatar">
+                                            <div class="verified-badge"></div>
+                                            <a href="single-freelancer-profile.html"><img src="~/images/avatar/woman-1.jpg" alt=""></a>
+                                        </div>
 
-                            <!-- Details -->
-                            <div class="job-listing-description">
-                                <h3 class="job-listing-title">DOĞUM GÜNÜ PASTASI YAPMASINI BİLEN EV HANIMI ARIYORUM</h3>
+                                        <!-- Name -->
+                                        <div class="freelancer-name">
+                                            <h4><a href="#">@ads.Title</a></h4>
+                                            <span>@ads.ApplicationUser.Name @ads.ApplicationUser.Surname</span>
+                                            <div class="freelancer-rating">
+                                                <strong><i class="icon-material-outline-location-on"></i> @ads.ApplicationUser.Location</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <!-- Job Listing Footer -->
-                                <div class="job-listing-footer">
-                                    <ul>
-                                        <li><i class="icon-feather-user"></i> Berna Taşdemir <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
-                                        <li><i class="icon-material-outline-location-on"></i> İstanbul, Kadıköy</li>
-                                        <li><i class="icon-material-outline-access-time"></i> 1 hafta</li>
-                                        <li><i class="icon-line-awesome-money"></i> 40₺</li>
-                                    </ul>
+                                <!-- Details -->
+                                <div class="freelancer-details">
+                                    <div class="freelancer-details-list">
+                                        <ul>
+                                            <li>Ücret <strong>@ads.Price ₺</strong></li>
+                                            <li>Memnuniyet <strong>95%</strong></li>
+                                        </ul>
+                                    </div>
+                                    <a href="#" class="button button-sliding-icon ripple-effect">Ben Yaparım <i class="icon-material-outline-arrow-right-alt"></i></a>
                                 </div>
                             </div>
-
-                            <!-- Apply Button -->
-                            <span class="list-apply-button ripple-effect">Ben Yaparım</span>
                         </div>
-                    </a>
-
-                    <!-- Job Listing -->
-                    <a href="single-job-page.html" class="job-listing with-apply-button">
-
-                        <!-- Job Listing Details -->
-                        <div class="job-listing-details">
-
-                            <!-- Logo -->
-                            <div class="job-listing-company-logo">
-                                <img src="~/images/avatar/woman-2.jpg" alt="">
-                            </div>
-
-                            <!-- Details -->
-                            <div class="job-listing-description">
-                                <h3 class="job-listing-title">ALTIN GÜNÜ İKRAMLARI HAZIRLAYACAK EV HANIMI ARIYORUM</h3>
-
-                                <!-- Job Listing Footer -->
-                                <div class="job-listing-footer">
-                                    <ul>
-                                        <li><i class="icon-feather-user"></i> Dilara Akdoğan <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
-                                        <li><i class="icon-material-outline-location-on"></i> Ankara, Etimesgut</li>
-                                        <li><i class="icon-material-outline-access-time"></i> 3 gün</li>
-                                        <li><i class="icon-line-awesome-money"></i> 200₺</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Apply Button -->
-                            <span class="list-apply-button ripple-effect">Ben Yaparım</span>
-                        </div>
-                    </a>
-
-                    <!-- Job Listing -->
-                    <a href="single-job-page.html" class="job-listing with-apply-button">
-
-                        <!-- Job Listing Details -->
-                        <div class="job-listing-details">
-
-                            <!-- Logo -->
-                            <div class="job-listing-company-logo">
-                                <img src="~/images/avatar/man-1.jpg" alt="">
-                            </div>
-
-                            <!-- Details -->
-                            <div class="job-listing-description">
-                                <h3 class="job-listing-title">ÖĞRENCİ EVİ İÇİN DÜZENLİ YEMEK PİŞİRECEK EV HANIMI ARIYORUM</h3>
-
-                                <!-- Job Listing Footer -->
-                                <div class="job-listing-footer">
-                                    <ul>
-                                        <li><i class="icon-feather-user"></i> Oğuzhan Demirci <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
-                                        <li><i class="icon-material-outline-location-on"></i> İstanbul, Beşiktaş</li>
-                                        <li><i class="icon-material-outline-access-time"></i> Sürekli</li>
-                                        <li><i class="icon-line-awesome-money"></i> 10₺</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Apply Button -->
-                            <span class="list-apply-button ripple-effect">Ben Yaparım</span>
-                        </div>
-                    </a>
-
-                    <!-- Job Listing -->
-                    <a href="single-job-page.html" class="job-listing with-apply-button">
-
-                        <!-- Job Listing Details -->
-                        <div class="job-listing-details">
-
-                            <!-- Logo -->
-                            <div class="job-listing-company-logo">
-                                <img src="~/images/avatar/woman-3.jpg" alt="">
-                            </div>
-
-                            <!-- Details -->
-                            <div class="job-listing-description">
-                                <h3 class="job-listing-title">NİŞAN YEMEĞİ MENÜSÜ YAPABİLECEK EV HANIMI ARIYORUM</h3>
-
-                                <!-- Job Listing Footer -->
-                                <div class="job-listing-footer">
-                                    <ul>
-                                        <li><i class="icon-feather-user"></i> Halime Demirkol <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
-                                        <li><i class="icon-material-outline-location-on"></i> İzmir, Buca</li>
-                                        <li><i class="icon-material-outline-access-time"></i> 3 hafta</li>
-                                        <li><i class="icon-line-awesome-money"></i> 350₺</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Apply Button -->
-                            <span class="list-apply-button ripple-effect">Ben Yaparım</span>
-                        </div>
-                    </a>
-
-                    <!-- Job Listing -->
-                    <a href="single-job-page.html" class="job-listing with-apply-button">
-
-                        <!-- Job Listing Details -->
-                        <div class="job-listing-details">
-
-                            <!-- Logo -->
-                            <div class="job-listing-company-logo">
-                                <img src="~/images/avatar/man-2.jpg" alt="">
-                            </div>
-
-                            <!-- Details -->
-                            <div class="job-listing-description">
-                                <h3 class="job-listing-title">DOĞUM GÜNÜ PASTASI YAPMASINI BİLEN EV HANIMI ARIYORUM</h3>
-
-                                <!-- Job Listing Footer -->
-                                <div class="job-listing-footer">
-                                    <ul>
-                                        <li><i class="icon-feather-user"></i> Berna Taşdemir <div class="verified-badge" title="Verified Employer" data-tippy-placement="top"></div></li>
-                                        <li><i class="icon-material-outline-location-on"></i> İstanbul, Kadıköy</li>
-                                        <li><i class="icon-material-outline-access-time"></i> 1 hafta</li>
-                                        <li><i class="icon-line-awesome-money"></i> 40₺</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Apply Button -->
-                            <span class="list-apply-button ripple-effect">Ben Yaparım</span>
-                        </div>
-                    </a>
-                </div>
-                <!-- Jobs Container / End -->
+                    </div>
+                }
 
             </div>
         </div>
     </div>
 </div>
-<!-- Featured Jobs / End -->
+<!-- Posted Advertisements / End -->
+
 
 <!-- Features Cities -->
 <div class="section margin-top-65 margin-bottom-65">

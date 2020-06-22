@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@using APP.Core.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -111,7 +112,7 @@
                         <!-- User Status Switcher -->
                         <div class="status-switch" id="snackbar-user-status">
                             <label class="user-online current-status">Online</label>
-                            <label class="user-invisible">Görünmez</label>
+                            <label class="status-offline user-invisible">Görünmez</label>
                             <!-- Status Indicator -->
                             <span class="status-indicator" aria-hidden="true"></span>
                         </div>
@@ -122,7 +123,7 @@
                         <li><a  asp-area="Identity" asp-page="/Account/Manage/Index"><i class="icon-material-outline-settings"></i> Settings</a></li>
                         <li style="margin-top:15px">
                             <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button type="submit" class="log-in-button"><i class="icon-feather-power"></i>Çıkış</button>
+                                <button type="submit" class="log-in-button">&nbsp;<i class="icon-feather-power"></i>Çıkış</button>
                             </form>
                         </li>
                     </ul>
@@ -162,7 +163,5 @@ else
             </button>
         </span>
     </div>
-
-
 }
 

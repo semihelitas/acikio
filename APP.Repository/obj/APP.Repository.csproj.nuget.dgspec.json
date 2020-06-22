@@ -4,12 +4,12 @@
     "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Repository\\APP.Repository.csproj": {}
   },
   "projects": {
-    "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Domain.csproj": {
+    "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Domain.csproj",
-        "projectName": "APP.Domain",
-        "projectPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Core.csproj",
+        "projectName": "APP.Core",
+        "projectPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Core.csproj",
         "packagesPath": "C:\\Users\\semih\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\obj\\",
         "projectStyle": "PackageReference",
@@ -37,6 +37,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -52,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -79,8 +85,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Domain.csproj": {
-                "projectPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Domain.csproj"
+              "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Core.csproj": {
+                "projectPath": "C:\\Users\\semih\\Source\\Repos\\semihelitas\\kodlayacagiz\\APP.Domain\\APP.Core.csproj"
               }
             }
           }
@@ -96,25 +102,25 @@
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[3.1.5, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[3.1.5, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[3.1.5, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[3.1.5, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[3.1.5, )"
             }
           },
           "imports": [
@@ -135,7 +141,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

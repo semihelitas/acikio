@@ -3,10 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - APP.UI</title>
+    <title>@ViewData["Title"]</title>
 
     <!-- CSS  -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/colors/blue.css">
 
 </head>
@@ -17,24 +17,11 @@
                 <div class="container">
                     <div class="left-side">
                         <div id="logo">
-                            <a href="index.html"><img src="images/logo.png" alt=""></a>
+                            <a href="/anasayfa"><img src="images/logo.png" alt=""></a>
                         </div>
-                        <nav id="navigation">
-                            <ul id="responsive">
-                                <li>
-                                    <a href="#" class="current"><i class="icon-material-outline-home"></i> Anasayfa</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="icon-material-outline-search"></i> Ev Hanımı Bul</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="icon-feather-airplay"></i> Kontrol Paneli</a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="icon-material-outline-forum"></i> İlan Ver</a>
-                                </li>
-                            </ul>
-                        </nav>
+                        
+                        <partial name="_NavbarPartial" />
+
                         <div class="clearfix"></div>
                     </div>
                     <!-- Right side -->
@@ -173,19 +160,19 @@
 
     <!-- Scripts
     ================================================== -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/jquery-migrate-3.0.0.min.js"></script>
-    <script src="js/mmenu.min.js"></script>
-    <script src="js/tippy.all.min.js"></script>
-    <script src="js/simplebar.min.js"></script>
-    <script src="js/bootstrap-slider.min.js"></script>
-    <script src="js/bootstrap-select.min.js"></script>
-    <script src="js/snackbar.js"></script>
-    <script src="js/clipboard.min.js"></script>
-    <script src="js/counterup.min.js"></script>
-    <script src="js/magnific-popup.min.js"></script>
-    <script src="js/slick.min.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/jquery-migrate-3.0.0.min.js"></script>
+    <script src="~/js/mmenu.min.js"></script>
+    <script src="~/js/tippy.all.min.js"></script>
+    <script src="~/js/simplebar.min.js"></script>
+    <script src="~/js/bootstrap-slider.min.js"></script>
+    <script src="~/js/bootstrap-select.min.js"></script>
+    <script src="~/js/snackbar.js"></script>
+    <script src="~/js/clipboard.min.js"></script>
+    <script src="~/js/counterup.min.js"></script>
+    <script src="~/js/magnific-popup.min.js"></script>
+    <script src="~/js/slick.min.js"></script>
+    <script src="~/js/custom.js"></script>
 
     <!-- Snackbar // documentation: https://www.polonel.com/snackbar/ -->
     <script>
