@@ -17,6 +17,11 @@ namespace APP.Repository.ChiefAds
             _dbContext = context;
         }
 
+        public Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsByLocation(string city)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsBySearch(string location)
         {
             return await _dbContext.ChiefAdvertisement.Include(u=>u.ApplicationUser).Where(x => x.ApplicationUser.Location.Contains(location)).AsNoTracking().ToListAsync();

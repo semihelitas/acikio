@@ -8,6 +8,7 @@ namespace APP.Repository.ChiefAds
     public interface IChiefAdsRepository : IGenericRepository<ChiefAdvertisement>
     {
         Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsBySearch(string location);
+        Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsByLocation(string city);
         Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsBySearch(string location, string keyword);
     }
 }

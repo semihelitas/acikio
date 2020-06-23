@@ -2,6 +2,11 @@
 @{
     ViewData["Title"] = "Acikio";
     Layout = "_Layout";
+
+    var returnIstanbulDataUrl = "/usta-ilanlari?location=İstanbul&keyword=";
+    // returnUrlAnkaraDataUrl = ...
+    // returnUrlIzmirDataUrl =...
+    // returnUrlAdanaDataUrl =...
 }
 
 <!-- Intro Banner -->
@@ -134,7 +139,7 @@
 
             <div class="col-xl-3 col-md-6">
                 <!-- Photo Box -->
-                <a href="jobs-list-layout-1.html" class="photo-box" data-background-image="images/cities/istanbul.jpg">
+                <a href=@returnIstanbulDataUrl class="photo-box" data-background-image="images/cities/istanbul.jpg">
                     <div class="photo-box-content">
                         <h3>İstanbul</h3>
                         <span>1376 İlan</span>
@@ -171,7 +176,6 @@
                     </div>
                 </a>
             </div>
-
         </div>
     </div>
 </div>

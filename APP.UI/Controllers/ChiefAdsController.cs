@@ -65,24 +65,32 @@ namespace APP.UI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ChiefAdvertisement entity)
         {
-            try
-            {
-                //db islemini baska yere tasicaz.
-                var activeUser = await _userManager.GetUserAsync(User);
-
-                entity.Id = Guid.NewGuid();
-                entity.CreatedAt = DateTime.Now;
-                entity.UserId = activeUser.Id;
-                entity.ApplicationUser = activeUser;
-                entity.AdViewed = 0;
-
-                await _chiefAdsService.CreateChiefAds(entity);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (entity == null)
             {
                 return View();
             }
+            else
+            {
+                try
+                {
+                    //db islemini baska yere tasicaz.
+                    var activeUser = await _userManager.GetUserAsync(User);
+                  
+                    entity.Id = Guid.NewGuid();
+                    entity.CreatedAt = DateTime.Now;
+                    entity.UserId = activeUser.Id;
+                    entity.ApplicationUser = activeUser;
+                    entity.AdViewed = 0;
+
+                    await _chiefAdsService.CreateChiefAds(entity);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View();
+                }
+            }
+
         }
 
         // GET: ChiefAdsController/Edit/5
