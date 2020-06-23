@@ -11,7 +11,8 @@ using APP.Repository.Repository;
 using APP.Service.UnitOfWork;
 using APP.Service.Abstract;
 using APP.Service.Concrete;
-using APP.Repository.FoodAds;
+using APP.Repository.ChiefAds;
+using APP.Repository.OrderOffer;
 
 namespace APP.UI
 {
@@ -38,8 +39,10 @@ namespace APP.UI
             // Services
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IFoodAdsService, FoodAdsService>();
-            services.AddScoped<IFoodAdsRepository, FoodAdsRepository>();
+            services.AddTransient<IChiefAdsService, ChiefAdsService>();
+            services.AddTransient<IOrderOffersService, OrderOffersService>();
+            services.AddTransient<IChiefAdsRepository, ChiefAdsRepository>();
+            services.AddTransient<IOrderOffersRepository, OrderOffersRepository>();
 
             // Settings
             services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -82,12 +85,23 @@ namespace APP.UI
                          pattern: "anasayfa",
                          defaults: new { controller = "Home", action = "Index" });
 
-                // .com/yemek-yapanlar
+                // .com/usta-ilanlari
                 endpoints.MapControllerRoute(
-                         name: "foodAdsIndex",
-                         pattern: "yemek-yapanlar",
-                         defaults: new { controller = "FoodAds", action = "Index" });
+                         name: "chiefAdsIndex",
+                         pattern: "usta-ilanlari",
+                         defaults: new { controller = "ChiefAds", action = "Index" });
 
+                // .com/usta-ilanlari/detaylar/{*id}
+                endpoints.MapControllerRoute(
+                         name: "chiefAdsDetails",
+                         pattern: "usta-ilanlari/detaylar/{*id}",
+                         defaults: new { controller = "ChiefAds", action = "Details" });
+
+                // .com/yeni-ilan
+                endpoints.MapControllerRoute(
+                         name: "chiefAdsCreate",
+                         pattern: "yeni-ilan",
+                         defaults: new { controller = "ChiefAds", action = "Create" });
                 endpoints.MapRazorPages();
             });
         }

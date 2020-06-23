@@ -5,6 +5,8 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    var signedInUser = await UserManager.GetUserAsync(User);
+
     <div class="right-side">
 
         <!--  User Notifications -->
@@ -68,7 +70,7 @@
                                 <!-- Notification -->
                                 <li class="notifications-not-read">
                                     <a href="dashboard-messages.html">
-                                        <span class="notification-avatar status-online"><img src="images/user-avatar-small-03.jpg" alt=""></span>
+                                        <span class="notification-avatar status-online"><img src="~/images/user-avatar-small-03.jpg" alt=""></span>
                                         <div class="notification-text">
                                             <strong>David Peterson</strong>
                                             <p class="notification-msg-text">Thanks for reaching out. I'm quite busy right now on many...</p>
@@ -92,7 +94,7 @@
             <!-- Messages -->
             <div class="header-notifications user-menu">
                 <div class="header-notifications-trigger">
-                    <a href="#"><div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div></a>
+                    <a href="#"><div class="user-avatar status-online"><img src="~/images/user-avatar-small-01.jpg" alt=""></div></a>
                 </div>
 
                 <!-- Dropdown -->
@@ -103,9 +105,9 @@
 
                         <!-- User Name / Avatar -->
                         <div class="user-details">
-                            <div class="user-avatar status-online"><img src="images/user-avatar-small-01.jpg" alt=""></div>
+                            <div class="user-avatar status-online"><img src="~/images/user-avatar-small-01.jpg" alt=""></div>
                             <div class="user-name">
-                                @User.Identity.Name <span>Yemek Ustası</span>
+                                @signedInUser.Name @signedInUser.Surname <span>@signedInUser.Email</span>
                             </div>
                         </div>
 

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace APP.Core.Models
 {
-    public class FoodAdvertisement : IBaseEntity
+    public class ChiefAdvertisement : IBaseEntity
     {
         [Key]
         public Guid Id { get; set; }
@@ -15,12 +15,15 @@ namespace APP.Core.Models
         public string Category { get; set; }
         public string Price { get; set; }
         public int AdViewed { get; set; }
-        
+
         // User
         [ForeignKey("ApplicationUser")]
         public string UserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
-
         public DateTime CreatedAt { get; set; }
+
+        // İlana Gelen Teklifler
+        public ICollection<OrderOffers> OrderOffers { get; set; }
+
     }
 }

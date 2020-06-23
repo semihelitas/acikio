@@ -863,4 +863,8 @@ C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Core.pdb
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Service.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Service.pdb
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\FoodAds\Index.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\ChiefAds\Index.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\ChiefAds\Details.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\ChiefAds\Create.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SidebarPartial.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_DashboardFooterPartial.cshtml.g.cs

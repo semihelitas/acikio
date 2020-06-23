@@ -12,7 +12,7 @@ namespace APP.Repository
 
         }
 
-        public DbSet<FoodAdvertisement> FoodAdvertisement { get; set; }
-        public DbSet<OrderAdvertisement> OrderAdvertisement { get; set; }
+        public DbSet<ChiefAdvertisement> ChiefAdvertisement { get; set; }
+        public DbSet<OrderOffers> OrderOffers { get; set; }
     }
 }

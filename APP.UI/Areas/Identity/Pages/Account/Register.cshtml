@@ -57,21 +57,45 @@
 
                         <!-- Account Type -->
                         @*<div class="account-type">
-                            <div>
-                                <input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked />
-                                <label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Yemek Ustası</label>
-                            </div>
+                                <div>
+                                    <input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked />
+                                    <label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Yemek Ustası</label>
+                                </div>
 
-                            <div>
-                                <input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio" />
-                                <label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Acıktım</label>
-                            </div>
-                        </div>*@
+                                <div>
+                                    <input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio" />
+                                    <label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Acıktım</label>
+                                </div>
+                            </div>*@
+
+                        <div class="input-with-icon-left">
+                            <i class="icon-material-outline-person-pin"></i>
+                            <input type="text" asp-for="Input.Name" class="input-text with-border" placeholder="Adı" required />
+                            <span asp-validation-for="Input.Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="input-with-icon-left">
+                            <i class="icon-material-outline-person-pin"></i>
+                            <input type="text" asp-for="Input.Surname" class="input-text with-border" placeholder="Soyadı" required />
+                            <span asp-validation-for="Input.Surname" class="text-danger"></span>
+                        </div>
 
                         <div class="input-with-icon-left">
                             <i class="icon-material-baseline-mail-outline"></i>
                             <input type="text" asp-for="Input.Email" class="input-text with-border" placeholder="E-Posta Adresi" required />
                             <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="input-with-icon-left">
+                            <i class="icon-material-outline-location-on"></i>
+                            <input id="autocomplete-input" type="text" asp-for="Input.Location" class="input-text with-border" placeholder="Konum" required />
+                            <span asp-validation-for="Input.Location" class="text-danger"></span>
+                        </div>
+
+                        <div class="input-with-icon-left">
+                            <i class="icon-line-awesome-calendar"></i>
+                            <input type="date" asp-for="Input.DateOfBirth" class="input-text with-border" placeholder="Doğum Tarihi" required />
+                            <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
                         </div>
 
                         <div class="input-with-icon-left">
@@ -87,14 +111,15 @@
                         </div>
 
                         <button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit">Kaydol <i class="icon-material-outline-arrow-right-alt"></i></button>
+
                     </form>
 
                     <!-- Social Login -->
-                    <div class="social-login-separator"><span>veya</span></div>
-                    <div class="social-login-buttons">
-                        <button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Facebook ile Kaydol</button>
-                        <button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Google+ ile Kaydol</button>
-                    </div>
+                    @*<div class="social-login-separator"><span>veya</span></div>
+                        <div class="social-login-buttons">
+                            <button class="facebook-login ripple-effect"><i class="icon-brand-facebook-f"></i> Facebook ile Kaydol</button>
+                            <button class="google-login ripple-effect"><i class="icon-brand-google-plus-g"></i> Google+ ile Kaydol</button>
+                        </div>*@
                 </div>
 
             </div>
@@ -121,61 +146,29 @@
     <script src="../../../../js/slick.min.js"></script>
     <script src="../../../../js/custom.js"></script>
 
+    <!-- Google Autocomplete -->
+    <script>
+        function initAutocomplete() {
+            var options = {
+                types: ['(cities)'],
+                // componentRestrictions: {country: "us"}
+            };
+
+            var input = document.getElementById('autocomplete-input');
+            var autocomplete = new google.maps.places.Autocomplete(input, options);
+        }
+
+        // Autocomplete adjustment for homepage
+        if ($('.intro-banner-search-form')[0]) {
+            setTimeout(function () {
+                $(".pac-container").prependTo(".intro-search-field.with-autocomplete");
+            }, 300);
+        }
+
+    </script>
+
+    <!-- Google API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgeuuDfRlweIs7D6uo4wdIHVvJ0LonQ6g&libraries=places&callback=initAutocomplete"></script>
+
 </body>
 </html>
-
-@*<div class="row">
-        <div class="col-md-4">
-            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                <h4>Create a new account.</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.ConfirmPassword"></label>
-                    <input asp-for="Input.ConfirmPassword" class="form-control" />
-                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-                </div>
-                <button type="submit" class="btn btn-primary">Register</button>
-            </form>
-        </div>
-        <div class="col-md-6 col-md-offset-2">
-            <section>
-                <h4>Use another service to register.</h4>
-                <hr />
-                @{
-                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                    {
-                        <div>
-                            <p>
-                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                                for details on setting up this ASP.NET application to support logging in via external services.
-                            </p>
-                        </div>
-                    }
-                    else
-                    {
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins)
-                                    {
-                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    }
-                }
-            </section>
-        </div>
-    </div>*@

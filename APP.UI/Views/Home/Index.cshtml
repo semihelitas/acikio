@@ -1,4 +1,4 @@
-﻿@model IEnumerable<APP.Core.Models.FoodAdvertisement>
+﻿@model HomeIndexViewModel
 @{
     ViewData["Title"] = "Acikio";
     Layout = "_Layout";
@@ -16,7 +16,7 @@
                     <h3>
                         <strong>Anne yemeği gibisi yoktur. Belki de vardır?</strong>
                         <br>
-                        <span>Binlerce ev hanımı bu platformu kullanarak anne lezzetlerini sizlerle buluşturuyor.</span>
+                        <span>Binlerce usta bu platformu kullanarak anne lezzetlerini sizlerle buluşturuyor.</span>
                     </h3>
                 </div>
             </div>
@@ -43,9 +43,9 @@
                     </div>
 
                     <!-- Button -->
-                    <div class="intro-search-button">
+                    <div id="getAdsWithSearch" class="intro-search-button">
                         @*onclick="window.location.href='jobs-list-layout-full-page-map.html'">*@
-                        <a class="button ripple-effect" asp-controller="Log" asp-action="Index"><i class="icon-line-awesome-cutlery"></i> Acıktım</a>
+                        <a style="color:white"  class="button ripple-effect"><i class="icon-line-awesome-cutlery"></i> Acıktım</a>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
     </div>
 </div>
 
-<!-- Posted Advertisements -->
+<!-- Chief Advertisements -->
 <div class="section gray padding-top-65 padding-bottom-75">
     <div class="container">
         <div class="row">
@@ -83,62 +83,42 @@
 
                 <!-- Section Headline -->
                 <div class="section-headline margin-top-0 margin-bottom-35">
-                    <h3>Acıkanlardan Gelenler</h3>
+                    <h3>Ustalardan Gelenler</h3>
                     <a href="jobs-list-layout-full-page-map.html" class="headline-link">Bütün ilanları gör</a>
                 </div>
 
-                @foreach (var ads in Model)
-                {
-                    <!-- Advertisement Container -->
-                    <div class="listings-container compact-list-layout margin-top-35">
-                        <div class="freelancers-container freelancers-list-layout compact-list margin-top-35">
+                <div class="listings-container grid-layout margin-top-35">
+                    @foreach (var ads in Model.ChiefAdvertisements)
+                    {
 
-                            <div class="freelancer">
-                                <!-- Overview -->
-                                <div class="freelancer-overview">
-                                    <div class="freelancer-overview-inner">
-
-                                        <!-- Bookmark Icon -->
-                                        <span class="bookmark-icon"></span>
-
-                                        <!-- Avatar -->
-                                        <div class="freelancer-avatar">
-                                            <div class="verified-badge"></div>
-                                            <a href="single-freelancer-profile.html"><img src="~/images/avatar/woman-1.jpg" alt=""></a>
-                                        </div>
-
-                                        <!-- Name -->
-                                        <div class="freelancer-name">
-                                            <h4><a href="#">@ads.Title</a></h4>
-                                            <span>@ads.ApplicationUser.Name @ads.ApplicationUser.Surname</span>
-                                            <div class="freelancer-rating">
-                                                <strong><i class="icon-material-outline-location-on"></i> @ads.ApplicationUser.Location</strong>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <a asp-controller="ChiefAds" asp-action="Details" asp-route-id="@ads.Id" class="job-listing">
+                            <div class="job-listing-details">
+                                <div class="job-listing-company-logo">
+                                    <img src="~/images/avatar/woman-1.jpg" alt="">
                                 </div>
-
-                                <!-- Details -->
-                                <div class="freelancer-details">
-                                    <div class="freelancer-details-list">
-                                        <ul>
-                                            <li>Ücret <strong>@ads.Price ₺</strong></li>
-                                            <li>Memnuniyet <strong>95%</strong></li>
-                                        </ul>
-                                    </div>
-                                    <a href="#" class="button button-sliding-icon ripple-effect">Ben Yaparım <i class="icon-material-outline-arrow-right-alt"></i></a>
+                                <div class="job-listing-description">
+                                    <h4 class="job-listing-company">@ads.ApplicationUser.Name @ads.ApplicationUser.Surname</h4>
+                                    <h3 class="job-listing-title">@ads.Title</h3>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                }
-
+                            <div class="job-listing-footer">
+                                <span href="/ilanlar" class="bookmark-icon bookmarked label label-important"></span>
+                                <ul>
+                                    <li><i class="icon-material-outline-location-on"></i> @ads.ApplicationUser.Location</li>
+                                    <li><i class="icon-material-outline-business-center"></i> @ads.Category</li>
+                                    <br />
+                                    <li><i class="icon-material-outline-account-balance-wallet"></i> @ads.Price ₺</li>
+                                    <li><i class="icon-material-outline-access-time"></i> @ads.CreatedAt.ToShortDateString()</li>
+                                </ul>
+                            </div>
+                        </a>
+                    }
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Posted Advertisements / End -->
-
+<!-- Chief Advertisements / End -->
 
 <!-- Features Cities -->
 <div class="section margin-top-65 margin-bottom-65">
@@ -196,3 +176,5 @@
     </div>
 </div>
 <!-- Features Cities / End -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="~/js/app-js/chiefAdsSearch.js"></script>

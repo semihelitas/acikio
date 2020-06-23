@@ -4,9 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace APP.Repository.OrderAds
+namespace APP.Repository.OrderOffer
 {
-    public interface IOrderAdsRepository : IGenericRepository<OrderAdvertisement>
+    public interface IOrderOffersRepository : IGenericRepository<OrderOffers>
     {
+
     }
 }

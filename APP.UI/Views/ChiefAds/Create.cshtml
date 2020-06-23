@@ -1,0 +1,175 @@
+﻿@model APP.Core.Models.ChiefAdvertisement
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="dashboard-container" style="height: 778px;">
+    <partial name="_SidebarPartial" />
+    <div class="dashboard-content-container" data-simplebar="init" style="height: 778px;">
+        <div class="simplebar-track vertical" style="visibility: visible;">
+            <div class="simplebar-scrollbar" style="visibility: visible; top: 179px; height: 588px;"></div>
+        </div>
+        <div class="simplebar-track horizontal" style="visibility: visible;">
+            <div class="simplebar-scrollbar" style="visibility: visible; left: 0px; width: 25px;"></div>
+        </div>
+        <div class="simplebar-scroll-content" style="padding-right: 17px; margin-bottom: -34px;">
+            <div class="simplebar-content" style="padding-bottom: 17px; margin-right: -17px;">
+                <div class="dashboard-content-inner" style="min-height: 778px;">
+
+                    <!-- Dashboard Headline -->
+                    <div class="dashboard-headline">
+                        <h3>Yeni İlan</h3>
+
+                        <!-- Breadcrumbs -->
+                        <nav id="breadcrumbs" class="dark">
+                            <ul>
+                                <li>
+                                    <a href="#">Kontrol Paneli</a>
+                                </li>
+                                <li>İlan Oluştur</li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Row -->
+                    <div class="row">
+                        <form asp-action="Create">
+                            <!-- Dashboard Box -->
+                            <div class="col-xl-12">
+                                <div class="dashboard-box margin-top-0">
+
+                                    <!-- Headline -->
+                                    <div class="headline">
+                                        <h3>
+                                            <i class="icon-feather-folder-plus"></i> Yeni İlan Formu
+                                        </h3>
+                                    </div>
+
+                                    <div class="content with-padding padding-bottom-10">
+                                        <div class="row">
+
+                                            <div class="col-xl-4">
+                                                <div class="submit-field">
+                                                    <h5>İlan Başlığı</h5>
+                                                    <input asp-for="Title" type="text" required class="with-border" placeholder="Ustası olduğunuz alanları belirten kısa bir başlık">
+                                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-4">
+                                                <div class="submit-field">
+                                                    <h5>Kategori</h5>
+                                                    <input asp-for="Category" type="text" required class="with-border" placeholder="Tatlılar, Deniz Ürünleri, Hamur İşleri vb.">
+                                                    <span asp-validation-for="Category" class="text-danger"></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-4">
+                                                <div class="submit-field">
+                                                    <h5>Ücret Aralığı</h5>
+                                                    <div class="row">
+                                                        <div class="col-xl-6">
+                                                            <div class="input-with-icon">
+                                                                <input asp-for="Price" required class="with-border" type="text" placeholder="Min - Max">
+                                                                <i class="currency">TL</i>
+                                                                <span asp-validation-for="Price" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-xl-12">
+                                                <div class="submit-field">
+                                                    <h5>İş Tanımı</h5>
+                                                    <textarea asp-for="Description" cols="30" rows="5" required class="with-border"></textarea>
+                                                    <span asp-validation-for="Description"  class="text-danger"></span>
+                                                    @*<div class="uploadButton margin-top-30">
+            <input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple="">
+            <label class="uploadButton-button ripple-effect" for="upload">Upload Files</label>
+            <span class="uploadButton-file-name">Images or documents that might be helpful in describing your job</span>
+        </div>*@
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12">
+                                <button type="submit" class="button ripple-effect big margin-top-30"><i class="icon-feather-plus"></i> İlan Oluştur</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Row / End -->
+
+                    <partial name="_DashboardFooterPartial" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<h1>Create</h1>
+
+    <h4>ChiefAdvertisement</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Category" class="control-label"></label>
+                    <input asp-for="Category" class="form-control" />
+                    <span asp-validation-for="Category" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AdViewed" class="control-label"></label>
+                    <input asp-for="AdViewed" class="form-control" />
+                    <span asp-validation-for="AdViewed" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserId" class="control-label"></label>
+                    <input asp-for="UserId" class="form-control" />
+                    <span asp-validation-for="UserId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatedAt" class="control-label"></label>
+                    <input asp-for="CreatedAt" class="form-control" />
+                    <span asp-validation-for="CreatedAt" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@

@@ -1,5 +1,5 @@
 ﻿using APP.Core.Models;
-using APP.Repository.FoodAds;
+using APP.Repository.ChiefAds;
 using APP.Repository.Repository;
 using System.Threading.Tasks;
 

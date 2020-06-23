@@ -22,7 +22,7 @@ namespace APP.Repository.Repository
 
         public async Task<TEntity> GetByIdAsync(Guid id)
         {
-            return await _dbContext.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(entity => entity.Id == id);
+            return await _dbContext.Set<TEntity>().Include(x=>x.ApplicationUser).AsNoTracking().FirstOrDefaultAsync(entity => entity.Id == id);
         }
 
         public async Task CreateAsync(TEntity entity)

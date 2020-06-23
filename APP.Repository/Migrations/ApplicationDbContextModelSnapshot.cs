@@ -24,6 +24,9 @@ namespace APP.UI.Data.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("AboutMe")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
@@ -96,7 +99,7 @@ namespace APP.UI.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("APP.Core.Models.FoodAdvertisement", b =>
+            modelBuilder.Entity("APP.Core.Models.ChiefAdvertisement", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -127,41 +130,40 @@ namespace APP.UI.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FoodAdvertisement");
+                    b.ToTable("ChiefAdvertisement");
                 });
 
-            modelBuilder.Entity("APP.Core.Models.OrderAdvertisement", b =>
+            modelBuilder.Entity("APP.Core.Models.OrderOffers", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("AdViewed")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ChiefAdsId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("ClientId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("OfferDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Price")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("OfferPrice")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ChiefAdsId");
 
-                    b.ToTable("OrderAdvertisement");
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("OrderOffers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -299,18 +301,24 @@ namespace APP.UI.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("APP.Core.Models.FoodAdvertisement", b =>
+            modelBuilder.Entity("APP.Core.Models.ChiefAdvertisement", b =>
                 {
                     b.HasOne("APP.Core.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("FoodAdvertisement")
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("APP.Core.Models.OrderAdvertisement", b =>
+            modelBuilder.Entity("APP.Core.Models.OrderOffers", b =>
                 {
+                    b.HasOne("APP.Core.Models.ChiefAdvertisement", "ChiefAdvertisement")
+                        .WithMany("OrderOffers")
+                        .HasForeignKey("ChiefAdsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("APP.Core.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("OrderAdvertisement")
-                        .HasForeignKey("UserId");
+                        .WithMany("OrderOffers")
+                        .HasForeignKey("ClientId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

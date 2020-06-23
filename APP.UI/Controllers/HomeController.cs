@@ -1,34 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using APP.UI.Models;
-using APP.Repository;
-using Microsoft.EntityFrameworkCore;
 using APP.Service.Abstract;
-using APP.Repository.Repository;
-using APP.Core.Models;
-using APP.Repository.FoodAds;
 
 namespace APP.UI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IFoodAdsService _foodAdsService;
-        public HomeController(ILogger<HomeController> logger, IFoodAdsService foodAdsService)
+        private readonly IChiefAdsService _chiefAdsService;
+
+        public HomeController(ILogger<HomeController> logger, IChiefAdsService chiefAdsService)
         {
             _logger = logger;
-            _foodAdsService = foodAdsService;
+            _chiefAdsService = chiefAdsService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var foodlist = await _foodAdsService.GetFoodAds();
-            return View(foodlist);
+            var model = new HomeIndexViewModel()
+            {
+                ChiefAdvertisements = await _chiefAdsService.GetChiefAds(),
+            };
+            return View(model);
         }
 
         public IActionResult Privacy()
