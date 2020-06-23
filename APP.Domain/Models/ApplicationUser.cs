@@ -11,6 +11,7 @@ namespace APP.Core.Models
         public DateTime DateOfBirth { get; set; }
         public string Location { get; set; }
         public string AboutMe { get; set; }
+        public int Rating { get; set; }
 
         // PostedFoodAds: Oluşturulan "yemek yapan birini arıyorum" ilanlarını tutar.
         public ICollection<ChiefAdvertisement> FoodAdvertisement { get; set; }

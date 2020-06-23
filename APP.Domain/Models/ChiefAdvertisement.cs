@@ -13,7 +13,7 @@ namespace APP.Core.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
-        public string Price { get; set; }
+        public int Price { get; set; }
         public int AdViewed { get; set; }
 
         // User

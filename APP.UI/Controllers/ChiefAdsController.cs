@@ -5,6 +5,7 @@ using APP.Core.Models;
 using APP.Repository;
 using APP.Service.Abstract;
 using APP.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace APP.UI.Controllers
 {
+    [Authorize]
     public class ChiefAdsController : Controller
     {
         private readonly IChiefAdsService _chiefAdsService;
@@ -44,7 +46,6 @@ namespace APP.UI.Controllers
             }
             
         }
-
 
         // GET: ChiefAdsController/Details/5
         public async Task<IActionResult> Details(Guid id)
