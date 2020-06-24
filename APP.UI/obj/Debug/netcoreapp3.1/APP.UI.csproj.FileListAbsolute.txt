@@ -868,3 +868,4 @@ C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\ChiefAds\Create.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SidebarPartial.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_DashboardFooterPartial.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\ChiefAds\GetAdvertisementsOfSignedUser.cshtml.g.cs

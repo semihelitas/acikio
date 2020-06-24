@@ -26,16 +26,16 @@ namespace APP.UI.Controllers
             _db = db;
         }
 
-        // GET: ChiefAdsController/Index=location=...?keyword=...
+        // GET: /usta-ilanlari
         public async Task<IActionResult> Index(string location, string keyword)
         {
-            if (location!=null && keyword!=null)
+            if (location != null && keyword != null)
             {
                 ViewBag.Location = location;
                 ViewBag.Keyword = keyword;
                 return View(await _chiefAdsService.GetChiefAdsBySearch(location, keyword));
             }
-            else if(location!=null && keyword==null)
+            else if (location != null && keyword == null)
             {
                 ViewBag.Location = location;
                 return View(await _chiefAdsService.GetChiefAdsBySearch(location));
@@ -44,15 +44,22 @@ namespace APP.UI.Controllers
             {
                 return View(await _chiefAdsService.GetChiefAds());
             }
-            
+
         }
 
-        // GET: ChiefAdsController/Details/5
+        // GET: /usta-ilanlari/detaylar/{*id}
         public async Task<IActionResult> Details(Guid id)
         {
             var advertisement = await _chiefAdsService.GetChiefAdsById(id);
-            var teklifler = _db.OrderOffers.Include(x => x.ChiefAdvertisement).Include(y=>y.ApplicationUser).Where(x => x.ChiefAdvertisement.Id == advertisement.Id).ToList();
+            var teklifler = _db.OrderOffers.Include(x => x.ChiefAdvertisement).Include(y => y.ApplicationUser).Where(x => x.ChiefAdvertisement.Id == advertisement.Id).ToList();
             return View(new ChiefAdsDetailViewModel() { ChiefAdvertisement = advertisement, Teklifler = teklifler });
+        }
+
+        // GET: /ilanlarim
+        public async Task<IActionResult> GetAdvertisementsOfSignedUser()
+        {
+            var signedUser = await _userManager.GetUserAsync(User);
+            return View(await _chiefAdsService.GetAllChiefAdsOfSignedUser(signedUser));
         }
 
         // GET: ChiefAdsController/Create
@@ -76,7 +83,7 @@ namespace APP.UI.Controllers
                 {
                     //db islemini baska yere tasicaz.
                     var activeUser = await _userManager.GetUserAsync(User);
-                  
+
                     entity.Id = Guid.NewGuid();
                     entity.CreatedAt = DateTime.Now;
                     entity.UserId = activeUser.Id;

@@ -4,9 +4,9 @@
     Layout = "_Layout";
 
     var returnIstanbulDataUrl = "/usta-ilanlari?location=İstanbul&keyword=";
-    // returnUrlAnkaraDataUrl = ...
-    // returnUrlIzmirDataUrl =...
-    // returnUrlAdanaDataUrl =...
+    var returnUrlAnkaraDataUrl = "/usta-ilanlari?location=Ankara&keyword=";
+    var returnUrlIzmirDataUrl = "/usta-ilanlari?location=İzmir&keyword=";
+    var returnUrlAdanaDataUrl = "/usta-ilanlari?location=Adana&keyword=";
 }
 
 <!-- Intro Banner -->
@@ -61,16 +61,12 @@
             <div class="col-md-12">
                 <ul class="intro-stats margin-top-45 hide-under-992px">
                     <li>
-                        <strong class="counter">1,586</strong>
-                        <span>Acıkan</span>
+                        <strong class="counter">@ViewBag.TotalUserCount</strong>
+                        <span>Toplam Kullanıcı</span>
                     </li>
                     <li>
-                        <strong class="counter">1,221</strong>
-                        <span>Ev Hanımı</span>
-                    </li>
-                    <li>
-                        <strong class="counter">3,543</strong>
-                        <span>Lezzet İlanı</span>
+                        <strong class="counter">@ViewBag.TotalAdsCount</strong>
+                        <span>Toplam Lezzet İlanı</span>
                     </li>
 
                 </ul>
@@ -93,7 +89,7 @@
                 </div>
 
                 <div class="listings-container grid-layout margin-top-35">
-                    @foreach (var ads in Model.ChiefAdvertisements)
+                    @foreach (var ads in Model.TheLastestRandomChiefAds)
                     {
 
                         <a asp-controller="ChiefAds" asp-action="Details" asp-route-id="@ads.Id" class="job-listing">
@@ -142,37 +138,37 @@
                 <a href=@returnIstanbulDataUrl class="photo-box" data-background-image="images/cities/istanbul.jpg">
                     <div class="photo-box-content">
                         <h3>İstanbul</h3>
-                        <span>1376 İlan</span>
+                        <span>@ViewBag.IstanbulAdsCount İlan</span>
                     </div>
                 </a>
             </div>
 
             <div class="col-xl-3 col-md-6">
                 <!-- Photo Box -->
-                <a href="jobs-list-layout-full-page-map.html" class="photo-box" data-background-image="images/cities/ankara.jpg">
+                <a href=@returnUrlAnkaraDataUrl class="photo-box" data-background-image="images/cities/ankara.jpg">
                     <div class="photo-box-content">
                         <h3>Ankara</h3>
-                        <span>845 İlan</span>
+                        <span>@ViewBag.AnkaraAdsCount İlan</span>
                     </div>
                 </a>
             </div>
 
             <div class="col-xl-3 col-md-6">
                 <!-- Photo Box -->
-                <a href="jobs-grid-layout-full-page.html" class="photo-box" data-background-image="images/cities/izmir.jpg">
+                <a href=@returnUrlIzmirDataUrl class="photo-box" data-background-image="images/cities/izmir.jpg">
                     <div class="photo-box-content">
                         <h3>İzmir</h3>
-                        <span>832 İlan</span>
+                        <span>@ViewBag.IzmirAdsCount İlan</span>
                     </div>
                 </a>
             </div>
 
             <div class="col-xl-3 col-md-6">
                 <!-- Photo Box -->
-                <a href="jobs-list-layout-2.html" class="photo-box" data-background-image="images/cities/adana.jpg">
+                <a href=@returnUrlAdanaDataUrl class="photo-box" data-background-image="images/cities/adana.jpg">
                     <div class="photo-box-content">
                         <h3>Adana</h3>
-                        <span>513 İlan</span>
+                        <span>@ViewBag.AdanaAdsCount İlan</span>
                     </div>
                 </a>
             </div>

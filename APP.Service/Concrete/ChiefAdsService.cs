@@ -62,5 +62,15 @@ namespace APP.Service.Concrete
         {
             return await _chiefAdsRepository.GetChiefAdsBySearch(location, keyword);
         }
+
+        public IEnumerable<ChiefAdvertisement> GetRandomChiefAdsFromTheLastest()
+        {
+            return _chiefAdsRepository.GetRandomChiefAdsFromTheLastest();
+        }
+
+        public async Task<IEnumerable<ChiefAdvertisement>> GetAllChiefAdsOfSignedUser(ApplicationUser signedUser)
+        {
+            return await _chiefAdsRepository.GetAllChiefAdsOfSignedUser(signedUser);
+        }
     }
 }

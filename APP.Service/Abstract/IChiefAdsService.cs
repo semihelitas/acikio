@@ -16,5 +16,7 @@ namespace APP.Service.Abstract
         Task<bool> IsChiefAdsExists(Guid id);
         Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsBySearch(string location);
         Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsBySearch(string location, string keyword);
+        IEnumerable<ChiefAdvertisement> GetRandomChiefAdsFromTheLastest();
+        Task<IEnumerable<ChiefAdvertisement>> GetAllChiefAdsOfSignedUser(ApplicationUser signedUser);
     }
 }

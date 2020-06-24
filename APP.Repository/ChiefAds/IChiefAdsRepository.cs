@@ -10,5 +10,8 @@ namespace APP.Repository.ChiefAds
         Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsBySearch(string location);
         Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsByLocation(string city);
         Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsBySearch(string location, string keyword);
+        IEnumerable<ChiefAdvertisement> GetRandomChiefAdsFromTheLastest();
+        List<ChiefAdvertisement> TakeTheLastXEntity(int number);
+        Task<IEnumerable<ChiefAdvertisement>> GetAllChiefAdsOfSignedUser(ApplicationUser signedUser);
     }
 }

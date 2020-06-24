@@ -156,130 +156,14 @@
                         </ul>
                     </div>
                 </div>
-
-                <!-- Widget -->
-                <div class="sidebar-widget">
-                    <h3>Skills</h3>
-                    <div class="task-tags">
-                        <span>iOS</span>
-                        <span>Android</span>
-                        <span>mobile apps</span>
-                        <span>design</span>
-                        <span>Python</span>
-                        <span>Flask</span>
-                        <span>PHP</span>
-                        <span>WordPress</span>
-                    </div>
-                </div>
-
-                <!-- Widget -->
-                <div class="sidebar-widget">
-                    <h3>Attachments</h3>
-                    <div class="attachments-container">
-                        <a href="#" class="attachment-box ripple-effect"><span>Cover Letter</span><i>PDF</i></a>
-                        <a href="#" class="attachment-box ripple-effect"><span>Contract</span><i>DOCX</i></a>
-                    </div>
-                </div>
-
-                <!-- Sidebar Widget -->
-                <div class="sidebar-widget">
-                    <h3>Bookmark or Share</h3>
-
-                    <!-- Bookmark Button -->
-                    <button class="bookmark-button margin-bottom-25">
-                        <span class="bookmark-icon"></span>
-                        <span class="bookmark-text">Bookmark</span>
-                        <span class="bookmarked-text">Bookmarked</span>
-                    </button>
-
-                    <!-- Copy URL -->
-                    <div class="copy-url">
-                        <input id="copy-url" type="text" value="" class="with-border">
-                        <button class="copy-url-button ripple-effect" data-clipboard-target="#copy-url" data-tippy-placement="top" data-tippy="" data-original-title="Copy to Clipboard"><i class="icon-material-outline-file-copy"></i></button>
-                    </div>
-
-                    <!-- Share Buttons -->
-                    <div class="share-buttons margin-top-25">
-                        <div class="share-buttons-trigger"><i class="icon-feather-share-2"></i></div>
-                        <div class="share-buttons-content">
-                            <span>Interesting? <strong>Share It!</strong></span>
-                            <ul class="share-buttons-icons">
-                                <li><a href="#" data-button-color="#3b5998" data-tippy-placement="top" data-tippy="" data-original-title="Share on Facebook" style="background-color: rgb(59, 89, 152);"><i class="icon-brand-facebook-f"></i></a></li>
-                                <li><a href="#" data-button-color="#1da1f2" data-tippy-placement="top" data-tippy="" data-original-title="Share on Twitter" style="background-color: rgb(29, 161, 242);"><i class="icon-brand-twitter"></i></a></li>
-                                <li><a href="#" data-button-color="#dd4b39" data-tippy-placement="top" data-tippy="" data-original-title="Share on Google Plus" style="background-color: rgb(221, 75, 57);"><i class="icon-brand-google-plus-g"></i></a></li>
-                                <li><a href="#" data-button-color="#0077b5" data-tippy-placement="top" data-tippy="" data-original-title="Share on LinkedIn" style="background-color: rgb(0, 119, 181);"><i class="icon-brand-linkedin-in"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
-
     </div>
 </div>
 
-@*<h1>Details</h1>
 
-    <div>
-        <h4>ChiefAdvertisement</h4>
-        <hr />
-        <dl class="row">
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Id)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Id)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Title)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Title)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Category)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Category)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.Price)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.Price)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.AdViewed)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.AdViewed)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.UserId)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.UserId)
-            </dd>
-            <dt class = "col-sm-2">
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </dt>
-            <dd class = "col-sm-10">
-                @Html.DisplayFor(model => model.CreatedAt)
-            </dd>
-        </dl>
-    </div>
-    <div>
-        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-        <a asp-action="Index">Back to List</a>
-    </div>*@
 
+<!-- Order Modal-->
 <div id="small-dialog" class="zoom-anim-dialog dialog-with-tabs mfp-hide">
 
     <!--Tabs -->
@@ -296,11 +180,12 @@
 
                 <!-- Welcome Text -->
                 <div class="welcome-text">
-                    <h3>Canın ne çektiyse @Model.ChiefAdvertisement.ApplicationUser.Name Ustaya söyle</h3>
+                    <h3>Little little into the middle</h3>
                 </div>
 
                 <!-- Form -->
-                <form method="post">
+                <form asp-controller="OrderOffer" asp-action="Create" method="post">
+                    <input hidden asp-for="ChiefAdvertisement.Id" value="@Model.ChiefAdvertisement.Id" />
 
                     <div class="input-with-icon-left">
                         <i class="icon-material-outline-account-circle"></i>

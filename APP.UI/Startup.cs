@@ -102,6 +102,19 @@ namespace APP.UI
                          name: "chiefAdsCreate",
                          pattern: "yeni-ilan",
                          defaults: new { controller = "ChiefAds", action = "Create" });
+
+                // .com/ilanlarim
+                endpoints.MapControllerRoute(
+                         name: "chiefAdsDashboardList",
+                         pattern: "ilanlarim",
+                         defaults: new { controller = "ChiefAds", action = "GetAdvertisementsOfSignedUser" });
+
+                // .com/siparisler
+                endpoints.MapControllerRoute(
+                         name: "orderOffers",
+                         pattern: "siparis-teklifleri",
+                         defaults: new { controller = "OrderOffer", action = "Index" });
+
                 endpoints.MapRazorPages();
             });
         }
