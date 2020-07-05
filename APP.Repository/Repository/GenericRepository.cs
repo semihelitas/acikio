@@ -17,12 +17,18 @@ namespace APP.Repository.Repository
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return await _dbContext.Set<TEntity>().Include(x=>x.ApplicationUser).AsTracking().ToListAsync();
+            return await _dbContext.Set<TEntity>()
+                .Include(x=>x.ApplicationUser)
+                .AsTracking()
+                .ToListAsync();
         }
 
         public async Task<TEntity> GetByIdAsync(Guid id)
         {
-            return await _dbContext.Set<TEntity>().Include(x=>x.ApplicationUser).AsNoTracking().FirstOrDefaultAsync(entity => entity.Id == id);
+            return await _dbContext.Set<TEntity>()
+                .Include(x=>x.ApplicationUser)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(entity => entity.Id == id);
         }
 
         public async Task CreateAsync(TEntity entity)

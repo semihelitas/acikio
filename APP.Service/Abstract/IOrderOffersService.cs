@@ -14,5 +14,10 @@ namespace APP.Service.Abstract
         Task UpdateOrderOffer(Guid id, OrderOffers entity);
         Task DeleteOrderOffer(Guid id);
         Task<bool> IsOrderOfferExists(Guid id);
+        Task<IEnumerable<OrderOffers>> GetAllOrderOffersOfUser(ApplicationUser user);
+        Task<IEnumerable<OrderOffers>> GetAllOrderOffersOfUserSent(ApplicationUser user);
+        Task<IEnumerable<OrderOffers>> GetGetOrderOffersOnlyChiefAccepted(ApplicationUser user);
+        Task<IEnumerable<OrderOffers>> GetOrderOffersPendingClientResponse(ApplicationUser user);
+        Task<int> CommitAsync();
     }
 }

@@ -44,15 +44,13 @@ namespace APP.UI.Controllers
             {
                 return View(await _chiefAdsService.GetChiefAds());
             }
-
         }
 
         // GET: /usta-ilanlari/detaylar/{*id}
         public async Task<IActionResult> Details(Guid id)
         {
             var advertisement = await _chiefAdsService.GetChiefAdsById(id);
-            var teklifler = _db.OrderOffers.Include(x => x.ChiefAdvertisement).Include(y => y.ApplicationUser).Where(x => x.ChiefAdvertisement.Id == advertisement.Id).ToList();
-            return View(new ChiefAdsDetailViewModel() { ChiefAdvertisement = advertisement, Teklifler = teklifler });
+            return View(new ChiefAdsDetailViewModel() { Advertisement = advertisement});
         }
 
         // GET: /ilanlarim

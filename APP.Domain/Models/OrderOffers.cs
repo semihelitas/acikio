@@ -12,25 +12,23 @@ namespace APP.Core.Models
         [Key]
         public Guid Id { get; set; }
 
-        // Advertisement (başvurulan ilan)
-        [ForeignKey("ChiefAdvertisement")]
-        public Guid ChiefAdsId { get; set; }
-        public ChiefAdvertisement ChiefAdvertisement { get; set; }
-
-        // Client (başvuran)
-        [ForeignKey("ApplicationUser")]
         public string ClientId { get; set; }
+
+        // Chief
+        [ForeignKey("ApplicationUser")]
+        public string ChiefId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
-        // Teklif İçeriği/Mesajı
-        public string OfferDescription { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
 
-        // Teklif Edilen Fiyat
-        public int OfferPrice { get; set; }
+        public double Price { get; set; }
 
-        // Teklif Tarihi
+        public DateTime DeliveryTime { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        public bool IsAccepted { get; set; }
+        public bool IsClientAccepted { get; set; }
+        public bool IsChiefAccepted { get; set; }
+        public bool IsCounterOffer { get; set; }
     }
 }

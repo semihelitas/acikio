@@ -1,0 +1,208 @@
+﻿@model APP.UI.Models.UserProfileViewModel
+@using Microsoft.AspNetCore.Identity
+@using APP.Core.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Profil";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string per = "100%";
+    int perNum = 100;
+    var user = await UserManager.GetUserAsync(User);
+}
+
+<!-- Ads Header -->
+<div class="single-page-header freelancer-header" data-background-image="images/single-freelancer.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="single-page-header-inner">
+                    <div class="left-side">
+                        <div class="header-image freelancer-avatar"><img src="~/images/avatar/woman-1.jpg" alt=""></div>
+                        <div class="header-details">
+                            <h3>@Model.ApplicationUser.Name @Model.ApplicationUser.Surname <span><i class="icon-line-awesome-user"></i> @Model.ApplicationUser.Nickname</span></h3>
+                            <ul>
+                                <li><div class="star-rating" data-rating="4.5"></div></li>
+                                <li><i class="icon-material-outline-location-on"></i> @Model.ApplicationUser.Location</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="background-image-container" style="background-image: url(&quot;images/single-freelancer.jpg&quot;);"></div>
+</div>
+
+<!-- Ads Content Container-->
+<div class="container">
+    <div class="row">
+
+        <!-- Content -->
+        <div class="col-xl-8 col-lg-8 content-right-offset">
+
+            <!-- About Chief -->
+            <div class="single-page-section">
+                <h3 class="margin-bottom-25">Usta Hakkında</h3>
+                <p>@Model.ApplicationUser.AboutMe</p>
+            </div>
+
+            <!-- Boxed List -->
+            <div class="boxed-list margin-bottom-60">
+                <div class="boxed-list-headline">
+                    <h3><i class="icon-material-outline-thumb-up"></i> Tamamladığı Siparişler ve Geri Dönüşler</h3>
+                </div>
+                <ul class="boxed-list-ul">
+                </ul>
+
+                <!-- Pagination -->
+                <div class="clearfix"></div>
+                <div class="pagination-container margin-top-40 margin-bottom-10">
+                    <nav class="pagination">
+                        <ul>
+                            <li><a href="#" class="ripple-effect current-page">1</a></li>
+                            <li><a href="#" class="ripple-effect">2</a></li>
+                            <li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="clearfix"></div>
+                <!-- Pagination / End -->
+
+            </div>
+            <!-- Boxed List / End -->
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-xl-4 col-lg-4">
+            <div class="sidebar-container">
+
+                <!-- Profile Overview -->
+                <div class="profile-overview">
+                    <div class="overview-item"><strong>@Model.ApplicationUser.MinimumOrderPrice ₺</strong><span>Minimum Sipariş Ücreti</span></div>
+                    <div class="overview-item"><strong>53</strong><span>Tamamlananmış İş</span></div>
+                </div>
+
+                <!-- Button -->
+                <a href="#small-dialog" class="apply-now-button popup-with-zoom-anim margin-bottom-50">Sipariş Teklifi Yap <i class="icon-material-outline-arrow-right-alt"></i></a>
+
+                <!-- Freelancer Indicators -->
+                <div class="sidebar-widget">
+                    <div class="freelancer-indicators">
+
+                        <!-- Indicator -->
+                        <div class="indicator">
+                            <strong>88%</strong>
+                            <div class="indicator-bar" data-indicator-percentage="88"><span style="width: 88%;"></span></div>
+                            <span>Lezzetliydi</span>
+                        </div>
+
+                        <!-- Indicator -->
+                        <div class="indicator">
+                            <strong>100%</strong>
+                            <div class="indicator-bar" data-indicator-percentage="100"><span style="width: 100%;"></span></div>
+                            <span>Tavsiye Edebilebilirlik</span>
+                        </div>
+
+                        <!-- Indicator -->
+                        <div class="indicator">
+                            <strong>90%</strong>
+                            <div class="indicator-bar" data-indicator-percentage="90"><span style="width: 90%;"></span></div>
+                            <span>Zamanlama</span>
+                        </div>
+
+                        <!-- Indicator -->
+                        <div class="indicator">
+                            <strong>@per</strong>
+                            <div class="indicator-bar" data-indicator-percentage="@perNum"><span style="width: @per"></span></div>
+                            <span>Genel Memnuniyet</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-widget">
+                    <h3>Skills</h3>
+                    <div class="task-tags">
+                        @{
+                            var ctString = Model.ApplicationUser.Categories;
+                            var categories = ctString.Split(',').ToList();
+                        }
+                        @foreach (var tag in categories)
+                        {
+                            <span>@tag</span>
+                        }
+                    </div>
+                </div>
+
+                <!-- Widget -->
+                <div class="sidebar-widget">
+                    <h3>Social Profiles</h3>
+                    <div class="freelancer-socials margin-top-25">
+                        <ul>
+                            <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Dribbble"><i class="icon-brand-dribbble"></i></a></li>
+                            <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Twitter"><i class="icon-brand-twitter"></i></a></li>
+                            <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Behance"><i class="icon-brand-behance"></i></a></li>
+                            <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="GitHub"><i class="icon-brand-github"></i></a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Order Modal-->
+<div id="small-dialog" class="zoom-anim-dialog dialog-with-tabs mfp-hide">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav" style="pointer-events: none;">
+            <li class="active"><a href="#tab">Sipariş Teklifi</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab" style="">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Merhaba @Model.ApplicationUser.Name Usta!</h3>
+                </div>
+
+                <!-- Form -->
+                <form asp-controller="OrderOffer" asp-action="Create" method="post">
+                    <input hidden asp-for="Offer.ClientId" value="@user.Id" />
+                    <input hidden asp-for="Offer.ChiefId" value="@Model.ApplicationUser.Id" />
+
+                    <div class="input-with-icon-left">
+                        <i class="icon-material-baseline-mail-outline"></i>
+                        <input asp-for="Offer.Title" type="text" class="input-text with-border" placeholder="Başlık" required>
+                    </div>
+
+                    <div class="input-with-icon">
+                        <input type="number" min="1" class="input-text with-border" asp-for="Offer.Price" placeholder="Teklif Miktarı" required><i class="currency">TL (₺)</i>
+                    </div>
+
+                    <div class="input-with-icon">
+                        <span>Teslimat Tarihi</span>
+                        <input type="date" class="input-text with-border" asp-for="Offer.DeliveryTime" placeholder="Teklif" required>
+                    </div>
+
+                    <textarea cols="10" placeholder="Teklif Detayları" class="with-border" asp-for="Offer.Description" required></textarea>
+
+                    <div class="uploadButton margin-top-25">
+                        <input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple="">
+                        <label class="uploadButton-button ripple-effect" for="upload">Dosya Yükle</label>
+                        <span class="uploadButton-file-name">İzin veriler dosya türleri: zip, pdf, png, jpg <br> Max. dosya boyutu: 50 MB.</span>
+                    </div>
+                    <!-- Button -->
+                    <button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit">Teklifi Gönder <i class="icon-material-outline-arrow-right-alt"></i></button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

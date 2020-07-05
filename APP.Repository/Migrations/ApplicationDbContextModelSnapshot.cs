@@ -30,6 +30,9 @@ namespace APP.UI.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Categories")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -44,6 +47,9 @@ namespace APP.UI.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
@@ -53,7 +59,13 @@ namespace APP.UI.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<double>("MinimumOrderPrice")
+                        .HasColumnType("float");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nickname")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -73,8 +85,8 @@ namespace APP.UI.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
+                    b.Property<double>("Rating")
+                        .HasColumnType("float");
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
@@ -102,6 +114,24 @@ namespace APP.UI.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("APP.Core.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("APP.Core.Models.ChiefAdvertisement", b =>
                 {
                     b.Property<Guid>("Id")
@@ -120,8 +150,8 @@ namespace APP.UI.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -142,29 +172,44 @@ namespace APP.UI.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ChiefAdsId")
+                    b.Property<Guid?>("ChiefAdvertisementId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ClientId")
+                    b.Property<string>("ChiefId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ClientId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("bit");
+                    b.Property<DateTime>("DeliveryTime")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("OfferDescription")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OfferPrice")
-                        .HasColumnType("int");
+                    b.Property<bool>("IsChiefAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsClientAccepted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsCounterOffer")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChiefAdsId");
+                    b.HasIndex("ChiefAdvertisementId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ChiefId");
 
                     b.ToTable("OrderOffers");
                 });
@@ -313,15 +358,13 @@ namespace APP.UI.Data.Migrations
 
             modelBuilder.Entity("APP.Core.Models.OrderOffers", b =>
                 {
-                    b.HasOne("APP.Core.Models.ChiefAdvertisement", "ChiefAdvertisement")
+                    b.HasOne("APP.Core.Models.ChiefAdvertisement", null)
                         .WithMany("OrderOffers")
-                        .HasForeignKey("ChiefAdsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ChiefAdvertisementId");
 
                     b.HasOne("APP.Core.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("OrderOffers")
-                        .HasForeignKey("ClientId");
+                        .HasForeignKey("ChiefId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

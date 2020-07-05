@@ -13,6 +13,8 @@ using APP.Service.Abstract;
 using APP.Service.Concrete;
 using APP.Repository.ChiefAds;
 using APP.Repository.OrderOffer;
+using APP.Repository.CategoryRepository;
+using APP.Repository.UserRepository;
 
 namespace APP.UI
 {
@@ -38,11 +40,15 @@ namespace APP.UI
 
             // Services
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<IChiefAdsService, ChiefAdsService>();
             services.AddTransient<IOrderOffersService, OrderOffersService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IChiefAdsRepository, ChiefAdsRepository>();
             services.AddTransient<IOrderOffersRepository, OrderOffersRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             // Settings
             services.AddRazorPages().AddRazorRuntimeCompilation();
@@ -79,6 +85,18 @@ namespace APP.UI
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+                // .com/ustalar
+                endpoints.MapControllerRoute(
+                         name: "ustalar",
+                         pattern: "ustalar",
+                         defaults: new { controller = "User", action = "Users" });
+
+                // .com/ustalar/{*category}
+                endpoints.MapControllerRoute(
+                         name: "ustalar-category",
+                         pattern: "ustalar/{*category}",
+                         defaults: new { controller = "User", action = "FilteredUsersByCategory" });
+
                 // .com/anasayfa
                 endpoints.MapControllerRoute(
                          name: "homepage",
@@ -99,21 +117,57 @@ namespace APP.UI
 
                 // .com/yeni-ilan
                 endpoints.MapControllerRoute(
-                         name: "chiefAdsCreate",
+                         name: "newAd",
                          pattern: "yeni-ilan",
                          defaults: new { controller = "ChiefAds", action = "Create" });
-
-                // .com/ilanlarim
-                endpoints.MapControllerRoute(
-                         name: "chiefAdsDashboardList",
-                         pattern: "ilanlarim",
-                         defaults: new { controller = "ChiefAds", action = "GetAdvertisementsOfSignedUser" });
 
                 // .com/siparisler
                 endpoints.MapControllerRoute(
                          name: "orderOffers",
                          pattern: "siparis-teklifleri",
                          defaults: new { controller = "OrderOffer", action = "Index" });
+
+                // .com/yonetim-paneli
+                endpoints.MapControllerRoute(
+                         name: "dashboard",
+                         pattern: "/yonetim-paneli",
+                         defaults: new { controller = "Dashboard", action = "Summary" });
+
+                // .com/yonetim-paneli/profili-duzenle
+                endpoints.MapControllerRoute(
+                         name: "profileEdit",
+                         pattern: "/yonetim-paneli/profili-duzenle",
+                         defaults: new { controller = "Dashboard", action = "ProfileEdit" });
+
+                // .com/yonetim-paneli/ilanlar
+                endpoints.MapControllerRoute(
+                         name: "manageAds",
+                         pattern: "/yonetim-paneli/ilanlarim",
+                         defaults: new { controller = "ChiefAds", action = "GetAdvertisementsOfSignedUser" });
+
+                // .com/yonetim-paneli/anlasmalar
+                endpoints.MapControllerRoute(
+                         name: "manageDeals",
+                         pattern: "/yonetim-paneli/anlasmalar",
+                         defaults: new { controller = "ChiefAds", action = "Deals" });
+
+                // .com/yonetim-paneli/gelen-teklifler
+                endpoints.MapControllerRoute(
+                         name: "manageOffers",
+                         pattern: "/yonetim-paneli/gelen-teklifler",
+                         defaults: new { controller = "OrderOffer", action = "IncomingOffers" });
+
+                // .com/yonetim-paneli/gelen-teklifler
+                endpoints.MapControllerRoute(
+                         name: "manageOffersOfSingleAd",
+                         pattern: "/yonetim-paneli/gelen-teklifler/{*id}",
+                         defaults: new { controller = "OrderOffer", action = "IncomingOffersOfSingleAd" });
+
+                // .com/yonetim-paneli/teklifler
+                endpoints.MapControllerRoute(
+                         name: "manageOffers",
+                         pattern: "/yonetim-paneli/tekliflerim",
+                         defaults: new { controller = "OrderOffer", action = "SentOffers" });
 
                 endpoints.MapRazorPages();
             });

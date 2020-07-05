@@ -1,6 +1,10 @@
 ﻿using APP.Core.Models;
 using APP.Repository;
+using APP.Repository.CategoryRepository;
+using APP.Repository.ChiefAds;
+using APP.Repository.OrderOffer;
 using APP.Repository.Repository;
+using APP.Repository.UserRepository;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,30 +13,22 @@ namespace APP.Service.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private Dictionary<Type, object> repositories;
 
         public ApplicationDbContext _dbContext;
+
         public UnitOfWork(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+            Advertisements = new ChiefAdsRepository(_dbContext);
+            Offers = new OrderOffersRepository(_dbContext);
+            Categories = new CategoryRepository(_dbContext);
+            Users = new UserRepository(_dbContext);
         }
 
-        public IGenericRepository<TEntity> GetRepository<TEntity>()
-            where TEntity : class, IBaseEntity
-        {
-            if (repositories == null)
-            {
-                repositories = new Dictionary<Type, object>();
-            }
-
-            var type = typeof(TEntity);
-            if (!repositories.ContainsKey(type))
-            {
-                repositories[type] = new GenericRepository<TEntity>(_dbContext);
-            }
-
-            return (IGenericRepository<TEntity>)repositories[type];
-        }
+        public IChiefAdsRepository Advertisements { get; set; }
+        public IOrderOffersRepository Offers { get; set; }
+        public ICategoryRepository Categories { get; set; }
+        public IUserRepository Users { get; set; }
 
         public async Task<int> CommitAsync()
         {

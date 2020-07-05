@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿//$(document).ready(function () {
     // Initialization
     $("#getAdsWithSearch").click(function () {
         var location = $("#autocomplete-input").val();
@@ -6,19 +6,19 @@
         let returnUrl = null;
 
         if (location != null && keyword != null) {
-            returnUrl = '/usta-ilanlari?' + 'location=' + location + '&' + 'keyword=' + keyword;
+            returnUrl = '/ustalar?' + 'location=' + location + '&' + 'keyword=' + keyword;
         }
         else if (location != null && keyword == null) {
-            returnUrl = '/usta-ilanlari?' + 'location=' + location;
+            returnUrl = '/ustalar?' + 'location=' + location;
         }
         else if (location == null && keyword == null) {
-            returnUrl = '/usta-ilanlari';
+            returnUrl = '/ustalar';
         }
 
         $.ajax(
             {
                 type: 'GET',
-                url: '/usta-ilanlari',
+                url: '/ustalar',
 
                 data: { location: location, keyword: keyword },
                 success:
@@ -31,4 +31,4 @@
                     }
             });
     });
-});
+//});

@@ -1,0 +1,281 @@
+﻿@model IEnumerable<APP.Core.Models.OrderOffers>
+@using Microsoft.AspNetCore.Identity
+@using APP.Core.Models
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Acikio - Onay Bekleyen Siparişlerin";
+    Layout = "_Layout";
+}
+
+<div class="dashboard-container" style="height: 778px;">
+    <partial name="_SidebarPartial" />
+
+    <div class="dashboard-content-container" data-simplebar="init" style="height: 778px;">
+        <div class="simplebar-track vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; top: 0px; height: 452px;"></div></div><div class="simplebar-track horizontal" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; left: 0px; width: 25px;"></div></div><div class="simplebar-scroll-content" style="padding-right: 17px; margin-bottom: -34px;">
+            <div class="simplebar-content" style="padding-bottom: 17px; margin-right: -17px;">
+                <div class="dashboard-content-inner" style="min-height: 778px;">
+
+                    <!-- Dashboard Headline -->
+                    <div class="dashboard-headline">
+                        <h3>Gelen Teklifler</h3>
+                        <span class="margin-top-7">Ustaların teklifini kabul ettiği siparişlerin, doğrulama onayını bekliyorlar</span>
+
+                        <!-- Breadcrumbs -->
+                        <nav id="breadcrumbs" class="dark">
+                            <ul>
+                                <li><a href="#">Yönetim Paneli</a></li>
+                                <li><a href="#">Onay Bekleyen Siparişlerin</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Row -->
+                    <div class="row">
+
+                        <!-- Dashboard Box -->
+                        <div class="col-xl-12">
+                            <div class="dashboard-box margin-top-0">
+
+                                <!-- Headline -->
+                                <div class="headline">
+                                    <h3><i class="icon-material-outline-supervisor-account"></i> Toplam @Model.Count() Bekleyen Sipariş Onayı</h3>
+                                </div>
+                                <div class="content">
+                                    <ul class="dashboard-box-list">
+                                        @foreach (var offer in Model)
+                                        {
+                                            var client = await UserManager.FindByIdAsync(offer.ClientId);
+                                            <li>
+                                                <!-- Overview -->
+                                                <div class="freelancer-overview manage-candidates">
+                                                    <div class="freelancer-overview-inner">
+
+                                                        <!-- Avatar -->
+                                                        <div class="freelancer-avatar">
+                                                            <div class="verified-badge"></div>
+                                                            <a href="#"><img src="~/images/user-avatar-big-02.jpg" alt=""></a>
+                                                        </div>
+
+                                                        <!-- Name -->
+                                                        <div class="freelancer-name">
+
+                                                            <h4><a href="#">@offer.Title </a></h4>
+
+                                                            <!-- Details -->
+                                                            <span class="freelancer-detail-item"><i class="icon-feather-user"></i> @offer.ApplicationUser.Name @offer.ApplicationUser.Surname</span>
+                                                            <span class="freelancer-detail-item"><a href="#"><i class="icon-material-outline-add-location"></i> @offer.ApplicationUser.Location</a></span>
+
+                                                            <!-- Bid Details -->
+                                                            <ul class="dashboard-task-info bid-info">
+                                                                <li><strong id="offerPrice" data-price="@offer.Price">@offer.Price ₺</strong><span>Teklif Miktarı</span></li>
+                                                                <li><strong>@offer.DeliveryTime.ToString("dd/MM/yyyy")</strong><span>Teslimat Tarihi</span></li>
+                                                                <li><strong>@offer.CreatedAt.ToString("dd/MM/yyyy")</strong><span>Teklif Tarihi</span></li>
+                                                            </ul>
+
+                                                            <!-- Buttons -->
+                                                            <div class="buttons-to-right always-visible margin-top-25 margin-bottom-0">
+                                                                <a href="#small-dialog-3" id="readOffer" data-title="@offer.Title" data-description="@offer.Description" class="popup-with-zoom-anim button green ripple-effect"><i class="icon-feather-eye"></i></a>
+                                                                <a href="#small-dialog-1" id="acceptOffer" data-offer-id="@offer.Id" data-price="@offer.Price" class="popup-with-zoom-anim button green ripple-effect"><i class="icon-material-outline-check"></i> Siparişi Onayla</a>
+                                                                <a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect"><i class="icon-feather-mail"></i> Mesaj Gönder</a>
+                                                                <a href="#small-dialog-4" id="rejectOffer" data-id="@offer.Id" class="popup-with-zoom-anim button red ripple-effect"><i class="icon-feather-trash"></i> Reddet</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Row / End -->
+
+                    <partial name="~/Views/Shared/_WhiteFooterPartial.cshtml" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Read Popup -->
+<div id="small-dialog-3" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab2">Teklif İçeriği</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3 id="offer-title"></h3>
+                </div>
+
+                <!-- Form -->
+                <p id="offer-description"></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Accept Offer Popup -->
+<div id="small-dialog-1" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab1">Sipariş Onayı</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Teklifi Onayla</h3>
+                    <div class="bid-acceptance margin-top-15">
+                        <span id="price-label"></span>
+                    </div>
+                </div>
+
+                <div class="radio">
+                    <input id="radio-1" name="radio" type="radio" required>
+                    <label for="radio-1"><span class="radio-label"></span> Teklif detaylarını, yükümlülüklerimi ve kullanıcı sözleşmesini okudum, kabul ediyorum.</label>
+                </div>
+
+                <!-- Button -->
+                <button id="acceptOfferConfirm" class="margin-top-15 button full-width button-sliding-icon ripple-effect" type="submit" form="terms">Onayla <i class="icon-material-outline-arrow-right-alt"></i></button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Send Direct Message Popup -->
+<div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab2">Send Message</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Direct Message To David</h3>
+                </div>
+
+                <!-- Form -->
+                <form method="post" id="send-pm">
+                    <textarea name="textarea" cols="10" placeholder="Message" class="with-border" required></textarea>
+                </form>
+
+                <!-- Button -->
+                <button class="button full-width button-sliding-icon ripple-effect" type="submit" form="send-pm">Send <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Delete Popup -->
+<div id="small-dialog-4" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab2">Teklifi Reddet</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Teklifi reddetmek istiyor musun?</h3>
+                </div>
+
+                <!-- Button -->
+                <button id="rejectOfferConfirm" class="full-width button button-sliding-icon ripple-effect" type="submit" form="send-pm">Evet <i class="icon-material-outline-arrow-right-alt"></i></button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    var offerId = "null";
+    $(document).on("click", "#acceptOffer", function () {
+        offerId = $(this).data('offer-id');
+        var offerPrice = $(this).data('price');
+        console.log(offerId);
+        console.log(offerPrice);
+        $("#price-label").text(offerPrice + " ₺");
+    });
+
+    $(document).on("click", "#acceptOfferConfirm", function () {
+        $.ajax({
+            type: "POST",
+            url: "/OrderOffer/ChiefOfferAcceptance",
+            data: { orderOfferId: offerId },
+            success: function (result) {
+                window.location.href = "/OrderOffer/AcceptanceSuccess";
+            },
+            error: function (result) {
+                alert("Hata!");
+            }
+        });
+    });
+
+    $(document).on("click", "#readOffer", function () {
+        var offerTitle = $(this).data('title');
+        var offerDescription = $(this).data('description');
+        $("#offer-title").text(offerTitle);
+        $("#offer-description").text(offerDescription);
+    });
+
+    var willDelete = "null";
+    $(document).on("click", "#rejectOffer", function () {
+        willDelete = $(this).data('id');
+    });
+
+    $(document).on("click", "#rejectOfferConfirm", function () {
+        $.ajax({
+            type: "POST",
+            url: "/OrderOffer/RejectOffer",
+            data: { id: willDelete },
+            success: function (result) {
+                window.location.href = "/OrderOffer/IncomingOffers";
+            },
+            error: function (result) {
+                alert("silme hatali!");
+            }
+        });
+    });
+
+</script>

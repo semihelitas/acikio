@@ -17,24 +17,41 @@ namespace APP.Repository.ChiefAds
             _dbContext = context;
         }
 
-        public Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsByLocation(string city)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsBySearch(string location)
         {
-            return await _dbContext.ChiefAdvertisement.Include(u=>u.ApplicationUser).Where(x => x.ApplicationUser.Location.Contains(location)).AsNoTracking().ToListAsync();
+            return await _dbContext.ChiefAdvertisement
+                .Include(u=>u.ApplicationUser)
+                .Where(x => x.ApplicationUser
+                .Location.Contains(location))
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsBySearch(string location, string keyword)
         {
-            return await _dbContext.ChiefAdvertisement.Include(u => u.ApplicationUser).Where(x => x.ApplicationUser.Location.Contains(location) && (x.Title.Contains(keyword) || x.Description.Contains(keyword) || x.Category.Contains(keyword))).ToListAsync();
+            return await _dbContext.ChiefAdvertisement
+                .Include(u => u.ApplicationUser)
+                .Where(x => x.ApplicationUser
+                .Location.Contains(location) && (x.Title.Contains(keyword) || x.Description.Contains(keyword) || x.Category.Contains(keyword)))
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<ChiefAdvertisement>> GetChiefAdsByKeyword(string keyword)
+        {
+            return await _dbContext.ChiefAdvertisement
+                .Include(u => u.ApplicationUser)
+                .Where(x => x.ApplicationUser
+                .Location.Contains(keyword) && (x.Title.Contains(keyword) || x.Description.Contains(keyword) || x.Category.Contains(keyword)))
+                .ToListAsync();
         }
 
         public List<ChiefAdvertisement> TakeTheLastXEntity(int number)
         {
-            return _dbContext.ChiefAdvertisement.Include(x => x.ApplicationUser).OrderByDescending(x => x.CreatedAt).Take(number).ToList();
+            return _dbContext.ChiefAdvertisement
+                .Include(x => x.ApplicationUser)
+                .OrderByDescending(x => x.CreatedAt)
+                .Take(number)
+                .ToList();
         }
 
         public IEnumerable<ChiefAdvertisement> GetRandomChiefAdsFromTheLastest()
@@ -57,7 +74,9 @@ namespace APP.Repository.ChiefAds
             }
             else if(listCapacity < 4)
             {
-                var takeAll = _dbContext.ChiefAdvertisement.Include(x => x.ApplicationUser).ToList();
+                var takeAll = _dbContext.ChiefAdvertisement
+                    .Include(x => x.ApplicationUser)
+                    .ToList();
                 return takeAll;
             }
             else
@@ -69,7 +88,12 @@ namespace APP.Repository.ChiefAds
 
         public async Task<IEnumerable<ChiefAdvertisement>> GetAllChiefAdsOfSignedUser(ApplicationUser signedUser)
         {
-            var adsListOfSignedUser = await _dbContext.ChiefAdvertisement.Where(x => x.ApplicationUser.Id == signedUser.Id).Include(x=>x.ApplicationUser).Include(x=>x.OrderOffers).AsNoTracking().ToListAsync();
+            var adsListOfSignedUser = await _dbContext.ChiefAdvertisement
+                .Where(x => x.ApplicationUser.Id == signedUser.Id)
+                .Include(x=>x.ApplicationUser)
+                .Include(x=>x.OrderOffers)
+                .AsNoTracking()
+                .ToListAsync();
             return adsListOfSignedUser;
         }
     }

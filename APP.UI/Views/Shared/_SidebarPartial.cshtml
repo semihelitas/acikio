@@ -20,19 +20,27 @@
                     <div class="dashboard-nav">
                         <div class="dashboard-nav-inner">
 
-                            <ul data-submenu-title="Fonksiyonlar">
-                                @*<li><a href="dashboard.html"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>*@
-                                @*<li><a href="dashboard-messages.html"><i class="icon-material-outline-question-answer"></i> Mesajlar <span class="nav-tag">2</span></a></li>*@
+                            <ul data-submenu-title="Panel">
+                                <li><a href="#"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
+                                <li><a href="#"><i class="icon-material-outline-question-answer"></i> Mesajlar <span class="nav-tag">2</span></a></li>
+                            </ul>
 
-                                <li><a href="/yeni-ilan"><i class="icon-feather-file-plus"></i> İlan Oluştur</a></li>
-                                <li><a href="/ilanlarim"><i class="icon-feather-file-text"></i> İlanlarını Yönet</a></li>
-                                <li><a href="/siparisler"><i class="icon-material-outline-rate-review"></i> Teklifleri Yönet</a></li>
+                            <ul data-submenu-title="Usta İşlemleri">
+                                <li><a href="/yonetim-paneli/anlasmalar"><i class="icon-line-awesome-thumb-tack"></i> Yapılacak Siparişler</a></li>
+                                <li><a href="/yonetim-paneli/gelen-teklifler"><i class="icon-line-awesome-paste"></i> Gelen Teklifler <i class="icon-feather-check-circle"></i></a></li>
+                                <li><a href="/OrderOffer/OffersOnlyChiefAccepted"><i class="icon-line-awesome-hourglass-1"></i> Onay Bekleyen <i class="icon-feather-check-circle"></i></a></li>
+                                <li><a href="/yonetim-paneli/anlasmalar"><i class="icon-feather-check-square"></i> Teslim Edilen</a></li>
+                            </ul>
 
+                            <ul data-submenu-title="Müşteri İşlemleri">
+                                <li><a href="/yonetim-paneli/anlasmalar"><i class="icon-line-awesome-thumb-tack"></i> Aktif Siparişlerim</a></li>
+                                <li><a href="/yonetim-paneli/tekliflerim"><i class="icon-line-awesome-paste"></i> Tekliflerim</a></li>
+                                <li><a href="/OrderOffer/ClientOrderVerificationAcceptance"><i class="icon-line-awesome-hourglass-1"></i> Onay Bekleyen</a></li>
+                                <li><a href="/yonetim-paneli/anlasmalar"><i class="icon-feather-check-square"></i> Teslim Alınanlar</a></li>
                             </ul>
 
                             <ul data-submenu-title="Hesap">
-                                <li><a href="dashboard-settings.html"><i class="icon-material-outline-settings"></i> Settings</a></li>
-                                <li><a href="index-logged-out.html"><i class="icon-material-outline-power-settings-new"></i> Logout</a></li>
+                                <li><a href="/Identity/Account/Manage"><i class="icon-material-outline-account-circle"></i> Profilini Düzenle</a></li>
                             </ul>
 
                         </div>

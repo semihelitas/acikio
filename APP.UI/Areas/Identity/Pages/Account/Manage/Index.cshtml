@@ -1,0 +1,210 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Profile";
+    string imageBase64 = "";
+}
+<div class="dashboard-container" style="height: 778px;">
+
+    <partial name="~/Views/Shared/_SidebarPartial.cshtml" />
+
+    <div class="dashboard-content-container" data-simplebar="init" style="height: 778px;">
+        <div class="simplebar-track vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; top: 0px; height: 144px;"></div></div><div class="simplebar-track horizontal" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; left: 0px; width: 25px;"></div></div><div class="simplebar-scroll-content" style="padding-right: 17px; margin-bottom: -34px;">
+            <div class="simplebar-content" style="padding-bottom: 17px; margin-right: -17px;">
+                <div class="dashboard-content-inner" style="min-height: 778px;">
+
+                    <!-- Dashboard Headline -->
+                    <div class="dashboard-headline">
+                        <h3>Profili Düzenle</h3>
+
+                        <!-- Breadcrumbs -->
+                        <nav id="breadcrumbs" class="dark">
+                            <ul>
+                                <li><a href="#">Kontrol Paneli</a></li>
+                                <li><a href="#">Hesabım</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Row -->
+                    <div class="row">
+                        <form id="profile-form" method="post">
+                            <!-- Dashboard Box -->
+                            <div class="col-xl-12">
+                                <div class="dashboard-box margin-top-0">
+
+                                    <!-- Headline -->
+                                    <div class="headline">
+                                        <h3><i class="icon-material-outline-account-circle"></i> Temel Bilgiler</h3>
+                                    </div>
+                                    @if (Model.StatusMessage != null)
+                                    {
+                                        <div class="notification success closeable">
+                                            <p>
+                                                <partial name="_StatusMessage" model="Model.StatusMessage" />
+                                            </p>
+                                            <a class="close"></a>
+                                        </div>
+                                    }
+
+                                    <div class="content with-padding padding-bottom-0">
+                                        <div class="row">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div class="col-auto">
+                                                <div class="avatar-wrapper" data-tippy-placement="bottom" data-tippy="" data-original-title="Change Avatar">
+                                                    <img class="profile-pic" src="~/images/avatar/woman-1.jpg" alt="">
+
+                                                    <div class="upload-button"></div>
+                                                    <input asp-for="Input.Image" class="file-upload" type="file" accept="image/*">
+                                                </div>
+                                            </div>
+
+                                            <div class="col">
+                                                <div class="row">
+
+                                                    <!-- Adı -->
+                                                    <div class="col-xl-6">
+                                                        <div class="submit-field">
+                                                            <h5><label asp-for="Input.Name"></label></h5>
+                                                            <div class="input-with-icon-left">
+                                                                <i class="icon-material-outline-account-circle"></i>
+                                                                <input asp-for="Input.Name" type="text" class="input-text with-border" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Soyadı -->
+                                                    <div class="col-xl-6">
+                                                        <div class="submit-field">
+                                                            <h5><label asp-for="Input.Surname"></label></h5>
+                                                            <div class="input-with-icon-left">
+                                                                <i class="icon-material-outline-account-circle"></i>
+                                                                <input asp-for="Input.Surname" type="text" class="input-text with-border" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- E-Posta -->
+                                                    <div class="col-xl-3">
+                                                        <div class="submit-field">
+                                                            <h5>E-Posta</h5>
+                                                            <div class="input-with-icon-left">
+                                                                <i class="icon-material-baseline-mail-outline"></i>
+                                                                <input asp-for="Email" type="text" class="input-text with-border" disabled>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Konum -->
+                                                    <div class="col-xl-3">
+                                                        <div class="submit-field">
+                                                            <h5><label asp-for="Input.Location"></label></h5>
+
+                                                            <div class="input-with-icon-left">
+                                                                <i class="icon-material-outline-location-on"></i>
+                                                                <input asp-for="Input.Location" id="autocomplete-input" type="text" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Telefon -->
+                                                    <div class="col-xl-3">
+                                                        <div class="submit-field">
+                                                            <h5><label asp-for="Input.PhoneNumber"></label></h5>
+                                                            <div class="input-with-icon-left">
+                                                                <i class="icon-line-awesome-phone"></i>
+                                                                <input asp-for="Input.PhoneNumber" type="text" class="input-text with-border" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Doğum Tarihi -->
+                                                    <div class="col-xl-3">
+                                                        <div class="submit-field">
+                                                            <h5><label asp-for="Input.DateOfBirth"></label></h5>
+                                                            <div class="input-with-icon-left">
+                                                                <i class="icon-line-awesome-calendar"></i>
+                                                                <input asp-for="Input.DateOfBirth" type="date" class="input-text with-border" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Hakkında -->
+                                                    <div class="col-xl-12" style="margin-bottom:15px">
+                                                        <div class="submit-field">
+                                                            <h5><label asp-for="Input.AboutMe"></label></h5>
+                                                            <textarea asp-for="Input.AboutMe" cols="30" rows="5" class="with-border" required></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dashboard Box -->
+                            <div class="col-xl-12">
+                                <div id="test1" class="dashboard-box">
+
+                                    <!-- Headline -->
+                                    <div class="headline">
+                                        <h3><i class="icon-material-outline-lock"></i> Parola Değişikliği</h3>
+                                    </div>
+
+                                    <div class="content with-padding">
+                                        <div class="row">
+                                            <div class="col-xl-4">
+                                                <div class="submit-field">
+                                                    <h5><label asp-for="Input.CurrentPassword"></label></h5>
+                                                    <input asp-for="Input.CurrentPassword" type="password" class="with-border">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-4">
+                                                <div class="submit-field">
+                                                    <h5><label asp-for="Input.NewPassword"></label></h5>
+                                                    <input asp-for="Input.NewPassword" type="password" class="with-border">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-4">
+                                                <div class="submit-field">
+                                                    <h5><label asp-for="Input.NewPasswordConfirm"></label></h5>
+                                                    <input asp-for="Input.NewPasswordConfirm" type="password" class="with-border">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-12">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" id="two-step" checked="">
+                                                    <label for="two-step"><span class="checkbox-icon"></span> Enable Two-Step Verification via Email</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Button -->
+                            <div class="col-xl-12">
+                                <button id="update-profile-button" type="submit" class="button ripple-effect big margin-top-30">Save Changes</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <!-- Row / End -->
+                    <partial name="~/Views/Shared/_WhiteFooterPartial.cshtml" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+</script>

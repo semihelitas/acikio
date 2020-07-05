@@ -1,0 +1,206 @@
+﻿@model IEnumerable<APP.Core.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Ustalar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="full-page-container" style="height: 998px;">
+
+    <div class="full-page-sidebar">
+        <div class="full-page-sidebar-inner" data-simplebar="init" style="height: 998px;">
+            <div class="simplebar-track vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; top: 0px; height: 969px;"></div></div><div class="simplebar-track horizontal" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; left: 0px; width: 25px;"></div></div><div class="simplebar-scroll-content" style="padding-right: 17px; margin-bottom: -34px;">
+                <div class="simplebar-content" style="padding-bottom: 17px; margin-right: -17px;">
+                    <div class="sidebar-container">
+
+                        <!-- Location -->
+                        <div class="sidebar-widget">
+                            <h3>Location</h3>
+                            <div class="input-with-icon">
+                                <div id="autocomplete-container">
+                                    <input id="autocomplete-input" type="text" placeholder="Location">
+                                </div>
+                                <i class="icon-material-outline-location-on"></i>
+                            </div>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="sidebar-widget">
+                            <h3>Kategoriler</h3>
+                            <select>
+                                <option selected disabled></option>
+                                @foreach (var category in ViewBag.Categories)
+                                {
+                                    <option value="@category">@category</option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Keywords -->
+                        <div class="sidebar-widget">
+                            <h3>Keywords</h3>
+                            <div class="keywords-container">
+                                <div class="keyword-input-container">
+                                    <input type="text" class="keyword-input" placeholder="e.g. task title">
+                                    <button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+                                </div>
+                                <div class="keywords-list" style="height: auto;"><!-- keywords go here --></div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <!-- Search Button -->
+                        <button class="button ripple-effect" style="width:100%">Search</button>
+                    </div>
+
+                    <!-- Search Button / End-->
+                    <!-- Sidebar Container / End -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Full Page Sidebar / End -->
+    <!-- Full Page Content -->
+    <div class="full-page-content-container" data-simplebar="init" style="height: 998px;">
+        <div class="simplebar-track vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; top: 0px; height: 713px;"></div></div><div class="simplebar-track horizontal" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; left: 0px; width: 25px;"></div></div><div class="simplebar-scroll-content" style="padding-right: 17px; margin-bottom: -34px;">
+            <div class="simplebar-content" style="padding-bottom: 17px; margin-right: -17px;">
+                <div class="full-page-content-inner">
+
+                    <h3 class="page-title">Search Results</h3>
+
+                    <div class="notify-box margin-top-15">
+                        <div class="switch-container">
+                            <label class="switch"><input type="checkbox"><span class="switch-button"></span><span class="switch-text">Turn on email alerts for this search</span></label>
+                        </div>
+
+                        <div class="sort-by">
+                            <span>Sırala:</span>
+                            <div class="btn-group bootstrap-select hide-tick">
+                                <select class="selectpicker hide-tick" tabindex="-98">
+                                    <option>Yüksek Puan</option>
+                                    <option>Düşük Puan</option>
+                                    <option>Yüksek Fiyat</option>
+                                    <option>Düşük Fiyat</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Freelancers List Container -->
+                    <div class="freelancers-container freelancers-grid-layout margin-top-35">
+                        @foreach (var user in Model)
+                        {
+                            <!--Freelancer -->
+                            <div class="freelancer">
+
+                                <!-- Overview -->
+                                <div class="freelancer-overview">
+                                    <div class="freelancer-overview-inner">
+
+                                        <!-- Bookmark Icon -->
+                                        <span class="bookmark-icon"></span>
+
+                                        <!-- Avatar -->
+                                        <div class="freelancer-avatar">
+                                            <div class="verified-badge"></div>
+                                            <a asp-controller="User" asp-action="Profile" asp-route-id="@user.Id"><img src="~/images/avatar/man-1.jpg" alt=""></a>
+                                        </div>
+
+                                        <!-- Name -->
+                                        <div class="freelancer-name">
+                                            <h4><a asp-controller="User" asp-action="Profile" asp-route-id="@user.Id">@user.Name @user.Surname</a></h4>
+                                            <span>@user.Nickname</span>
+                                        </div>
+
+                                        <!-- Rating -->
+                                        <div class="freelancer-rating">
+                                            @{
+                                                var rating = user.Rating.ToString().Replace(",", ".");
+                                            }
+                                            <div class="star-rating" data-rating="@rating"></div>
+                                        </div>
+
+                                        <!-- Location -->
+                                        <div class="freelancer-details-list" style="margin-top:15px;">
+                                            <strong><i class="icon-material-outline-location-on"></i> @user.Location</strong>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <!-- Details -->
+                                <div class="freelancer-details">
+                                    <div class="freelancer-details-list">
+                                        @{
+                                            var categoryString = user.Categories.Split(',').ToList();
+                                        }
+                                        @foreach (var category in categoryString)
+                                        {
+                                            <span class="keyword"><span class="keyword-remove"></span><span class="keyword-text">@category</span></span>
+                                        }
+                                    </div>
+
+                                    <a asp-controller="User" asp-action="Profile" asp-route-id="@user.Id" class="button button-sliding-icon ripple-effect margin-top-10">Profili Gör ( Minimum @user.MinimumOrderPrice₺ )<i class="icon-material-outline-arrow-right-alt"></i></a>
+                                </div>
+                            </div>
+                            <!-- Freelancer / End -->
+                        }
+                    </div>
+                    <!-- Freelancers Container / End -->
+                    <!-- Pagination -->
+                    <div class="clearfix"></div>
+                    <div class="pagination-container margin-top-20 margin-bottom-20">
+                        <nav class="pagination">
+                            <ul>
+                                <li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-left"></i></a></li>
+                                <li><a href="#" class="ripple-effect">1</a></li>
+                                <li><a href="#" class="ripple-effect current-page">2</a></li>
+                                <li><a href="#" class="ripple-effect">3</a></li>
+                                <li><a href="#" class="ripple-effect">4</a></li>
+                                <li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!-- Pagination / End -->
+                    <!-- Footer -->
+                    <div class="small-footer margin-top-15">
+                        <div class="small-footer-copyrights">
+                            © 2018 <strong>Hireo</strong>. All Rights Reserved.
+                        </div>
+                        <ul class="footer-social-links">
+                            <li>
+                                <a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Facebook">
+                                    <i class="icon-brand-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Twitter">
+                                    <i class="icon-brand-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Google Plus">
+                                    <i class="icon-brand-google-plus-g"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-tippy-placement="top" data-tippy="" data-original-title="LinkedIn">
+                                    <i class="icon-brand-linkedin-in"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- Footer / End -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Full Page Content / End -->
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+

@@ -14,11 +14,10 @@
                 <!-- Location -->
                 <div class="sidebar-widget">
                     <h3>Konum</h3>
-                    <div class="input-with-icon">
+                    <div class="keyword-input-container">
                         <div id="autocomplete-container">
                             <input id="autocomplete-input" type="text" placeholder="Konum">
                         </div>
-                        <i class="icon-material-outline-location-on"></i>
                     </div>
                 </div>
 
@@ -42,14 +41,17 @@
                     <div class="keywords-container">
                         <div class="keyword-input-container">
                             <input type="text" class="keyword-input" placeholder="tatlı, börek, pasta vs.">
-                            <button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+                            <button id="getAdsWithKeyword" class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
                         </div>
                         <div class="keywords-list" style="height: auto;"><!-- keywords go here --></div>
                         <div class="clearfix"></div>
                     </div>
                 </div>
                 <div class="clearfix"></div>
-
+                <div id="getAdsWithSearch" class="intro-search-button">
+                    @*onclick="window.location.href='jobs-list-layout-full-page-map.html'">*@
+                    <a style="color:white" class="button ripple-effect"><i class="icon-line-awesome-cutlery"></i> Acıktım</a>
+                </div>
             </div>
         </div>
         <div class="col-xl-9 col-lg-8 content-left-offset">
@@ -65,7 +67,7 @@
                     <span>Sort by:</span>
                     <div class="btn-group bootstrap-select hide-tick">
                         <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="Relevance"> <span class="glyphicon glyphicon-ok check-mark"></span></button><select class="selectpicker hide-tick" tabindex="-98">
-                            <option>Relevance</option>
+                            <option onkeydown="">Relevance</option>
                             <option>Newest</option>
                             <option>Oldest</option>
                             <option>Random</option>
@@ -137,7 +139,7 @@
                             <div class="freelancer-details-list">
                                 <ul>
                                     <li>Ücret <strong>@chief.Price ₺</strong></li>
-                                    <li>İlan Tarihi <strong>@chief.CreatedAt.ToShortDateString()</strong></li>
+                                    <li>İlan Tarihi <strong id="date-sort">@chief.CreatedAt.ToString("dd/MM/yyyy")</strong></li>
                                 </ul>
                             </div>
                             <a href="single-freelancer-profile.html" class="button button-sliding-icon ripple-effect">İlan Detayları <i class="icon-material-outline-arrow-right-alt"></i></a>
@@ -148,7 +150,7 @@
 
             </div>
             <!-- Freelancers Container / End -->
-            @if (Model.Count() != 0)
+            @if (Model.Count() > 0)
             {
                 <!-- Pagination -->
                 <div class="clearfix"></div>
@@ -175,3 +177,7 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="~/js/app-js/filterByLocation.js"></script>
+<script src="~/js/app-js/filterByKeyword.js"></script>

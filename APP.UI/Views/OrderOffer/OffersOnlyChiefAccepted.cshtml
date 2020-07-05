@@ -1,0 +1,192 @@
+﻿@model IEnumerable<APP.Core.Models.OrderOffers>
+@using Microsoft.AspNetCore.Identity
+@using APP.Core.Models
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Acikio - Onay Bekleyenler";
+    Layout = "_Layout";
+}
+
+<div class="dashboard-container" style="height: 778px;">
+    <partial name="_SidebarPartial" />
+
+    <div class="dashboard-content-container" data-simplebar="init" style="height: 778px;">
+        <div class="simplebar-track vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; top: 0px; height: 547px;"></div></div><div class="simplebar-track horizontal" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; left: 0px; width: 25px;"></div></div><div class="simplebar-scroll-content" style="padding-right: 17px; margin-bottom: -34px;">
+            <div class="simplebar-content" style="padding-bottom: 17px; margin-right: -17px;">
+                <div class="dashboard-content-inner" style="min-height: 778px;">
+                    <!-- Dashboard Headline -->
+                    <div class="dashboard-headline">
+                        <h3>Onay Bekleyen Teklifler</h3>
+
+                        <!-- Breadcrumbs -->
+                        <nav id="breadcrumbs" class="dark">
+                            <ul>
+                                <li><a href="#">Yönetim Paneli</a></li>
+                                <li>Onay Bekleyen</li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Row -->
+                    <div class="row">
+
+                        <!-- Dashboard Box -->
+                        <div class="col-xl-12">
+                            <div class="dashboard-box margin-top-0">
+
+                                <!-- Headline -->
+                                <div class="headline">
+                                    <h3><i class="icon-material-outline-business-center"></i> Toplam @Model.Count() Teklif</h3>
+                                </div>
+
+                                <div class="content">
+                                    <ul class="dashboard-box-list">
+                                        @foreach (var offer in Model)
+                                        {
+                                            var client = await UserManager.FindByIdAsync(offer.ClientId);
+                                            <li>
+                                                <!-- Job Listing -->
+                                                <div class="job-listing">
+
+                                                    <!-- Job Listing Details -->
+                                                    <div class="job-listing-details">
+
+                                                        <!-- Logo -->
+                                                        <a href="#" class="job-listing-company-logo">
+                                                            <img src="~/images/company-logo-02.png" alt="">
+                                                        </a>
+
+                                                        <!-- Details -->
+                                                        <div class="job-listing-description">
+                                                            <h3 class="job-listing-title"><a href="#"><i class="icon-line-awesome-hourglass"></i> @offer.Title</a></h3>
+
+                                                            <!-- Job Listing Footer -->
+                                                            <div class="job-listing-footer">
+                                                                <ul>
+                                                                    <li><i class="icon-feather-user"></i> @client.Name @client.Surname</li>
+                                                                    <li><i class="icon-material-outline-location-on"></i> @client.Location</li>
+                                                                    <li><i class="icon-line-awesome-money"></i> @offer.Price ₺</li>
+                                                                    <li><i class="icon-material-outline-access-time"></i> @offer.CreatedAt.ToString("dd/MM/yyyy")</li>
+                                                                    <li><i class="icon-line-awesome-hourglass"></i> Teslim Tarihi: @offer.DeliveryTime.ToString("dd/MM/yyyy")</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Buttons -->
+                                                <div class="buttons-to-right single-right-button">
+                                                    <a href="#small-dialog-3" id="readOffer" data-title="@offer.Title" data-description="@offer.Description" class="popup-with-zoom-anim button red ripple-effect ico" data-tippy-placement="left" data-tippy="" data-original-title="Read"><i class="icon-feather-eye"></i></a>
+                                                    <a href="#small-dialog-4" id="rejectOffer" data-id="@offer.Id" class="popup-with-zoom-anim button red ripple-effect ico" data-tippy-placement="left" data-tippy="" data-original-title="Remove"><i class="icon-feather-trash-2"></i></a>
+                                                </div>
+                                            </li>
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Row / End -->
+
+                    <partial name="~/Views/Shared/_WhiteFooterPartial.cshtml" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Read Popup -->
+<div id="small-dialog-3" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab2">Teklif İçeriği</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3 id="offer-title"></h3>
+                </div>
+
+                <!-- Form -->
+                <p id="offer-description"></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Delete Popup -->
+<div id="small-dialog-4" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab2">Teklifi Reddet</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Onay sürecindeki teklifi <br /> reddetmek istiyor musun?</h3>
+                </div>
+
+                <!-- Button -->
+                <button id="rejectOfferConfirm" class="full-width button button-sliding-icon ripple-effect" type="submit" form="send-pm">Evet <i class="icon-material-outline-arrow-right-alt"></i></button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).on("click", "#readOffer", function () {
+        var offerTitle = $(this).data('title');
+        var offerDescription = $(this).data('description');
+        $("#offer-title").text(offerTitle);
+        $("#offer-description").text(offerDescription);
+    });
+
+    $(document).on("click", "#deleteOffer", function () {
+        var offerTitle = $(this).data('title');
+        var offerDescription = $(this).data('description');
+        $("#offer-title").text(offerTitle);
+        $("#offer-description").text(offerDescription);
+    });
+
+    var willDelete = "null";
+    $(document).on("click", "#rejectOffer", function () {
+        willDelete = $(this).data('id');
+    });
+
+    $(document).on("click", "#rejectOfferConfirm", function () {
+        $.ajax({
+            type: "POST",
+            url: "/OrderOffer/RejectOffer",
+            data: { id: willDelete },
+            success: function (result) {
+                window.location.href = "/OrderOffer/OffersOnlyChiefAccepted";
+            },
+            error: function (result) {
+                alert("silme hatali!");
+            }
+        });
+    });
+
+</script>

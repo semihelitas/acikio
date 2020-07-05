@@ -1,10 +1,14 @@
 ﻿@model ChiefAdsDetailViewModel
-
+@using Microsoft.AspNetCore.Identity
+@using APP.Core.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
     string per = "100%";
     int perNum = 100;
+    var user = await UserManager.GetUserAsync(User);
 }
 
 <!-- Ads Header -->
@@ -16,12 +20,12 @@
                     <div class="left-side">
                         <div class="header-image freelancer-avatar"><img src="~/images/avatar/woman-1.jpg" alt=""></div>
                         <div class="header-details">
-                            <h3>@Model.ChiefAdvertisement.Title <span><i class="icon-line-awesome-user"></i> @Model.ChiefAdvertisement.ApplicationUser.Name @Model.ChiefAdvertisement.ApplicationUser.Surname</span></h3>
+                            <h3>@Model.Advertisement.Title <span><i class="icon-line-awesome-user"></i> @Model.Advertisement.ApplicationUser.Name @Model.Advertisement.ApplicationUser.Surname</span></h3>
                             <ul>
                                 <li><div class="star-rating" data-rating="4.5"></div></li>
-                                <li><i class="icon-material-outline-location-on"></i> @Model.ChiefAdvertisement.ApplicationUser.Location</li>
-                                <li><i class="icon-material-outline-business-center"></i> @Model.ChiefAdvertisement.Category</li>
-                                <li><i class="icon-material-outline-access-time"></i> @Model.ChiefAdvertisement.CreatedAt.ToShortDateString()</li>
+                                <li><i class="icon-material-outline-location-on"></i> @Model.Advertisement.ApplicationUser.Location</li>
+                                <li><i class="icon-material-outline-business-center"></i> @Model.Advertisement.Category</li>
+                                <li><i class="icon-material-outline-access-time"></i> @Model.Advertisement.CreatedAt.ToShortDateString()</li>
                             </ul>
                         </div>
                     </div>
@@ -41,13 +45,13 @@
 
             <div class="single-page-section">
                 <h3 class="margin-bottom-25">İş Tanımı</h3>
-                <p>@Model.ChiefAdvertisement.Description</p>
+                <p>@Model.Advertisement.Description</p>
             </div>
 
             <!-- About Chief -->
             <div class="single-page-section">
                 <h3 class="margin-bottom-25">Usta Hakkında</h3>
-                <p>@Model.ChiefAdvertisement.ApplicationUser.AboutMe</p>
+                <p>@Model.Advertisement.ApplicationUser.AboutMe</p>
             </div>
 
             <!-- Boxed List -->
@@ -56,26 +60,7 @@
                     <h3><i class="icon-material-outline-thumb-up"></i> Tamamladığı Siparişler ve Geri Dönüşler</h3>
                 </div>
                 <ul class="boxed-list-ul">
-                    @foreach (var teklif in Model.Teklifler)
-                    {
-                        <li>
-                            <div class="boxed-list-item">
-                                <!-- Content -->
-                                <div class="item-content">
-                                    <h4>@teklif.ChiefAdvertisement.Title <span>@teklif.ApplicationUser.Name @teklif.ApplicationUser.Surname</span></h4>
-                                    <div class="item-details margin-top-10">
-                                        <div class="star-rating" data-rating="5.0"><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span><span class="star"></span></div>
-                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> @teklif.IsAccepted</div>
-                                    </div>
-                                    <div class="item-description">
-                                        <p>@teklif.OfferDescription </p>
-                                        <p>@teklif.OfferPrice </p>
-                                        <p>@teklif.CreatedAt </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    }
+
                 </ul>
 
                 <!-- Pagination -->
@@ -102,7 +87,7 @@
 
                 <!-- Profile Overview -->
                 <div class="profile-overview">
-                    <div class="overview-item"><strong>@Model.ChiefAdvertisement.Price ₺</strong><span>Sipariş Ücreti</span></div>
+                    <div class="overview-item"><strong>@Model.Advertisement.Price ₺</strong><span>Sipariş Ücreti</span></div>
                     <div class="overview-item"><strong>53</strong><span>Tamamlananmış İş</span></div>
                 </div>
 
@@ -133,7 +118,7 @@
                             <div class="indicator-bar" data-indicator-percentage="90"><span style="width: 90%;"></span></div>
                             <span>Zamanlama</span>
                         </div>
-                        
+
                         <!-- Indicator -->
                         <div class="indicator">
                             <strong>@per</strong>
@@ -180,73 +165,35 @@
 
                 <!-- Welcome Text -->
                 <div class="welcome-text">
-                    <h3>Little little into the middle</h3>
+                    <h3>Merhaba @Model.Advertisement.ApplicationUser.Name Usta!</h3>
                 </div>
 
                 <!-- Form -->
                 <form asp-controller="OrderOffer" asp-action="Create" method="post">
-                    <input hidden asp-for="ChiefAdvertisement.Id" value="@Model.ChiefAdvertisement.Id" />
-
-                    <div class="input-with-icon-left">
-                        <i class="icon-material-outline-account-circle"></i>
-                        <input type="text" class="input-text with-border" name="name" id="name" placeholder="First and Last Name">
-                    </div>
+                    @*<input hidden asp-for="Offer.ChiefAdsId" value="@Model.Advertisement.Id" />*@
+                    @*<input hidden asp-for="Offer.ClientId" value="@user.Id" />*@
 
                     <div class="input-with-icon-left">
                         <i class="icon-material-baseline-mail-outline"></i>
-                        <input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Email Address">
+                        <input type="text" class="input-text with-border" name="emailaddress" id="emailaddress" placeholder="Başlık" required>
                     </div>
 
-                    <textarea name="textarea" cols="10" placeholder="Message" class="with-border"></textarea>
+                    <div class="input-with-icon">
+                        <input type="number" min="1" class="input-text with-border" @*asp-for="Offer.OfferPrice"*@ placeholder="Teklif" required><i class="currency">TL (₺)</i>
+                    </div>
+
+                    <textarea cols="10" placeholder="Message" class="with-border" @*asp-for="Offer.OfferDescription"*@ required></textarea>
 
                     <div class="uploadButton margin-top-25">
                         <input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload" multiple="">
-                        <label class="uploadButton-button ripple-effect" for="upload">Add Attachments</label>
-                        <span class="uploadButton-file-name">Allowed file types: zip, pdf, png, jpg <br> Max. files size: 50 MB.</span>
+                        <label class="uploadButton-button ripple-effect" for="upload">Dosya Yükle</label>
+                        <span class="uploadButton-file-name">İzin veriler dosya türleri: zip, pdf, png, jpg <br> Max. dosya boyutu: 50 MB.</span>
                     </div>
-
+                    <!-- Button -->
+                    <button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit">Teklifi Gönder <i class="icon-material-outline-arrow-right-alt"></i></button>
                 </form>
 
-                <!-- Button -->
-                <button class="button margin-top-35 full-width button-sliding-icon ripple-effect" type="submit">Make an Offer <i class="icon-material-outline-arrow-right-alt"></i></button>
-
             </div>
-            <!-- Login -->
-            <div class="popup-tab-content" id="loginn" style="display: none;">
-
-                <!-- Welcome Text -->
-                <div class="welcome-text">
-                    <h3>Discuss Your Project With Tom</h3>
-                </div>
-
-                <!-- Form -->
-                <form method="post" id="make-an-offer-form">
-
-                    <div class="input-with-icon-left">
-                        <i class="icon-material-outline-account-circle"></i>
-                        <input type="text" class="input-text with-border" name="name2" id="name2" placeholder="First and Last Name" required="">
-                    </div>
-
-                    <div class="input-with-icon-left">
-                        <i class="icon-material-baseline-mail-outline"></i>
-                        <input type="text" class="input-text with-border" name="emailaddress2" id="emailaddress2" placeholder="Email Address" required="">
-                    </div>
-
-                    <textarea name="textarea" cols="10" placeholder="Message" class="with-border"></textarea>
-
-                    <div class="uploadButton margin-top-25">
-                        <input class="uploadButton-input" type="file" accept="image/*, application/pdf" id="upload-cv" multiple="">
-                        <label class="uploadButton-button" for="upload-cv">Add Attachments</label>
-                        <span class="uploadButton-file-name">Allowed file types: zip, pdf, png, jpg <br> Max. files size: 50 MB.</span>
-                    </div>
-
-                </form>
-
-                <!-- Button -->
-                <button class="button full-width button-sliding-icon ripple-effect" type="submit" form="make-an-offer-form">Make an Offer <i class="icon-material-outline-arrow-right-alt"></i></button>
-
-            </div>
-
         </div>
     </div>
 </div>

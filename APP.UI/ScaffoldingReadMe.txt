@@ -1,1 +1,0 @@
-﻿// semih tarafindan düzenlendi 00.20

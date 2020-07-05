@@ -115,6 +115,14 @@
 /*  02. Layout Components
 ----------------------------------------------------------------- */
 
+.white-text{
+	color:white !important;
+}
+
+.orange-text{
+	color:orange !important;
+}
+
 /* ---------------------------------- */
 /* Forms Reset & Styles
 ------------------------------------- */
@@ -283,7 +291,7 @@ img { max-width: 100%; }
 }
 
 #logo img {
-	height: 42px;
+	height: 60px;
 	width: auto;
 	top: 50%;
 	position: relative;
@@ -5245,7 +5253,7 @@ span.blog-item-tag {
 .freelancers-grid-layout .freelancer-details { border-radius: 0 0 4px 4px; }
 
 .freelancers-grid-layout .freelancer-details a.button {
-	display: block;
+/*	display: block;*/
 	text-align: center;
 	width: 100% !important;
 	transition: 0.3s;
@@ -5389,7 +5397,8 @@ span.blog-item-tag {
     text-align: center;
     min-width: 50%;
     max-width: 100%;
-    width: auto !important;
+	width: 190px;
+/*    width: auto !important;*/
     transition: 0.3s;
     float: right;
 	box-shadow: 0 4px 12px rgba(102,103,107,0.15);
@@ -7472,7 +7481,7 @@ input:checked + .switch-button:before {
     top: 0;
     left: 0;
     z-index: 15;
-    background: linear-gradient(to right,rgba(250,250,250,1) 20%, rgba(250,250,250,.95) 50% ,rgba(250,250,250,0.1) 80%,rgba(250,250,250,0) 100%);
+    /*background: linear-gradient(to right,rgba(250,250,250,1) 20%, rgba(250,250,250,.95) 50% ,rgba(250,250,250,0.1) 80%,rgba(250,250,250,0) 100%);*/
 }
 
 .intro-banner:after {
@@ -7480,20 +7489,20 @@ input:checked + .switch-button:before {
     background-color: white;
 }
 
-.intro-banner .background-image-container {
-	background-image: url("/images/back.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 100% 60%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 90%;
-    left: 10%;
-    z-index: 10;
-    overflow: hidden;
-}
+	.intro-banner .background-image-container {
+		background-image: url("/images/backgrounds/registerbg.jpg");
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: 100% 60%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%; /*90*/
+		left: 0%; /**/
+		z-index: 10;
+		overflow: hidden;
+	}
 
 /* Disabled Gradient */
 .intro-banner.disable-gradient:before {

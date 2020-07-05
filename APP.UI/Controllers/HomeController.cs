@@ -9,19 +9,20 @@ using APP.Core.Models;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using APP.Repository;
 
 namespace APP.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IChiefAdsService _chiefAdsService;
+        private readonly ICategoryService _categoryService;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, IChiefAdsService chiefAdsService, UserManager<ApplicationUser> userManager)
+        public HomeController(ILogger<HomeController> logger, IChiefAdsService chiefAdsService, UserManager<ApplicationUser> userManager, ICategoryService categoryService)
         {
-            _logger = logger;
             _chiefAdsService = chiefAdsService;
+            _categoryService = categoryService;
             _userManager = userManager;
         }
 
@@ -31,22 +32,25 @@ namespace APP.UI.Controllers
 
             ViewBag.TotalAdsCount = list.Count();
             ViewBag.TotalUserCount = await _userManager.Users.CountAsync();
-            ViewBag.IstanbulAdsCount = GetAdsCountByLocation("İstanbul", list);
-            ViewBag.AnkaraAdsCount = GetAdsCountByLocation("Ankara", list);
-            ViewBag.IzmirAdsCount = GetAdsCountByLocation("İzmir", list);
-            ViewBag.AdanaAdsCount = GetAdsCountByLocation("Adana", list);
+            ViewBag.IstanbulAdsCount = await GetAdsCountByLocation("İstanbul");
+            ViewBag.AnkaraAdsCount = await GetAdsCountByLocation("Ankara");
+            ViewBag.IzmirAdsCount = await GetAdsCountByLocation("İzmir");
+            ViewBag.AdanaAdsCount = await GetAdsCountByLocation("Adana");
+
+            var categories = await _categoryService.GetCategories();
+            ViewBag.Categories = categories.Select(x => x.Name).ToList();
 
             var model = new HomeIndexViewModel()
             {
-                ChiefAdvertisements = list,
-                TheLastestRandomChiefAds = _chiefAdsService.GetRandomChiefAdsFromTheLastest()
+                HighestRatedUsers = await _userManager.Users.OrderByDescending(x => x.Rating).Take(6).ToListAsync(),
+                Categories = await _categoryService.GetFirstNCategories(8),
             };
             return View(model);
         }
 
-        public int GetAdsCountByLocation(string location, IEnumerable<ChiefAdvertisement> list)
+        public async Task<int> GetAdsCountByLocation(string location)
         {
-            return list.Where(x => x.ApplicationUser.Location.Contains(location)).Count();
+            return await _userManager.Users.Where(x=>x.Location.Contains(location)).CountAsync();
         }
 
         public IActionResult Privacy()
