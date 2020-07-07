@@ -1,0 +1,134 @@
+﻿@model IEnumerable<APP.Core.Models.CompletedDeal>
+@using Microsoft.AspNetCore.Identity
+@using APP.Core.Models
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Acikio - Eski Siparişlerin";
+    Layout = "_Layout";
+}
+
+<div class="dashboard-container" style="height: 778px;">
+    <partial name="_SidebarPartial" />
+
+    <div class="dashboard-content-container" data-simplebar="init" style="height: 778px;">
+        <div class="simplebar-track vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; top: 0px; height: 547px;"></div></div><div class="simplebar-track horizontal" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; left: 0px; width: 25px;"></div></div><div class="simplebar-scroll-content" style="padding-right: 17px; margin-bottom: -34px;">
+            <div class="simplebar-content" style="padding-bottom: 17px; margin-right: -17px;">
+                <div class="dashboard-content-inner" style="min-height: 778px;">
+                    <!-- Dashboard Headline -->
+                    <div class="dashboard-headline">
+                        <h3>Tamamlanmış Siparişler</h3>
+
+                        <!-- Breadcrumbs -->
+                        <nav id="breadcrumbs" class="dark">
+                            <ul>
+                                <li><a href="#">Yönetim Paneli</a></li>
+                                <li>Tamamlanmış Siparişler</li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Row -->
+                    <div class="row">
+
+                        <!-- Dashboard Box -->
+                        <div class="col-xl-12">
+                            <div class="dashboard-box margin-top-0">
+
+                                <!-- Headline -->
+                                <div class="headline">
+                                    <h3><i class="icon-material-outline-business-center"></i> Tamamlanmış @Model.Count() Sipariş</h3>
+                                </div>
+
+                                <div class="content">
+                                    <ul class="dashboard-box-list">
+                                        @foreach (var completedDeal in Model)
+                                        {
+                                            var chief = await UserManager.FindByIdAsync(completedDeal.Deal.ChiefId);
+                                            <li>
+                                                <!-- Job Listing -->
+                                                <div class="job-listing">
+
+                                                    <!-- Job Listing Details -->
+                                                    <div class="job-listing-details">
+
+                                                        <!-- Logo -->
+                                                        <a href="#" class="job-listing-company-logo">
+                                                            <img src="~/images/company-logo-02.png" alt="">
+                                                        </a>
+
+                                                        <!-- Details -->
+                                                        <div class="job-listing-description">
+                                                            <h3 class="job-listing-title"><a href="#"><i class="icon-line-awesome-hourglass"></i> @completedDeal.Deal.OrderOffer.Title</a></h3>
+
+                                                            <!-- Job Listing Footer -->
+                                                            <div class="job-listing-footer">
+                                                                <ul>
+                                                                    <li><i class="icon-feather-user"></i> @chief.Name @chief.Surname</li>
+                                                                    <li><i class="icon-material-outline-location-on"></i> @chief.Location</li>
+                                                                    <li><i class="icon-line-awesome-money"></i> @completedDeal.Deal.OrderOffer.Price ₺</li>
+                                                                    <li><i class="icon-line-awesome-calendar-check-o"></i> Teslim Tarihi: @completedDeal.CreatedAt.ToString("dd/MM/yyyy")</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Buttons -->
+                                                <div class="buttons-to-right single-right-button">
+                                                    <a href="#small-dialog-3" id="readOffer" data-title="@completedDeal.Deal.OrderOffer.Title" data-description="@completedDeal.Deal.OrderOffer.Description" class="popup-with-zoom-anim button red ripple-effect ico" data-tippy-placement="left" data-tippy="" data-original-title="Read"><i class="icon-feather-eye"></i></a>
+                                                </div>
+                                            </li>
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Row / End -->
+
+                    <partial name="~/Views/Shared/_WhiteFooterPartial.cshtml" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Read Popup -->
+<div id="small-dialog-3" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab2">Teklif İçeriği</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3 id="offer-title"></h3>
+                </div>
+
+                <!-- Form -->
+                <p id="offer-description"></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $(document).on("click", "#readOffer", function () {
+        var offerTitle = $(this).data('title');
+        var offerDescription = $(this).data('description');
+        $("#offer-title").text(offerTitle);
+        $("#offer-description").text(offerDescription);
+    });
+</script>

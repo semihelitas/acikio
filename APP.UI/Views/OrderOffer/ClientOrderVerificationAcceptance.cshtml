@@ -18,7 +18,7 @@
 
                     <!-- Dashboard Headline -->
                     <div class="dashboard-headline">
-                        <h3>Gelen Teklifler</h3>
+                        <h3>Doğrulama Onayı Bekleyen Siparişlerin</h3>
                         <span class="margin-top-7">Ustaların teklifini kabul ettiği siparişlerin, doğrulama onayını bekliyorlar</span>
 
                         <!-- Breadcrumbs -->
@@ -78,7 +78,7 @@
                                                                 <a href="#small-dialog-3" id="readOffer" data-title="@offer.Title" data-description="@offer.Description" class="popup-with-zoom-anim button green ripple-effect"><i class="icon-feather-eye"></i></a>
                                                                 <a href="#small-dialog-1" id="acceptOffer" data-offer-id="@offer.Id" data-price="@offer.Price" class="popup-with-zoom-anim button green ripple-effect"><i class="icon-material-outline-check"></i> Siparişi Onayla</a>
                                                                 <a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect"><i class="icon-feather-mail"></i> Mesaj Gönder</a>
-                                                                <a href="#small-dialog-4" id="rejectOffer" data-id="@offer.Id" class="popup-with-zoom-anim button red ripple-effect"><i class="icon-feather-trash"></i> Reddet</a>
+                                                                <a href="#small-dialog-4" id="rejectOffer" data-id="@offer.Id" class="popup-with-zoom-anim button red ripple-effect"><i class="icon-feather-trash"></i> Teklifi Geri Çek</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -146,7 +146,7 @@
 
                 <!-- Welcome Text -->
                 <div class="welcome-text">
-                    <h3>Teklifi Onayla</h3>
+                    <h3>Siparişi Doğrula</h3>
                     <div class="bid-acceptance margin-top-15">
                         <span id="price-label"></span>
                     </div>
@@ -154,7 +154,7 @@
 
                 <div class="radio">
                     <input id="radio-1" name="radio" type="radio" required>
-                    <label for="radio-1"><span class="radio-label"></span> Teklif detaylarını, yükümlülüklerimi ve kullanıcı sözleşmesini okudum, kabul ediyorum.</label>
+                    <label for="radio-1"><span class="radio-label"></span> Sipariş detaylarını, yükümlülüklerimi ve kullanıcı sözleşmesini okudum, kabul ediyorum.</label>
                 </div>
 
                 <!-- Button -->
@@ -206,7 +206,7 @@
     <div class="sign-in-form">
 
         <ul class="popup-tabs-nav">
-            <li><a href="#tab2">Teklifi Reddet</a></li>
+            <li><a href="#tab2">Teklifi Geri Çek</a></li>
         </ul>
 
         <div class="popup-tabs-container">
@@ -216,7 +216,7 @@
 
                 <!-- Welcome Text -->
                 <div class="welcome-text">
-                    <h3>Teklifi reddetmek istiyor musun?</h3>
+                    <h3>Siparişi iptal etmek istiyor musun?</h3>
                 </div>
 
                 <!-- Button -->
@@ -241,10 +241,10 @@
     $(document).on("click", "#acceptOfferConfirm", function () {
         $.ajax({
             type: "POST",
-            url: "/OrderOffer/ChiefOfferAcceptance",
+            url: "/OrderOffer/ClientOfferAcceptance",
             data: { orderOfferId: offerId },
             success: function (result) {
-                window.location.href = "/OrderOffer/AcceptanceSuccess";
+                window.location.href = "/OrderOffer/OrderAgreementSuccessful";
             },
             error: function (result) {
                 alert("Hata!");
@@ -270,7 +270,7 @@
             url: "/OrderOffer/RejectOffer",
             data: { id: willDelete },
             success: function (result) {
-                window.location.href = "/OrderOffer/IncomingOffers";
+                window.location.href = "/OrderOffer/ClientOrderVerificationAcceptance";
             },
             error: function (result) {
                 alert("silme hatali!");

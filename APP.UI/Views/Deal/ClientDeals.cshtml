@@ -1,0 +1,382 @@
+﻿@model IEnumerable<APP.Core.Models.Deal>
+@using Microsoft.AspNetCore.Identity
+@using APP.Core.Models
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Acikio - Aktif Siparişlerim";
+    Layout = "_Layout";
+}
+
+<div class="dashboard-container" style="height: 778px;">
+    <partial name="_SidebarPartial" />
+
+    <div class="dashboard-content-container" data-simplebar="init" style="height: 778px;">
+        <div class="simplebar-track vertical" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; top: 0px; height: 452px;"></div></div><div class="simplebar-track horizontal" style="visibility: visible;"><div class="simplebar-scrollbar" style="visibility: visible; left: 0px; width: 25px;"></div></div><div class="simplebar-scroll-content" style="padding-right: 17px; margin-bottom: -34px;">
+            <div class="simplebar-content" style="padding-bottom: 17px; margin-right: -17px;">
+                <div class="dashboard-content-inner" style="min-height: 778px;">
+
+                    <!-- Dashboard Headline -->
+                    <div class="dashboard-headline">
+                        <h3>Aktif Siparişlerim</h3>
+                        <span class="margin-top-7">Ustalar tarafından hazırlanmakta olan tüm siparişlerin</span>
+
+                        <!-- Breadcrumbs -->
+                        <nav id="breadcrumbs" class="dark">
+                            <ul>
+                                <li><a href="#">Yönetim Paneli</a></li>
+                                <li><a href="#">Aktif Siparişlerim</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <!-- Row -->
+                    <div class="row">
+
+                        <!-- Dashboard Box -->
+                        <div class="col-xl-12">
+                            <div class="dashboard-box margin-top-0">
+
+                                <!-- Headline -->
+                                <div class="headline">
+                                    <h3><i class="icon-material-outline-supervisor-account"></i> Toplam @Model.Count() Sipariş</h3>
+                                </div>
+                                <div class="content">
+                                    <ul class="dashboard-box-list">
+                                        @foreach (var deal in Model)
+                                        {
+                                            var client = await UserManager.FindByIdAsync(deal.OrderOffer.ClientId);
+                                            <li>
+                                                <!-- Overview -->
+                                                <div class="freelancer-overview manage-candidates">
+                                                    <div class="freelancer-overview-inner">
+
+                                                        <!-- Avatar -->
+                                                        <div class="freelancer-avatar">
+                                                            <div class="verified-badge"></div>
+                                                            <a href="#"><img src="~/images/user-avatar-big-02.jpg" alt=""></a>
+                                                        </div>
+
+                                                        <!-- Name -->
+                                                        <div class="freelancer-name">
+
+                                                            <h4><a href="#">@deal.OrderOffer.Title </a></h4>
+
+                                                            <!-- Details -->
+                                                            <span class="freelancer-detail-item"><i class="icon-feather-user"></i> @deal.ApplicationUser.Name @deal.ApplicationUser.Surname</span>
+                                                            <span class="freelancer-detail-item"><a href="#"><i class="icon-material-outline-add-location"></i> @deal.ApplicationUser.Location</a></span>
+
+                                                            <!-- Bid Details -->
+                                                            <ul class="dashboard-task-info bid-info">
+                                                                <li><strong id="offerPrice" data-price="@deal.OrderOffer.Price">@deal.OrderOffer.Price ₺</strong><span>Teklif Miktarı</span></li>
+                                                                <li><strong>@deal.DeliveryTime.ToString("dd/MM/yyyy")</strong><span>Teslimat Tarihi</span></li>
+                                                                <li><strong>@deal.CreatedAt.ToString("dd/MM/yyyy")</strong><span>Teklif Tarihi</span></li>
+                                                            </ul>
+
+                                                            <!-- Buttons -->
+                                                            <div class="buttons-to-right always-visible margin-top-25 margin-bottom-0">
+                                                                <a href="#small-dialog-3" id="readOffer" data-title="@deal.OrderOffer.Title" data-description="@deal.OrderOffer.Description" class="popup-with-zoom-anim button green ripple-effect"><i class="icon-feather-eye"></i></a>
+                                                                @if (deal.IsChiefConfirm == false && deal.IsClientConfirm == false)
+                                                                {
+                                                            <a href="#" class="button gray ripple-effect"><i class="icon-material-outline-access-time"></i> Usta Onayı Bekleniyor</a>
+                                                                }
+                                                                else if (deal.IsChiefConfirm == true && deal.IsClientConfirm == false)
+                                                                {
+                                                            <a href="#small-dialog-2" id="dealDone" data-offer-id="@deal.Id" data-price="@deal.OrderOffer.Price" class="popup-with-zoom-anim button green ripple-effect"><i class="icon-feather-truck"></i> Siparişi Teslim Aldım</a>
+                                                                }
+
+                                                                <a href="#small-dialog-2" class="popup-with-zoom-anim button ripple-effect"><i class="icon-feather-mail"></i> Mesaj Gönder</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Row / End -->
+
+                    <partial name="~/Views/Shared/_WhiteFooterPartial.cshtml" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Read Popup -->
+<div id="small-dialog-3" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab2">Teklif İçeriği</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3 id="offer-title"></h3>
+                </div>
+
+                <!-- Form -->
+                <p id="offer-description"></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Review Order -->
+<div id="small-dialog-2" class="zoom-anim-dialog dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav" style="pointer-events: none;">
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2" style="">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Deneyiminizi Puanlayın</h3>
+                    <span>Acikio müşteri deneyimini önemser ve iyileştirmeye çalışır.</span>
+                </div>
+
+                <form method="post" id="leave-review-form">
+
+                    <div class="feedback-yes-no">
+                        <strong>Lezzet</strong>
+                        <div class="radio">
+                            <input value="1" id="radio-1" name="delicious" type="radio" required="">
+                            <label for="radio-1"><span class="radio-label"></span> 1</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="2" id="radio-2" name="delicious" type="radio" required="">
+                            <label for="radio-2"><span class="radio-label"></span> 2</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="3" id="radio-3" name="delicious" type="radio" required="">
+                            <label for="radio-3"><span class="radio-label"></span> 3</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="4" id="radio-4" name="delicious" type="radio" required="">
+                            <label for="radio-4"><span class="radio-label"></span> 4</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="5" id="radio-5" name="delicious" type="radio" required="">
+                            <label for="radio-5"><span class="radio-label"></span> 5</label>
+                        </div>
+                    </div>
+
+                    <div class="feedback-yes-no">
+                        <strong>Zamanlama</strong>
+                        <div class="radio">
+                            <input value="1" id="radio-20" name="timing" type="radio" required="">
+                            <label for="radio-20"><span class="radio-label"></span> 1</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="2" id="radio-21" name="timing" type="radio" required="">
+                            <label for="radio-21"><span class="radio-label"></span> 2</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="3" id="radio-22" name="timing" type="radio" required="">
+                            <label for="radio-22"><span class="radio-label"></span> 3</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="4" id="radio-23" name="timing" type="radio" required="">
+                            <label for="radio-23"><span class="radio-label"></span> 4</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="5" id="radio-24" name="timing" type="radio" required="">
+                            <label for="radio-24"><span class="radio-label"></span> 5</label>
+                        </div>
+                    </div>
+
+                    <div class="feedback-yes-no">
+                        <strong>Tavsiye Edilebilirlik</strong>
+                        <div class="radio">
+                            <input value="1" id="radio-6" name="advice" type="radio" required="">
+                            <label for="radio-6"><span class="radio-label"></span> 1</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="2" id="radio-7" name="advice" type="radio" required="">
+                            <label for="radio-7"><span class="radio-label"></span> 2</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="3" id="radio-8" name="advice" type="radio" required="">
+                            <label for="radio-8"><span class="radio-label"></span> 3</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="4" id="radio-9" name="advice" type="radio" required="">
+                            <label for="radio-9"><span class="radio-label"></span> 4</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="5" id="radio-10" name="advice" type="radio" required="">
+                            <label for="radio-10"><span class="radio-label"></span> 5</label>
+                        </div>
+                    </div>
+
+                    <div class="feedback-yes-no">
+                        <strong>İletişim</strong>
+                        <div class="radio">
+                            <input value="1" id="radio-11" name="communication" type="radio" required="">
+                            <label for="radio-11"><span class="radio-label"></span> 1</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="2" id="radio-12" name="communication" type="radio" required="">
+                            <label for="radio-12"><span class="radio-label"></span> 2</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="3" id="radio-13" name="communication" type="radio" required="">
+                            <label for="radio-13"><span class="radio-label"></span> 3</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="4" id="radio-14" name="communication" type="radio" required="">
+                            <label for="radio-14"><span class="radio-label"></span> 4</label>
+                        </div>
+
+                        <div class="radio">
+                            <input value="5" id="radio-15" name="communication" type="radio" required="">
+                            <label for="radio-15"><span class="radio-label"></span> 5</label>
+                        </div>
+                    </div>
+
+                    <textarea class="with-border" placeholder="Yorum" name="comment" id="reviewComment" cols="7" required=""></textarea>
+
+                </form>
+
+                <!-- Button -->
+                <button id="dealDoneComplete" class="button full-width button-sliding-icon ripple-effect" type="submit" form="leave-review-form">Leave a Review <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+            </div>
+
+        </div>
+    </div>
+    <button title="Close (Esc)" type="button" class="mfp-close"></button>
+</div>
+
+
+<!-- Send Direct Message Popup -->
+<div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab2">Send Message</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Direct Message To David</h3>
+                </div>
+
+                <!-- Form -->
+                <form method="post" id="send-pm">
+                    <textarea name="textarea" cols="10" placeholder="Message" class="with-border" required></textarea>
+                </form>
+
+                <!-- Button -->
+                <button class="button full-width button-sliding-icon ripple-effect" type="submit" form="send-pm">Send <i class="icon-material-outline-arrow-right-alt"></i></button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    var dealGuid = "null";
+    $(document).on("click", "#dealDone", function () {
+        dealGuid = $(this).data('offer-id');
+    });
+
+    $(document).on("click", "#dealDoneComplete", function () {
+
+        var deliciousValue = $("input[name='delicious']:checked").val();
+        var timingValue = $("input[name='timing']:checked").val();
+        var adviceValue = $("input[name='advice']:checked").val();
+        var communicationValue = $("input[name='communication']:checked").val();
+        var reviewComment = $("#reviewComment").val();
+        $.ajax({
+            type: "POST",
+            url: "/Deal/ClientCompleteDeal",
+            data: {
+                dealId: dealGuid,
+                timingScore: timingValue,
+                deliciousScore: deliciousValue,
+                communicationScore: communicationValue,
+                adviceScore: adviceValue,
+                comment: reviewComment
+            },
+            success: function (result) {
+                window.location.href = "/anasayfa";
+            },
+            error: function (result) {
+                alert("Hata!");
+            }
+        });
+    });
+
+    $(document).on("click", "#readOffer", function () {
+        var offerTitle = $(this).data('title');
+        var offerDescription = $(this).data('description');
+        $("#offer-title").text(offerTitle);
+        $("#offer-description").text(offerDescription);
+    });
+
+    var willDelete = "null";
+    $(document).on("click", "#rejectOffer", function () {
+        willDelete = $(this).data('id');
+    });
+
+    $(document).on("click", "#rejectOfferConfirm", function () {
+        $.ajax({
+            type: "POST",
+            url: "/OrderOffer/RejectOffer",
+            data: { id: willDelete },
+            success: function (result) {
+                window.location.href = "/OrderOffer/IncomingOffers";
+            },
+            error: function (result) {
+                alert("silme hatali!");
+            }
+        });
+    });
+
+</script>

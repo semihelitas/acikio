@@ -15,5 +15,7 @@ namespace APP.Repository
         public DbSet<Category> Category { get; set; }
         public DbSet<ChiefAdvertisement> ChiefAdvertisement { get; set; }
         public DbSet<OrderOffers> OrderOffers { get; set; }
+        public DbSet<Deal> Deal { get; set; }
+        public DbSet<CompletedDeal> CompletedDeal { get; set; }
     }
 }

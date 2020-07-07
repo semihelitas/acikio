@@ -29,6 +29,6 @@ namespace APP.Core.Models
 
         public bool IsClientAccepted { get; set; }
         public bool IsChiefAccepted { get; set; }
-        public bool IsCounterOffer { get; set; }
+        public bool IsDeal { get; set; }
     }
 }

@@ -18,13 +18,15 @@ namespace APP.UI.Controllers
     public class OrderOfferController : Controller
     {
         private readonly IOrderOffersService _orderOffersService;
+        private readonly IDealService _dealService;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _db;
-        public OrderOfferController(IOrderOffersService orderOffersService, UserManager<ApplicationUser> userManager, ApplicationDbContext db)
+        public OrderOfferController(IOrderOffersService orderOffersService, UserManager<ApplicationUser> userManager, ApplicationDbContext db, IDealService dealService)
         {
             _orderOffersService = orderOffersService;
             _userManager = userManager;
             _db = db;
+            _dealService = dealService;
         }
 
         public ActionResult Index()
@@ -64,20 +66,48 @@ namespace APP.UI.Controllers
         }
 
         [HttpPost]
-        public IActionResult ClientOfferAcceptance(Guid orderOfferId)
+        public async Task<IActionResult> ClientOfferAcceptance(Guid orderOfferId)
         {
             if (ModelState.IsValid)
             {
                 //will refactoring
                 var getOrderOffer = _db.OrderOffers.Where(x => x.Id == orderOfferId).FirstOrDefault();
-                getOrderOffer.IsChiefAccepted = true;
-                _db.SaveChanges();
-                return Redirect("/OrderOffer/AcceptanceSuccess");
+                if (getOrderOffer != null)
+                {
+                    getOrderOffer.IsClientAccepted = true;
+
+                    // Create new deal (refactoring)
+                    var deal = new Deal()
+                    {
+                        Id = Guid.NewGuid(),
+                        OrderOffer = getOrderOffer,
+                        ChiefId = getOrderOffer.ChiefId,
+                        ApplicationUser = getOrderOffer.ApplicationUser,
+                        DeliveryTime = getOrderOffer.DeliveryTime,
+                        CreatedAt = DateTime.Now,
+                        IsCanceled = false,
+                        IsChiefConfirm = false,
+                        IsClientConfirm = false
+                    };
+
+                    await _dealService.CreateDeal(deal);
+
+                    getOrderOffer.IsDeal = true;
+                    _db.SaveChanges();
+
+                    return Redirect("/OrderOffer/OrderAgreementSuccessful");
+                }
+                return BadRequest();
             }
             return BadRequest();
         }
 
         public IActionResult AcceptanceSuccess()
+        {
+            return View();
+        }
+
+        public IActionResult OrderAgreementSuccessful()
         {
             return View();
         }
@@ -101,7 +131,7 @@ namespace APP.UI.Controllers
                     offer.CreatedAt = DateTime.Now;
                     offer.IsChiefAccepted = false;
                     offer.IsClientAccepted = false;
-                    offer.IsCounterOffer = false;
+                    offer.IsDeal = false;
                     await _orderOffersService.CreateOrderOffer(offer);
                     return Redirect("/User/Profile/" + offer.ChiefId);
                 }
@@ -120,44 +150,6 @@ namespace APP.UI.Controllers
         public async Task RejectOffer(Guid id)
         {
             await _orderOffersService.DeleteOrderOffer(id);
-        }
-
-        // GET: OrderOfferController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: OrderOfferController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(SentOffers));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-
-
-        // POST: OrderOfferController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(SentOffers));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

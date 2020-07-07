@@ -2,6 +2,7 @@
 using APP.Repository;
 using APP.Repository.CategoryRepository;
 using APP.Repository.ChiefAds;
+using APP.Repository.DealRepository;
 using APP.Repository.OrderOffer;
 using APP.Repository.Repository;
 using APP.Repository.UserRepository;
@@ -23,12 +24,14 @@ namespace APP.Service.UnitOfWork
             Offers = new OrderOffersRepository(_dbContext);
             Categories = new CategoryRepository(_dbContext);
             Users = new UserRepository(_dbContext);
+            Deals = new DealRepository(_dbContext);
         }
 
         public IChiefAdsRepository Advertisements { get; set; }
         public IOrderOffersRepository Offers { get; set; }
         public ICategoryRepository Categories { get; set; }
         public IUserRepository Users { get; set; }
+        public IDealRepository Deals { get; set; }
 
         public async Task<int> CommitAsync()
         {

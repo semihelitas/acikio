@@ -15,6 +15,7 @@ using APP.Repository.ChiefAds;
 using APP.Repository.OrderOffer;
 using APP.Repository.CategoryRepository;
 using APP.Repository.UserRepository;
+using APP.Repository.DealRepository;
 
 namespace APP.UI
 {
@@ -45,11 +46,12 @@ namespace APP.UI
             services.AddTransient<IOrderOffersService, OrderOffersService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IDealService, DealService>();
             services.AddTransient<IChiefAdsRepository, ChiefAdsRepository>();
             services.AddTransient<IOrderOffersRepository, OrderOffersRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
-
+            services.AddTransient<IDealRepository, DealRepository>();
             // Settings
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();

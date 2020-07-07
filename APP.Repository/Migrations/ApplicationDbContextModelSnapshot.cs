@@ -166,6 +166,79 @@ namespace APP.UI.Data.Migrations
                     b.ToTable("ChiefAdvertisement");
                 });
 
+            modelBuilder.Entity("APP.Core.Models.CompletedDeal", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("AdviceScore")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("CommunicationScore")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DealId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("DeliciousScore")
+                        .HasColumnType("float");
+
+                    b.Property<double>("TimingScore")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DealId");
+
+                    b.ToTable("CompletedDeal");
+                });
+
+            modelBuilder.Entity("APP.Core.Models.Deal", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ChiefId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DeliveryTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsCanceled")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsChiefConfirm")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsClientConfirm")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDone")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("OrderOfferId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChiefId");
+
+                    b.HasIndex("OrderOfferId");
+
+                    b.ToTable("Deal");
+                });
+
             modelBuilder.Entity("APP.Core.Models.OrderOffers", b =>
                 {
                     b.Property<Guid>("Id")
@@ -196,7 +269,7 @@ namespace APP.UI.Data.Migrations
                     b.Property<bool>("IsClientAccepted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsCounterOffer")
+                    b.Property<bool>("IsDeal")
                         .HasColumnType("bit");
 
                     b.Property<double>("Price")
@@ -354,6 +427,24 @@ namespace APP.UI.Data.Migrations
                     b.HasOne("APP.Core.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("FoodAdvertisement")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("APP.Core.Models.CompletedDeal", b =>
+                {
+                    b.HasOne("APP.Core.Models.Deal", "Deal")
+                        .WithMany()
+                        .HasForeignKey("DealId");
+                });
+
+            modelBuilder.Entity("APP.Core.Models.Deal", b =>
+                {
+                    b.HasOne("APP.Core.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ChiefId");
+
+                    b.HasOne("APP.Core.Models.OrderOffers", "OrderOffer")
+                        .WithMany()
+                        .HasForeignKey("OrderOfferId");
                 });
 
             modelBuilder.Entity("APP.Core.Models.OrderOffers", b =>

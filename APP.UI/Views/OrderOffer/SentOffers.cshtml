@@ -38,7 +38,7 @@
 
                                 <!-- Headline -->
                                 <div class="headline">
-                                    <h3><i class="icon-material-outline-supervisor-account"></i> 3 Bidders</h3>
+                                    <h3><i class="icon-material-outline-supervisor-account"></i> Toplam @Model.Count() Bekleyen Teklif</h3>
                                 </div>
 
                                 <div class="content">
@@ -79,8 +79,9 @@
                                                             </ul>
                                                             <!-- Buttons -->
                                                             <div class="buttons-to-right always-visible margin-top-25 margin-bottom-0">
-                                                                <a href="#small-dialog-1" class="popup-with-zoom-anim button gray ripple-effect disabled"><i class="icon-line-awesome-hourglass-start"></i> Cevap Bekleniyor</a>
-                                                                <a href="#" class="button red ripple-effect ico" data-tippy-placement="top" data-tippy="" data-original-title="İptal Et"><i class="icon-feather-trash-2"></i></a>
+                                                                <a href="#small-dialog-3" id="readOffer" data-title="@offer.Title" data-description="@offer.Description" class="popup-with-zoom-anim button green ripple-effect"><i class="icon-feather-eye"></i></a>
+                                                                <a href="#" class="disabled button gray ripple-effect"><i class="icon-line-awesome-hourglass-start"></i> Cevap Bekleniyor</a>
+                                                                <a href="#small-dialog-4" id="rejectOffer" data-id="@offer.Id" class="popup-with-zoom-anim button red ripple-effect"><i class="icon-feather-trash"></i>Teklifi Geri Çek</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -104,56 +105,16 @@
 
 </div>
 
-<!-- Bid Acceptance Popup
-================================================== -->
-<div id="small-dialog-1" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+<!-- Popups-->
+<!-- Read Popup -->
+<div id="small-dialog-3" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
 
     <!--Tabs -->
     <div class="sign-in-form">
 
         <ul class="popup-tabs-nav">
-            <li><a href="#tab1">Sipariş Onayı</a></li>
-        </ul>
-
-        <div class="popup-tabs-container">
-
-            <!-- Tab -->
-            <div class="popup-tab-content" id="tab">
-
-                <!-- Welcome Text -->
-                <div class="welcome-text">
-                    <h3>Accept Offer From David</h3>
-                    <div class="bid-acceptance margin-top-15">
-                        $3200
-                    </div>
-
-                </div>
-
-                <form id="terms">
-                    <div class="radio">
-                        <input id="radio-1" name="radio" type="radio" required>
-                        <label for="radio-1"><span class="radio-label"></span>  I have read and agree to the Terms and Conditions</label>
-                    </div>
-                </form>
-
-                <!-- Button -->
-                <button class="margin-top-15 button full-width button-sliding-icon ripple-effect" type="submit" form="terms">Accept <i class="icon-material-outline-arrow-right-alt"></i></button>
-
-            </div>
-
-        </div>
-    </div>
-</div>
-<!-- Bid Acceptance Popup / End -->
-<!-- Send Direct Message Popup
-================================================== -->
-<div id="small-dialog-2" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
-
-    <!--Tabs -->
-    <div class="sign-in-form">
-
-        <ul class="popup-tabs-nav">
-            <li><a href="#tab2">Send Message</a></li>
+            <li><a href="#tab2">Teklif İçeriği</a></li>
         </ul>
 
         <div class="popup-tabs-container">
@@ -163,20 +124,73 @@
 
                 <!-- Welcome Text -->
                 <div class="welcome-text">
-                    <h3>Direct Message To David</h3>
+                    <h3 id="offer-title"></h3>
                 </div>
 
                 <!-- Form -->
-                <form method="post" id="send-pm">
-                    <textarea name="textarea" cols="10" placeholder="Message" class="with-border" required></textarea>
-                </form>
-
-                <!-- Button -->
-                <button class="button full-width button-sliding-icon ripple-effect" type="submit" form="send-pm">Send <i class="icon-material-outline-arrow-right-alt"></i></button>
-
+                <p id="offer-description"></p>
             </div>
 
         </div>
     </div>
 </div>
-<!-- Send Direct Message Popup / End -->
+
+<!-- Delete Popup -->
+<div id="small-dialog-4" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+    <!--Tabs -->
+    <div class="sign-in-form">
+
+        <ul class="popup-tabs-nav">
+            <li><a href="#tab2">Teklifi Geri Çek</a></li>
+        </ul>
+
+        <div class="popup-tabs-container">
+
+            <!-- Tab -->
+            <div class="popup-tab-content" id="tab2">
+
+                <!-- Welcome Text -->
+                <div class="welcome-text">
+                    <h3>Siparişi iptal etmek istiyor musun?</h3>
+                </div>
+
+                <!-- Button -->
+                <button id="rejectOfferConfirm" class="full-width button button-sliding-icon ripple-effect" type="submit" form="send-pm">Evet <i class="icon-material-outline-arrow-right-alt"></i></button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+
+    $(document).on("click", "#readOffer", function () {
+        var offerTitle = $(this).data('title');
+        var offerDescription = $(this).data('description');
+        $("#offer-title").text(offerTitle);
+        $("#offer-description").text(offerDescription);
+    });
+
+    var willDelete = "null";
+    $(document).on("click", "#rejectOffer", function () {
+        willDelete = $(this).data('id');
+    });
+
+    $(document).on("click", "#rejectOfferConfirm", function () {
+        $.ajax({
+            type: "POST",
+            url: "/OrderOffer/RejectOffer",
+            data: { id: willDelete },
+            success: function (result) {
+                window.location.href = "/OrderOffer/SentOffers";
+            },
+            error: function (result) {
+                alert("silme hatali!");
+            }
+        });
+    });
+
+</script>

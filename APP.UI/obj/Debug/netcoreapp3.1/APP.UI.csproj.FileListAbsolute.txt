@@ -881,3 +881,8 @@ C:\Users\semih\source\repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\OrderOffer\AcceptanceSuccess.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\OrderOffer\OffersOnlyChiefAccepted.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\OrderOffer\ClientOrderVerificationAcceptance.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\OrderOffer\OrderAgreementSuccessful.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Deal\ChiefDeals.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Deal\ClientDeals.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Deal\ChiefCompletedDealsList.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Deal\ClientCompletedDealsList.cshtml.g.cs
