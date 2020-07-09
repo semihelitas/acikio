@@ -14,5 +14,6 @@ namespace APP.Repository.DealRepository
         Task CompleteDeal(CompletedDeal completedDeal);
         Task<IEnumerable<CompletedDeal>> ChiefCompletedDeals(ApplicationUser user);
         Task<IEnumerable<CompletedDeal>> ClientCompletedDeals(ApplicationUser user);
+        Task<CompletedDeal> GetSingleCompletedDeal(Guid id);
     }
 }

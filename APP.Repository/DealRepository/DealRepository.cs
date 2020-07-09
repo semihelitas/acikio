@@ -69,5 +69,10 @@ namespace APP.Repository.DealRepository
                 .ToListAsync();
             return completedDeals;
         }
+
+        public async Task<CompletedDeal> GetSingleCompletedDeal(Guid id)
+        {
+            return await _dbContext.CompletedDeal.Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
     }
 }

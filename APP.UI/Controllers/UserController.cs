@@ -16,16 +16,19 @@ namespace APP.UI.Controllers
     {
         private readonly IUserService _userService;
         private readonly ICategoryService _categoryService;
+        private readonly INotificationService _notificationService;
         private UserManager<ApplicationUser> _userManager;
-        public UserController(UserManager<ApplicationUser> userManager, IUserService userService, ICategoryService categoryService)
+        public UserController(UserManager<ApplicationUser> userManager, IUserService userService, ICategoryService categoryService, INotificationService notificationService)
         {
             _userManager = userManager;
             _userService = userService;
             _categoryService = categoryService;
+            _notificationService = notificationService;
         }
 
         public async Task<IActionResult> Profile(string id)
         {
+            await ShowNotifications();
             if (id == null)
                 return NotFound();
             else
@@ -37,6 +40,7 @@ namespace APP.UI.Controllers
 
         public async Task<IActionResult> Users(string location, string keyword)
         {
+            await ShowNotifications();
             var categories = await _categoryService.GetCategories();
             ViewBag.Categories = categories.Select(x => x.Name).ToList();
             return View(await _userService.GetUsersBySearch(location, keyword));
@@ -44,9 +48,16 @@ namespace APP.UI.Controllers
 
         public async Task<IActionResult> FilteredUsersByCategory(string category)
         {
+            await ShowNotifications();
             var categories = await _categoryService.GetCategories();
             ViewBag.Categories = categories.Select(x => x.Name).ToList();
             return View(await _userService.GetUsersByCategory(category));
+        }
+
+        public async Task ShowNotifications()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            ViewBag.Notifications = await _notificationService.GetUnreadNotifications(currentUser.Id);
         }
     }
 }

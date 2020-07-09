@@ -22,7 +22,7 @@ C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\ne
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.csproj.CopyComplete
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.pdb
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.csproj.CoreCompileInputs.cache
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.genruntimeconfig.cache
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\bin\Debug\netcoreapp3.1\APP.Core.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\bin\Debug\netcoreapp3.1\APP.Core.pdb
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.Repository\obj\Debug\netcoreapp3.1\APP.Repository.csproj.CoreCompileInputs.cache

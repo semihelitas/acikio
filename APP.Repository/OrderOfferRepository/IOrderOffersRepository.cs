@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APP.Repository.OrderOffer
+namespace APP.Repository.OrderOfferRepository
 {
     public interface IOrderOffersRepository : IGenericRepository<OrderOffers>
     {

@@ -1,0 +1,118 @@
+﻿@model APP.Core.Models.CompletedDeal
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Acikio - Fatura</title>
+    <link rel="stylesheet" href="~/css/invoice.css">
+</head>
+
+@{
+    Layout = null;
+    var chef = ViewBag.Chef;
+    var client = ViewBag.Client;
+}
+
+<body>
+
+    <!-- Print Button -->
+    <div class="print-button-container">
+        <a href="javascript:window.print()" class="print-button green">Faturayı Yazdır</a>
+    </div>
+
+    <!-- Invoice -->
+    <div id="invoice">
+
+        <!-- Header -->
+        <div class="row">
+            <div class="col-xl-6">
+                <div id="logo"><img src="~/images/logos/acikio-logo-orange.png" alt=""></div>
+            </div>
+
+            <div class="col-xl-6">
+
+                <p id="details">
+                    <strong>Fatura No:</strong> #@Model.Id.ToString().Split('-').FirstOrDefault()<br>
+                    <strong>İşlem Tarihi:</strong> @Model.CreatedAt.ToString("dd/MM/yyyy") <br>
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Client & Supplier -->
+        <div class="row">
+            <div class="col-xl-12">
+                <h2>Sanal Fatura</h2>
+            </div>
+
+            <div class="col-xl-6">
+                <strong class="margin-bottom-5">Hizmeti Veren</strong>
+                <p>
+                    @chef.Name @chef.Surname <br>
+                    @chef.Location <br>
+                    @chef.Email <br />
+                </p>
+            </div>
+
+            <div class="col-xl-6">
+                <strong class="margin-bottom-5">Müşteri</strong>
+                <p>
+                    @client.Name @client.Surname <br>
+                    @client.Location <br>
+                    @client.Email <br>
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Invoice -->
+        <div class="row">
+            <div class="col-xl-12">
+                <table class="margin-top-20">
+                    <tbody>
+                        <tr>
+                            <th>Açıklama</th>
+                            <th>Bedel</th>
+                            <th>KDV (0%)</th>
+                            <th>Toplam</th>
+                        </tr>
+
+                        <tr>
+                            <td>Standart Acikio Hizmeti</td>
+                            <td>₺@Model.Deal.OrderOffer.Price.00</td>
+                            <td>₺0.00</td>
+                            <td>$@Model.Deal.OrderOffer.Price.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-xl-4 col-xl-offset-8">
+                <table id="totals">
+                    <tbody>
+                        <tr>
+                            <th>Toplam Ödenen</th>
+                            <th><span>$@Model.Deal.OrderOffer.Price.00</span></th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- Footer -->
+        <div class="row">
+            <div class="col-xl-12">
+                <ul id="footer">
+                    <li><span>www.acikio.com</span></li>
+                    <li>support@acikio.com</li>
+                    <li> +90 (212) 426 10 10</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

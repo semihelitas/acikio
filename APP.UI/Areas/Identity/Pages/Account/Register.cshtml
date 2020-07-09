@@ -57,16 +57,16 @@
 
                         <!-- Account Type -->
                         @*<div class="account-type">
-                                <div>
-                                    <input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked />
-                                    <label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Yemek Ustası</label>
-                                </div>
+            <div>
+                <input type="radio" name="account-type-radio" id="freelancer-radio" class="account-type-radio" checked />
+                <label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Yemek Ustası</label>
+            </div>
 
-                                <div>
-                                    <input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio" />
-                                    <label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Acıktım</label>
-                                </div>
-                            </div>*@
+            <div>
+                <input type="radio" name="account-type-radio" id="employer-radio" class="account-type-radio" />
+                <label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Acıktım</label>
+            </div>
+        </div>*@
 
                         <div class="input-with-icon-left">
                             <i class="icon-material-outline-person-pin"></i>
@@ -108,6 +108,14 @@
                             <i class="icon-material-outline-lock"></i>
                             <input type="password" asp-for="Input.ConfirmPassword" class="input-text with-border" placeholder="Parola Tekrar" required />
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+
+                        <div class="btn-group bootstrap-select input-text with-border" style="margin-bottom:10px">
+                            <select asp-for="Input.Role" class="selectpicker" tabindex="-98">
+                                <option selected value="Üye">Normal Üyelik</option>
+                                <option value="Usta">Usta Üyeliği</option>
+                            </select>
+                            <span asp-validation-for="Input.Role" class="text-danger"></span>
                         </div>
 
                         <button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit">Kaydol <i class="icon-material-outline-arrow-right-alt"></i></button>

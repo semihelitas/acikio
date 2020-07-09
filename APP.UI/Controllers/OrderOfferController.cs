@@ -19,42 +19,103 @@ namespace APP.UI.Controllers
     {
         private readonly IOrderOffersService _orderOffersService;
         private readonly IDealService _dealService;
+        private readonly INotificationService _notificationService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationDbContext _db;
-        public OrderOfferController(IOrderOffersService orderOffersService, UserManager<ApplicationUser> userManager, ApplicationDbContext db, IDealService dealService)
+        public OrderOfferController(IOrderOffersService orderOffersService, UserManager<ApplicationUser> userManager, ApplicationDbContext db, IDealService dealService, INotificationService notificationService, SignInManager<ApplicationUser> signInManager)
         {
             _orderOffersService = orderOffersService;
             _userManager = userManager;
             _db = db;
             _dealService = dealService;
+            _signInManager = signInManager;
+            _notificationService = notificationService;
+
         }
 
-        public ActionResult Index()
+    public async Task<IActionResult> Dashboard()
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            var IsUserChef = await _userManager.IsInRoleAsync(user, "Usta");
+            var IsUserClient = await _userManager.IsInRoleAsync(user, "Üye");
+
+            if (IsUserChef == true && IsUserClient == false)
+            {
+                var chiefDeals = await _dealService.ChiefDeals(user);
+                ViewBag.ActiveOrders = chiefDeals.Count();
+
+                var incomingOffers = await _orderOffersService.GetAllOrderOffersOfUser(user);
+                ViewBag.Offers = incomingOffers.Count();
+
+                var waitingForConfirmation = await _orderOffersService.GetGetOrderOffersOnlyChiefAccepted(user);
+                ViewBag.WaitingForConfirmation = waitingForConfirmation.Count();
+
+                var completedOrders = await _dealService.ChiefCompletedDeals(user);
+                ViewBag.AllCompletedOrders = completedOrders.OrderByDescending(x => x.CreatedAt).Take(4);
+                ViewBag.CompletedOrders = completedOrders.Count();
+            }
+
+            if (IsUserClient == true && IsUserChef == false)
+            {
+                var client = await _dealService.ClientDeals(user);
+                ViewBag.ActiveOrders = client.Count();
+
+                var sentOffers = await _orderOffersService.GetAllOrderOffersOfUserSent(user);
+                ViewBag.Offers = sentOffers.Count();
+
+                var waitingForConfirmation = await _orderOffersService.GetOrderOffersPendingClientResponse(user);
+                ViewBag.WaitingForConfirmation = waitingForConfirmation.Count();
+
+                var completedOrders = await _dealService.ClientCompletedDeals(user);
+                ViewBag.AllCompletedOrders = completedOrders.OrderByDescending(x=>x.CreatedAt).Take(4);
+                ViewBag.CompletedOrders = completedOrders.Count();
+            }
+
+            ViewBag.UserAllNotifications = await _notificationService.GetAllNotifications(user.Id);
+            await ShowNotifications();
             return View();
         }
 
         // GET: /yonetim-paneli/tekliflerim
         public async Task<IActionResult> SentOffers()
         {
+            await ShowNotifications();
             return View(await _orderOffersService.GetAllOrderOffersOfUserSent(await _userManager.GetUserAsync(User)));
         }
 
         // GET: /yonetim-paneli/gelen-teklifler
         public async Task<IActionResult> IncomingOffers()
         {
+            await ShowNotifications();
             return View(await _orderOffersService.GetAllOrderOffersOfUser(await _userManager.GetUserAsync(User)));
         }
 
         [HttpPost]
-        public IActionResult ChiefOfferAcceptance(Guid orderOfferId)
+        public async Task<IActionResult> ChiefOfferAcceptance(Guid orderOfferId)
         {
             if (ModelState.IsValid)
             {
                 //will refactoring
-                var getOrderOffer = _db.OrderOffers.Where(x => x.Id == orderOfferId).FirstOrDefault();
+                var getOrderOffer = await _db.OrderOffers.Where(x => x.Id == orderOfferId).FirstOrDefaultAsync();
                 getOrderOffer.IsChiefAccepted = true;
                 _db.SaveChanges();
+
+                var chief = await _userManager.GetUserAsync(User);
+
+                await _notificationService.SendNotification(new Notification()
+                {
+                    Id = Guid.NewGuid(),
+                    SenderId = getOrderOffer.ChiefId,
+                    SenderName = "" + chief.Name + " " + chief.Surname,
+                    ReceiverId = getOrderOffer.ClientId,
+                    IsItRead = false,
+                    CreatedAt = DateTime.Now,
+                    ReturnUrl = "/OrderOffer/ClientOrderVerificationAcceptance",
+                    NotificationString = "siparişinizi kabul etti!"
+                });
+
                 return Redirect("/OrderOffer/AcceptanceSuccess");
             }
             return BadRequest();
@@ -62,6 +123,7 @@ namespace APP.UI.Controllers
 
         public async Task<IActionResult> ClientOrderVerificationAcceptance()
         {
+            await ShowNotifications();
             return View(await _orderOffersService.GetOrderOffersPendingClientResponse(await _userManager.GetUserAsync(User)));
         }
 
@@ -95,6 +157,19 @@ namespace APP.UI.Controllers
                     getOrderOffer.IsDeal = true;
                     _db.SaveChanges();
 
+                    var client = await _userManager.GetUserAsync(User);
+
+                    await _notificationService.SendNotification(new Notification()
+                    {
+                        Id = Guid.NewGuid(),
+                        SenderId = getOrderOffer.ClientId,
+                        SenderName = "" + client.Name + " " + client.Surname,
+                        ReceiverId = getOrderOffer.ChiefId,
+                        IsItRead = false,
+                        CreatedAt = DateTime.Now,
+                        ReturnUrl = "/Deal/ChiefDeals",
+                        NotificationString = "siparişi onayladı! Teslimat süresi geçmeden siparişi hazırlayın."
+                    });
                     return Redirect("/OrderOffer/OrderAgreementSuccessful");
                 }
                 return BadRequest();
@@ -102,18 +177,21 @@ namespace APP.UI.Controllers
             return BadRequest();
         }
 
-        public IActionResult AcceptanceSuccess()
+        public async Task<IActionResult> AcceptanceSuccessAsync()
         {
+            await ShowNotifications();
             return View();
         }
 
-        public IActionResult OrderAgreementSuccessful()
+        public async Task<IActionResult> OrderAgreementSuccessfulAsync()
         {
+            await ShowNotifications();
             return View();
         }
 
         public async Task<IActionResult> OffersOnlyChiefAccepted(ApplicationUser user)
         {
+            await ShowNotifications();
             return View(await _orderOffersService.GetGetOrderOffersOnlyChiefAccepted(await _userManager.GetUserAsync(User)));
         }
 
@@ -133,9 +211,23 @@ namespace APP.UI.Controllers
                     offer.IsClientAccepted = false;
                     offer.IsDeal = false;
                     await _orderOffersService.CreateOrderOffer(offer);
+
+                    var client = await _userManager.GetUserAsync(User);
+                    await _notificationService.SendNotification(new Notification()
+                    {
+                        Id = Guid.NewGuid(),
+                        SenderId = offer.ClientId,
+                        SenderName = "" + client.Name + " " + client.Surname,
+                        ReceiverId = offer.ChiefId,
+                        IsItRead = false,
+                        CreatedAt = DateTime.Now,
+                        ReturnUrl = "/OrderOffer/IncomingOffers",
+                        NotificationString = "yeni bir sipariş teklifi gönderdi!"
+                    });
+
                     return Redirect("/User/Profile/" + offer.ChiefId);
                 }
-                catch(Exception)
+                catch (Exception)
                 {
                     throw;
                 }
@@ -150,6 +242,12 @@ namespace APP.UI.Controllers
         public async Task RejectOffer(Guid id)
         {
             await _orderOffersService.DeleteOrderOffer(id);
+        }
+
+        public async Task ShowNotifications()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            ViewBag.Notifications = await _notificationService.GetUnreadNotifications(currentUser.Id);
         }
     }
 }

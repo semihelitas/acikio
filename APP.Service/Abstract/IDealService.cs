@@ -19,5 +19,6 @@ namespace APP.Service.Abstract
         Task CompleteDeal(CompletedDeal competedDeal);
         Task<IEnumerable<CompletedDeal>> ChiefCompletedDeals(ApplicationUser user);
         Task<IEnumerable<CompletedDeal>> ClientCompletedDeals(ApplicationUser user);
+        Task<CompletedDeal> GetSingleCompletedDeal(Guid id);
     }
 }

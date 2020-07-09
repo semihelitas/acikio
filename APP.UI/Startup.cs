@@ -11,11 +11,11 @@ using APP.Repository.Repository;
 using APP.Service.UnitOfWork;
 using APP.Service.Abstract;
 using APP.Service.Concrete;
-using APP.Repository.ChiefAds;
-using APP.Repository.OrderOffer;
 using APP.Repository.CategoryRepository;
 using APP.Repository.UserRepository;
 using APP.Repository.DealRepository;
+using APP.Repository.OrderOfferRepository;
+using APP.Repository.NotificationRepository;
 
 namespace APP.UI
 {
@@ -37,21 +37,23 @@ namespace APP.UI
                     Configuration.GetConnectionString("DatabaseConnection")));
             // Identity
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             // Services
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            services.AddTransient<IChiefAdsService, ChiefAdsService>();
             services.AddTransient<IOrderOffersService, OrderOffersService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IDealService, DealService>();
-            services.AddTransient<IChiefAdsRepository, ChiefAdsRepository>();
+            services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IOrderOffersRepository, OrderOffersRepository>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IDealRepository, DealRepository>();
+            services.AddTransient<INotificationRepository, NotificationRepository>();
+
             // Settings
             services.AddRazorPages().AddRazorRuntimeCompilation();
             services.AddControllersWithViews();
@@ -105,24 +107,6 @@ namespace APP.UI
                          pattern: "anasayfa",
                          defaults: new { controller = "Home", action = "Index" });
 
-                // .com/usta-ilanlari
-                endpoints.MapControllerRoute(
-                         name: "chiefAdsIndex",
-                         pattern: "usta-ilanlari",
-                         defaults: new { controller = "ChiefAds", action = "Index" });
-
-                // .com/usta-ilanlari/detaylar/{*id}
-                endpoints.MapControllerRoute(
-                         name: "chiefAdsDetails",
-                         pattern: "usta-ilanlari/detaylar/{*id}",
-                         defaults: new { controller = "ChiefAds", action = "Details" });
-
-                // .com/yeni-ilan
-                endpoints.MapControllerRoute(
-                         name: "newAd",
-                         pattern: "yeni-ilan",
-                         defaults: new { controller = "ChiefAds", action = "Create" });
-
                 // .com/siparisler
                 endpoints.MapControllerRoute(
                          name: "orderOffers",
@@ -141,18 +125,6 @@ namespace APP.UI
                          pattern: "/yonetim-paneli/profili-duzenle",
                          defaults: new { controller = "Dashboard", action = "ProfileEdit" });
 
-                // .com/yonetim-paneli/ilanlar
-                endpoints.MapControllerRoute(
-                         name: "manageAds",
-                         pattern: "/yonetim-paneli/ilanlarim",
-                         defaults: new { controller = "ChiefAds", action = "GetAdvertisementsOfSignedUser" });
-
-                // .com/yonetim-paneli/anlasmalar
-                endpoints.MapControllerRoute(
-                         name: "manageDeals",
-                         pattern: "/yonetim-paneli/anlasmalar",
-                         defaults: new { controller = "ChiefAds", action = "Deals" });
-
                 // .com/yonetim-paneli/gelen-teklifler
                 endpoints.MapControllerRoute(
                          name: "manageOffers",
@@ -170,6 +142,12 @@ namespace APP.UI
                          name: "manageOffers",
                          pattern: "/yonetim-paneli/tekliflerim",
                          defaults: new { controller = "OrderOffer", action = "SentOffers" });
+
+                // .com/yonetim-paneli/gelen-teklifler
+                endpoints.MapControllerRoute(
+                         name: "message",
+                         pattern: "mesajlar/{*receiverId}",
+                         defaults: new { controller = "Message", action = "Inbox" });
 
                 endpoints.MapRazorPages();
             });

@@ -70,5 +70,10 @@ namespace APP.Service.Concrete
         {
             throw new NotImplementedException();
         }
+
+        public async Task<CompletedDeal> GetSingleCompletedDeal(Guid id)
+        {
+            return await _uow.Deals.GetSingleCompletedDeal(id);
+        }
     }
 }

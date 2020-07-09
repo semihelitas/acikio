@@ -132,40 +132,6 @@ namespace APP.UI.Data.Migrations
                     b.ToTable("Category");
                 });
 
-            modelBuilder.Entity("APP.Core.Models.ChiefAdvertisement", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("AdViewed")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("ChiefAdvertisement");
-                });
-
             modelBuilder.Entity("APP.Core.Models.CompletedDeal", b =>
                 {
                     b.Property<Guid>("Id")
@@ -239,13 +205,68 @@ namespace APP.UI.Data.Migrations
                     b.ToTable("Deal");
                 });
 
-            modelBuilder.Entity("APP.Core.Models.OrderOffers", b =>
+            modelBuilder.Entity("APP.Core.Models.Message", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ChiefAdvertisementId")
+                    b.Property<bool>("IsItRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MessageText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiverId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SentAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Message");
+                });
+
+            modelBuilder.Entity("APP.Core.Models.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsItRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("NotificationString")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiverId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReturnUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notification");
+                });
+
+            modelBuilder.Entity("APP.Core.Models.OrderOffers", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ChiefId")
@@ -279,8 +300,6 @@ namespace APP.UI.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChiefAdvertisementId");
 
                     b.HasIndex("ChiefId");
 
@@ -422,13 +441,6 @@ namespace APP.UI.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("APP.Core.Models.ChiefAdvertisement", b =>
-                {
-                    b.HasOne("APP.Core.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("FoodAdvertisement")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("APP.Core.Models.CompletedDeal", b =>
                 {
                     b.HasOne("APP.Core.Models.Deal", "Deal")
@@ -449,10 +461,6 @@ namespace APP.UI.Data.Migrations
 
             modelBuilder.Entity("APP.Core.Models.OrderOffers", b =>
                 {
-                    b.HasOne("APP.Core.Models.ChiefAdvertisement", null)
-                        .WithMany("OrderOffers")
-                        .HasForeignKey("ChiefAdvertisementId");
-
                     b.HasOne("APP.Core.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("OrderOffers")
                         .HasForeignKey("ChiefId");

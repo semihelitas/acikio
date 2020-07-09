@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace APP.Core.Models
 {
@@ -16,8 +17,6 @@ namespace APP.Core.Models
         public string Nickname { get; set; }
         public double MinimumOrderPrice { get; set; }
         public string Categories { get; set; }
-        // PostedFoodAds: Oluşturulan "yemek yapan birini arıyorum" ilanlarını tutar.
-        public ICollection<ChiefAdvertisement> FoodAdvertisement { get; set; }
         public ICollection<OrderOffers> OrderOffers { get; set; }
     }
 }

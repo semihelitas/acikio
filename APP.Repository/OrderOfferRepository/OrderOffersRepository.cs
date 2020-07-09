@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace APP.Repository.OrderOffer
+namespace APP.Repository.OrderOfferRepository
 {
     public class OrderOffersRepository : GenericRepository<OrderOffers>, IOrderOffersRepository
     {

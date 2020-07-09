@@ -863,11 +863,7 @@ C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Core.pdb
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Service.dll
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\bin\Debug\netcoreapp3.1\APP.Service.pdb
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\ChiefAds\Index.cshtml.g.cs
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\ChiefAds\Details.cshtml.g.cs
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\ChiefAds\Create.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SidebarPartial.cshtml.g.cs
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\ChiefAds\GetAdvertisementsOfSignedUser.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_FooterPartial.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Index.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
@@ -886,3 +882,7 @@ C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Deal\ClientDeals.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Deal\ChiefCompletedDealsList.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Deal\ClientCompletedDealsList.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\OrderOffer\Dashboard.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Deal\Invoice.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Message\Inbox.cshtml.g.cs
+C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Message\GetConversationWithUser.cshtml.g.cs

@@ -15,12 +15,24 @@ namespace APP.UI.Controllers
     {
         private readonly IDealService _dealService;
         private UserManager<ApplicationUser> _userManager;
+        private readonly INotificationService _notificationService;
         private readonly ApplicationDbContext _dbContext;
-        public DealController(IDealService dealService, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext)
+        public DealController(IDealService dealService, UserManager<ApplicationUser> userManager, ApplicationDbContext dbContext, INotificationService notificationService)
         {
             _dealService = dealService;
             _userManager = userManager;
             _dbContext = dbContext;
+            _notificationService = notificationService;
+        }
+
+        public async Task<IActionResult> Invoice(Guid id)
+        {
+            var completedDeal = await _dealService.GetSingleCompletedDeal(id);
+            var completedIncludeDeals = await _dbContext.CompletedDeal.Include(x => x.Deal).ThenInclude(y => y.OrderOffer).ToListAsync();
+            var CID = completedIncludeDeals.Where(x => x.Id == id).FirstOrDefault();
+            ViewBag.Chef = await _dbContext.Users.Where(x => x.Id == CID.Deal.OrderOffer.ChiefId).FirstOrDefaultAsync();
+            ViewBag.Client = await _dbContext.Users.Where(x => x.Id == CID.Deal.OrderOffer.ClientId).FirstOrDefaultAsync();
+            return View(completedDeal);
         }
 
         [HttpPost]
@@ -31,6 +43,20 @@ namespace APP.UI.Controllers
             {
                 deal.IsChiefConfirm = true;
                 await _dbContext.SaveChangesAsync();
+
+                var chief = await _userManager.GetUserAsync(User);
+                var client = await _dbContext.Users.Where(x => x.Id == deal.OrderOffer.ClientId).FirstOrDefaultAsync();
+                await _notificationService.SendNotification(new Notification()
+                {
+                    Id = Guid.NewGuid(),
+                    SenderId = deal.ChiefId,
+                    SenderName = "" + chief.Name + " " + chief.Surname,
+                    ReceiverId = client.Id,
+                    IsItRead = false,
+                    CreatedAt = DateTime.Now,
+                    ReturnUrl = "/Deal/ClientDeals",
+                    NotificationString = "sipariş teslimatını gerçekleştirdi! Bu teslimatı aldıysanız, doğrulamak için onaylayın."
+                });
             }
 
             return Redirect("/");
@@ -38,16 +64,19 @@ namespace APP.UI.Controllers
 
         public async Task<IActionResult> ChiefCompletedDealsList()
         {
+            await ShowNotifications();
             return View(await _dealService.ChiefCompletedDeals(await _userManager.GetUserAsync(User)));
         }
 
         public async Task<IActionResult> ClientCompletedDealsList()
         {
+            await ShowNotifications();
             return View(await _dealService.ClientCompletedDeals(await _userManager.GetUserAsync(User)));
         }
 
         public async Task<IActionResult> ChiefDeals()
         {
+            await ShowNotifications();
             var currentUser = await _userManager.GetUserAsync(User);
             return View(await _dealService.ChiefDeals(currentUser));
         }
@@ -78,6 +107,20 @@ namespace APP.UI.Controllers
 
                 await _dealService.CompleteDeal(completedDeal);
                 _dbContext.SaveChanges();
+
+                var client = await _userManager.GetUserAsync(User);
+                var chief = await _dbContext.Users.Where(x => x.Id == deal.ChiefId).FirstOrDefaultAsync();
+                await _notificationService.SendNotification(new Notification()
+                {
+                    Id = Guid.NewGuid(),
+                    SenderId = client.Id,
+                    SenderName = "" + client.Name + " " + client.Surname,
+                    ReceiverId = chief.Id,
+                    IsItRead = false,
+                    CreatedAt = DateTime.Now,
+                    ReturnUrl = "/Deal/ChiefCompletedDealsList",
+                    NotificationString = "sipariş teslimatını onayladı, ellerinize sağlık!"
+                });
             }
 
             return Redirect("/anasayfa");
@@ -85,9 +128,15 @@ namespace APP.UI.Controllers
 
         public async Task<IActionResult> ClientDeals()
         {
+            await ShowNotifications();
             var currentUser = await _userManager.GetUserAsync(User);
             return View(await _dealService.ClientDeals(currentUser));
         }
 
+        public async Task ShowNotifications()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            ViewBag.Notifications = await _notificationService.GetUnreadNotifications(currentUser.Id);
+        }
     }
 }
