@@ -17,13 +17,16 @@ namespace APP.UI.Controllers
         private readonly IUserService _userService;
         private readonly ICategoryService _categoryService;
         private readonly INotificationService _notificationService;
+        private readonly IDealService _dealService;
+
         private UserManager<ApplicationUser> _userManager;
-        public UserController(UserManager<ApplicationUser> userManager, IUserService userService, ICategoryService categoryService, INotificationService notificationService)
+        public UserController(UserManager<ApplicationUser> userManager, IUserService userService, ICategoryService categoryService, INotificationService notificationService, IDealService dealService)
         {
             _userManager = userManager;
             _userService = userService;
             _categoryService = categoryService;
             _notificationService = notificationService;
+            _dealService = dealService;
         }
 
         public async Task<IActionResult> Profile(string id)
@@ -34,7 +37,8 @@ namespace APP.UI.Controllers
             else
             {
                 var user = await _userManager.FindByIdAsync(id);
-                return View(new UserProfileViewModel() { ApplicationUser = user });
+                var deals = await _dealService.ChiefCompletedDeals(user);
+                return View(new UserProfileViewModel() { ApplicationUser = user, CompletedDeals = deals });
             }
         }
 

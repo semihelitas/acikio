@@ -18,7 +18,7 @@
             <div class="col-md-12">
                 <div class="single-page-header-inner">
                     <div class="left-side">
-                        <div class="header-image freelancer-avatar"><img src="~/images/avatar/woman-1.jpg" alt=""></div>
+                        <div class="header-image freelancer-avatar"><img src="~/images/avatar/@Model.ApplicationUser.Image" alt=""></div>
                         <div class="header-details">
                             <h3>@Model.ApplicationUser.Name @Model.ApplicationUser.Surname <span><i class="icon-line-awesome-user"></i> @Model.ApplicationUser.Nickname</span></h3>
                             <ul>
@@ -47,30 +47,49 @@
                 <p>@Model.ApplicationUser.AboutMe</p>
             </div>
 
-            <!-- Boxed List -->
-            <div class="boxed-list margin-bottom-60">
-                <div class="boxed-list-headline">
-                    <h3><i class="icon-material-outline-thumb-up"></i> Tamamladığı Siparişler ve Geri Dönüşler</h3>
-                </div>
-                <ul class="boxed-list-ul">
-                </ul>
+            @if (Model.CompletedDeals.Count() > 0)
+            {
+                <!-- Boxed List -->
+                <div class="boxed-list margin-bottom-60">
+                    <div class="boxed-list-headline">
+                        <h3><i class="icon-material-outline-thumb-up"></i> Tamamladığı Siparişler ve Geri Dönüşler</h3>
+                    </div>
 
-                <!-- Pagination -->
-                <div class="clearfix"></div>
-                <div class="pagination-container margin-top-40 margin-bottom-10">
-                    <nav class="pagination">
-                        <ul>
-                            <li><a href="#" class="ripple-effect current-page">1</a></li>
-                            <li><a href="#" class="ripple-effect">2</a></li>
-                            <li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="clearfix"></div>
-                <!-- Pagination / End -->
+                    <ul class="boxed-list-ul">
+                        @foreach (var deal in Model.CompletedDeals)
+                        {
+                        <li>
+                            <div class="boxed-list-item">
+                                <!-- Content -->
+                                <div class="item-content">
+                                    @{
+                                        var client = await UserManager.FindByIdAsync(deal.Deal.OrderOffer.ClientId);
+                                    }
+                                    <h4>@deal.Deal.OrderOffer.Title <span>@client.Name @client.Surname </span></h4>
+                                    @{
+                                        double totalRating = (deal.TimingScore + deal.DeliciousScore + deal.CommunicationScore + deal.AdviceScore)/4;
+                                        var rating = totalRating.ToString().Replace(",", ".");
+                                    }
+                                    <div class="item-details margin-top-10">
+                                        <div class="star-rating" data-rating="@rating"></div>
+                                        <div class="detail-item"><i class="icon-material-outline-date-range"></i> @deal.CreatedAt.ToShortDateString()</div>
+                                    </div>
+                                    <div class="item-description">
+                                        <p>@deal.Comment </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                                        }
+                    </ul>
 
-            </div>
-            <!-- Boxed List / End -->
+
+                    <div class="clearfix"></div>
+                    <!-- Pagination / End -->
+
+                </div>
+                <!-- Boxed List / End -->
+            }
         </div>
 
         <!-- Sidebar -->
@@ -80,7 +99,7 @@
                 <!-- Profile Overview -->
                 <div class="profile-overview">
                     <div class="overview-item"><strong>@Model.ApplicationUser.MinimumOrderPrice ₺</strong><span>Minimum Sipariş Ücreti</span></div>
-                    <div class="overview-item"><strong>53</strong><span>Tamamlananmış İş</span></div>
+                    <div class="overview-item"><strong>@Model.CompletedDeals.Count()</strong><span>Tamamlananmış İş</span></div>
                 </div>
 
                 <!-- Button -->
@@ -121,7 +140,7 @@
                 </div>
 
                 <div class="sidebar-widget">
-                    <h3>Skills</h3>
+                    <h3>Kategoriler</h3>
                     <div class="task-tags">
                         @{
                             var ctString = Model.ApplicationUser.Categories;
@@ -134,19 +153,6 @@
                     </div>
                 </div>
 
-                <!-- Widget -->
-                <div class="sidebar-widget">
-                    <h3>Social Profiles</h3>
-                    <div class="freelancer-socials margin-top-25">
-                        <ul>
-                            <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Dribbble"><i class="icon-brand-dribbble"></i></a></li>
-                            <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Twitter"><i class="icon-brand-twitter"></i></a></li>
-                            <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="Behance"><i class="icon-brand-behance"></i></a></li>
-                            <li><a href="#" data-tippy-placement="top" data-tippy="" data-original-title="GitHub"><i class="icon-brand-github"></i></a></li>
-
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

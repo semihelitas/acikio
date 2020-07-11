@@ -10,5 +10,6 @@ namespace APP.UI.Models
     {
         public ApplicationUser ApplicationUser { get; set; }
         public OrderOffers Offer { get; set; }
+        public IEnumerable<CompletedDeal> CompletedDeals { get; set; }
     }
 }

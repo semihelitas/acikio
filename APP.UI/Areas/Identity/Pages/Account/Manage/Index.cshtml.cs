@@ -38,7 +38,6 @@ namespace APP.UI.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            public string Image { get; set; }
             [Display(Name = "Adı")]
             public string Name { get; set; }
 
@@ -85,8 +84,7 @@ namespace APP.UI.Areas.Identity.Pages.Account.Manage
                 Location = currentUser.Location,
                 PhoneNumber = currentUser.PhoneNumber,
                 DateOfBirth = currentUser.DateOfBirth,
-                AboutMe = currentUser.AboutMe,
-                Image = currentUser.Image
+                AboutMe = currentUser.AboutMe
             };
         }
 
@@ -116,14 +114,13 @@ namespace APP.UI.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            if (Input.PhoneNumber != null && Input.Name != null && Input.Surname != null && Input.DateOfBirth != null && Input.Location != null && Input.AboutMe != null && Input.Image != null)
+            if (Input.PhoneNumber != null && Input.Name != null && Input.Surname != null && Input.DateOfBirth != null && Input.Location != null && Input.AboutMe != null)
             {
                 user.Name = Input.Name;
                 user.Surname = Input.Surname;
                 user.Location = Input.Location;
                 user.DateOfBirth = Input.DateOfBirth;
                 user.AboutMe = Input.AboutMe;
-                user.Image = Input.Image;
 
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)

@@ -15,10 +15,10 @@
 
                         <!-- Location -->
                         <div class="sidebar-widget">
-                            <h3>Location</h3>
+                            <h3>Konum</h3>
                             <div class="input-with-icon">
                                 <div id="autocomplete-container">
-                                    <input id="autocomplete-input" type="text" placeholder="Location">
+                                    <input id="autocomplete-input" type="text" placeholder="Konum giriniz">
                                 </div>
                                 <i class="icon-material-outline-location-on"></i>
                             </div>
@@ -28,7 +28,7 @@
                         <div class="sidebar-widget">
                             <h3>Kategoriler</h3>
                             <select>
-                                <option selected disabled></option>
+                                <option selected disabled>Kategori seçiniz</option>
                                 @foreach (var category in ViewBag.Categories)
                                 {
                                     <option value="@category">@category</option>
@@ -38,10 +38,10 @@
 
                         <!-- Keywords -->
                         <div class="sidebar-widget">
-                            <h3>Keywords</h3>
+                            <h3>Anahtar Kelime</h3>
                             <div class="keywords-container">
                                 <div class="keyword-input-container">
-                                    <input type="text" class="keyword-input" placeholder="e.g. task title">
+                                    <input type="text" class="keyword-input" placeholder="tatlılar, diyet, vegan vs.">
                                     <button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
                                 </div>
                                 <div class="keywords-list" style="height: auto;"><!-- keywords go here --></div>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <!-- Search Button -->
-                            <button class="button ripple-effect" style="width:100%">Search</button>
+                            <button class="button ripple-effect" style="width:100%">Filtrele</button>
                     </div>
                     
                     <!-- Search Button / End-->
@@ -67,11 +67,11 @@
             <div class="simplebar-content" style="padding-bottom: 17px; margin-right: -17px;">
                 <div class="full-page-content-inner">
 
-                    <h3 class="page-title">Search Results</h3>
+                    <h3 class="page-title">Arama Sonuçları</h3>
 
                     <div class="notify-box margin-top-15">
                         <div class="switch-container">
-                            <label class="switch"><input type="checkbox"><span class="switch-button"></span><span class="switch-text">Turn on email alerts for this search</span></label>
+                            <span class="switch-text">Toplam @Model.Count() eşleşen sonuç bulundu</span>
                         </div>
 
                         <div class="sort-by">
@@ -104,7 +104,7 @@
                                         <!-- Avatar -->
                                         <div class="freelancer-avatar">
                                             <div class="verified-badge"></div>
-                                            <a asp-controller="User" asp-action="Profile" asp-route-id="@user.Id"><img src="~/images/avatar/man-1.jpg" alt=""></a>
+                                            <a asp-controller="User" asp-action="Profile" asp-route-id="@user.Id"><img src="~/images/avatar/@user.Image" alt=""></a>
                                         </div>
 
                                         <!-- Name -->
@@ -148,26 +148,11 @@
                         }
                     </div>
                     <!-- Freelancers Container / End -->
-                    <!-- Pagination -->
-                    <div class="clearfix"></div>
-                    <div class="pagination-container margin-top-20 margin-bottom-20">
-                        <nav class="pagination">
-                            <ul>
-                                <li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-left"></i></a></li>
-                                <li><a href="#" class="ripple-effect">1</a></li>
-                                <li><a href="#" class="ripple-effect current-page">2</a></li>
-                                <li><a href="#" class="ripple-effect">3</a></li>
-                                <li><a href="#" class="ripple-effect">4</a></li>
-                                <li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="clearfix"></div>
-                    <!-- Pagination / End -->
+
                     <!-- Footer -->
                     <div class="small-footer margin-top-15">
                         <div class="small-footer-copyrights">
-                            © 2018 <strong>Hireo</strong>. All Rights Reserved.
+                            © 2020 <b>Acikio</b> Tüm Hakları Saklıdır.
                         </div>
                         <ul class="footer-social-links">
                             <li>

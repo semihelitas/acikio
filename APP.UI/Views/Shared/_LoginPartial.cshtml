@@ -110,7 +110,7 @@
                         </div>
                     </div>
 
-                    <a href="dashboard-messages.html" class="header-notifications-button ripple-effect button-sliding-icon">View All Messages<i class="icon-material-outline-arrow-right-alt"></i></a>
+                    <a href="/mesajlar" class="header-notifications-button ripple-effect button-sliding-icon">Gelen Kutusu<i class="icon-material-outline-arrow-right-alt"></i></a>
                 </div>
             </div>
 
@@ -122,7 +122,7 @@
             <!-- Messages -->
             <div class="header-notifications user-menu">
                 <div class="header-notifications-trigger">
-                    <a href="#"><div class="user-avatar status-online"><img src="~/images/user-avatar-small-01.jpg" alt=""></div></a>
+                    <a href="#"><div class="user-avatar status-online"><img src="~/images/avatar/@signedInUser.Image" alt=""></div></a>
                 </div>
 
                 <!-- Dropdown -->
@@ -133,7 +133,7 @@
 
                         <!-- User Name / Avatar -->
                         <div class="user-details">
-                            <div class="user-avatar status-online"><img src="~/images/user-avatar-small-01.jpg" alt=""></div>
+                            <div class="user-avatar status-online"><img src="~/images/avatar/@signedInUser.Image" alt=""></div>
                             <div class="user-name">
                                 @signedInUser.Name @signedInUser.Surname <span>@signedInUser.Email</span>
                             </div>
@@ -149,8 +149,8 @@
                     </div>
 
                     <ul class="user-menu-small-nav">
-                        <li><a href="/kontrol-paneli"><i class="icon-material-outline-dashboard"></i> Dashboard</a></li>
-                        <li><a asp-controller="OrderOffer" asp-action="Dashboard"><i class="icon-material-outline-settings"></i> Settings</a></li>
+                        <li><a asp-controller="OrderOffer" asp-action="Dashboard"><i class="icon-material-outline-dashboard"></i> Yönetim Paneli</a></li>
+                        <li><a href="/Identity/Account/Manage"><i class="icon-material-outline-settings"></i> Hesap Ayarları</a></li>
                         <li style="margin-top:15px">
                             <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                                 <button type="submit" class="log-in-button">&nbsp;<i class="icon-feather-power"></i>Çıkış</button>

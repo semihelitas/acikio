@@ -885,4 +885,3 @@ C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\OrderOffer\Dashboard.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Deal\Invoice.cshtml.g.cs
 C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Message\Inbox.cshtml.g.cs
-C:\Users\semih\Source\Repos\semihelitas\kodlayacagiz\APP.UI\obj\Debug\netcoreapp3.1\Razor\Views\Message\GetConversationWithUser.cshtml.g.cs
